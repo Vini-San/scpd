@@ -1,4 +1,4 @@
-# Projeto E-commerce
+# Projeto de cadastro de processos e documentos
 
 Projeto teste desenvolvido do zero.
 
