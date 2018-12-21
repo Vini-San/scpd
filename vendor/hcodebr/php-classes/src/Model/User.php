@@ -11,7 +11,7 @@ class User extends Model{
 	public static function login($login,$password){
 		$sql = new Sql();
 
-		$results = $sql->select("SELECT * FROM tb_users WHERE deslogin = :LOGIN", array(
+		$results = $sql->select("SELECT * FROM usuario WHERE cpf = :LOGIN", array(
 			":LOGIN"=>$login
 		));
 
@@ -23,7 +23,7 @@ class User extends Model{
 
 		$data = $results[0];
 
-		if(password_verify($password, $data["despassword"]) === true){
+		if(password_verify($password, $data["senha"]) === true){
 
 			$user = new User();
 
@@ -46,16 +46,12 @@ class User extends Model{
 		
 	}
 
-	public static function verifyLogin($inadmin = true){
+	public static function verifyLogin(){
 
 		if (
 			!isset($_SESSION[User::SESSION])
 			||
 			!$_SESSION[User::SESSION]
-			||
-			!(int)$_SESSION[User::SESSION]["iduser"] > 0
-			||
-			(bool)$_SESSION[User::SESSION]["inadmin"] != $inadmin
 		) {
 
 			header("Location: /admin/login");
@@ -72,17 +68,18 @@ class User extends Model{
 
 	}
 
-	public function save(){
+	public function saveProcess(){
 
 		$sql = new Sql();
-		$results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", array(
+		$results = $sql->query("INSERT INTO processo values(null, :numero_processo, :id_orgao, :id_tipo_processo, :data_inicio, :nome_processo, :assunto_processo; id_processo_documento)", array(
 
-			":desperson"=>$this->getdesperson(),
-			":deslogin"=>$this->getdeslogin(),
-			":despassword"=>$this->getdespassword(),
-			":desemail"=>$this->getdesemail(),
-			":nrphone"=>$this->getnrphone(),
-			":inadmin"=>$this->getinadmin()
+			":numero_processo"=>$this->getnumero_processo(),
+			":id_orgao"=>$this->getid_orgao(),
+			":id_tipo_processo"=>$this->getid_tipo_processo(),
+			":data_inicio"=>$this->getdata_inicio(),
+			":nome_processo"=>$this->getnome_processo(),
+			":assunto_processo"=>$this->getassunto_processo(),
+			":id_processo_documento"=>$this->getid_processo_documento()
 
 		));
 

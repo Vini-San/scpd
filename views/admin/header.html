@@ -240,7 +240,7 @@ desired effect
         </div>
       </div>
 
-      <!-- search form (Optional) -->
+      <!-- search form (Optional)
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
@@ -250,32 +250,34 @@ desired effect
               </span>
         </div>
       </form>
-      <!-- /.search form -->
+      /.search form -->
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
         <li class="header">MENU</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Processos</span>
+          <a href="#"><i class="fa fa-book fa-fw"></i> <span>Processos</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="/admin/users/create"><i class="fa fa-link"></i> <span>Cadastro</span></a></li>
-            <li ><a href="/admin/users"><i class="fa fa-link"></i> <span>Consulta</span></a></li>
+            <li class="active"><a href="/admin/users/create"><i class="fa fa-floppy-o" aria-hidden="true"></i><span>Cadastro</span></a></li>
+            <li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Consulta</span></a></li>
+            <li ><a href="/admin/users"><i class="fa fa-pencil" aria-hidden="true"></i><span>Movimentar</span></a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Documentos</span>
+          <a href="#"><i class="fa fa-file-text-o"></i> <span>Documentos</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="/admin/docs/docs-create"><i class="fa fa-link"></i> <span>Cadastro</span></a></li>
-            <li ><a href="/admin/docs"><i class="fa fa-link"></i> <span>Consulta</span></a></li>
+            <li class="active"><a href="/admin/docs/docs-create"><i class="fa fa-floppy-o" aria-hidden="true"></i><span>Cadastro</span></a></li>
+            <li ><a href="/admin/docs"><i class="fa fa-search" aria-hidden="true"></i><span>Consulta</span></a></li>
+            <li ><a href="/admin/users"><i class="fa fa-pencil" aria-hidden="true"></i><span>Movimentar</span></a></li>
           </ul>
         </li>
       </ul>

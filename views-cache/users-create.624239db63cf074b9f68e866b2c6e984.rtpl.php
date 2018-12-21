@@ -49,11 +49,6 @@
               <label for="assunto_processo">Assunto</label>
               <input type="text" class="form-control" id="assunto_processo" name="assunto_processo" placeholder="Digite o assunto">
             </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" name="inadmin" value="1"> Acesso de Administrador
-              </label>
-            </div>
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
