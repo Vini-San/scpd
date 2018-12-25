@@ -14,32 +14,44 @@
   	<div class="col-md-12">
   		<div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Editar Usuário</h3>
+          <h3 class="box-title">Editar Processo</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/users/{$user.iduser}" method="post">
+        <form role="form" action="/admin/users/{$user.id_processo}" method="post">
           <div class="box-body">
             <div class="form-group">
-              <label for="desperson">Nome</label>
-              <input type="text" class="form-control" id="desperson" name="desperson" placeholder="Digite o nome" value="{$user.desperson}">
+              <label for="desperson">Numero</label>
+              <input type="text" class="form-control" id="numero_processo" name="numero_processo" placeholder="Digite o numero" value="{$user.numero_processo}">
             </div>
             <div class="form-group">
-              <label for="deslogin">Login</label>
-              <input type="text" class="form-control" id="deslogin" name="deslogin" placeholder="Digite o login"  value="{$user.deslogin}">
+              <label for="id_orgao">Orgão</label>
+              <select id="id_orgao" name="id_orgao">
+                <option value="{$user.id_orgao}">{$user.nome_orgao}</option>
+                <option value="1">DGI</option>
+                <option value="2">UERJ</option>
+              </select>
             </div>
             <div class="form-group">
-              <label for="nrphone">Telefone</label>
-              <input type="tel" class="form-control" id="nrphone" name="nrphone" placeholder="Digite o telefone"  value="{$user.nrphone}">
+              <label for="id_tipo_processo">Orgão</label>
+              <select id="id_tipo_processo" name="id_tipo_processo">
+                <option value="{$user.id_tipo_processo}">{$user.tipo_processo}</option>
+                <option value="1">ACI</option>
+                <option value="2">Furto</option>
+                <option value="3">Processo Administrativo</option>
+              </select>
             </div>
             <div class="form-group">
-              <label for="desemail">E-mail</label>
-              <input type="email" class="form-control" id="desemail" name="desemail" placeholder="Digite o e-mail" value="{$user.desemail}">
+              <label for="data_inicio">Data Inicio</label>
+              <input type="text" class="form-control" id="data_inicio" name="data_inicio" placeholder="Digite a data"  value="{$user.data_inicio}">
             </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" name="inadmin" value="1" {if="$user.inadmin == 1"}checked{/if}> Acesso de Administrador
-              </label>
+            <div class="form-group">
+              <label for="nome_processo">Nome</label>
+              <input type="text" class="form-control" id="nome_processo" name="nome_processo" placeholder="Digite o nome" value="{$user.nome_processo}">
+            </div>
+            <div class="form-group">
+              <label for="assunto_processo">Assunto</label>
+              <input type="text" class="form-control" id="assunto_processo" name="assunto_processo" placeholder="Digite o assunto" value="{$user.assunto_processo}">
             </div>
           </div>
           <!-- /.box-body -->

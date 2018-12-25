@@ -64,7 +64,14 @@ class User extends Model{
 	public static function listAll(){
 
 		$sql = new Sql();
-		return $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) ORDER BY B.DESPERSON");
+		return $sql->select("SELECT * FROM processo p INNER JOIN orgao o on o.id_orgao=o.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento GROUP BY p.id_processo");
+
+	}
+
+	public static function listAllOrgao(){
+
+		$sql = new Sql();
+		return $sql->select("SELECT * FROM orgao ORDER BY orgao.id_hierarquia_orgao");
 
 	}
 
@@ -87,13 +94,13 @@ class User extends Model{
 
 	}
 
-	public function get($iduser){
+	public function get($id_processo){
 
 		$sql = new Sql();
 
-		$results = $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) WHERE a.iduser= :iduser", array(
+		$results = $sql->select("SELECT * FROM processo p INNER JOIN orgao o on o.id_orgao=o.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento WHERE p.id_processo=:id_processo GROUP BY p.id_processo", array(
 
-			":iduser"=>$iduser
+			":id_processo"=>$id_processo
 
 		));
 

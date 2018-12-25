@@ -14,6 +14,8 @@ $app->config('debug', true);
 
 $app->get('/', function() {
 
+	User::verifyLogin();
+	
 	$page = new Page();
 
 	$page->setTpl("index");
@@ -75,13 +77,13 @@ $app->get("/admin/users/create", function(){
 });
 
 //quando vai para página de update
-$app->get("/admin/users/:iduser/delete", function($iduser){
+$app->get("/admin/users/:id_processo/delete", function($iduser){
 
 	User::verifyLogin();
 
 	$user = new User();
 
-	$user->get((int)$iduser);
+	$user->get((int)$id_processo);
 
 	$user->delete();
 
@@ -92,18 +94,18 @@ $app->get("/admin/users/:iduser/delete", function($iduser){
 
 });
 
-$app->get("/admin/users/:iduser", function($iduser){
+$app->get("/admin/users/:id_processo", function($iduser){
 
 	User::verifyLogin();
 
 	$user = new User();
 
-	$user->get((int)$iduser);
+	$user->get((int)$id_processo);
 
 	$page = new PageAdmin();
 
 	$page->setTpl("users-update", array(
-		"user"=>$user->getValues()
+		"user"=>$id_processo->getValues()
 	));
 });
 
@@ -126,13 +128,13 @@ $app->post("/admin/users/create", function(){
 });
 
 //para modificar dados no banco
-$app->post("/admin/users/:iduser", function($iduser){
+$app->post("/admin/users/:id_processo", function($id_processo){
 
 	User::verifyLogin();
 
 	$user = new User();
 
-	$user->get((int)$iduser);
+	$user->get((int)$id_processo);
 	$user->setData($_POST);
 	$user->update();
 

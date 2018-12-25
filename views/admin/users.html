@@ -26,11 +26,11 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>Login</th>
-                    <th style="width: 60px">Admin</th>
+                    <th style="width: 10px">Numero</th>
+                    <th>Assunto</th>
+                    <th>Órgão</th>
+                    <th>Data Início</th>
+                    <th style="width: 100px">Admin</th>
                     <th style="width: 140px">&nbsp;</th>
                   </tr>
                 </thead>
@@ -38,14 +38,13 @@
                   <tr>
                   {loop="$users"}
                   <tr>
-                    <td>{$value.iduser}</td>
-                    <td>{$value.desperson}</td>
-                    <td>{$value.desemail}</td>
-                    <td>{$value.deslogin}</td/>
-                    <td>{if="$value.inadmin == 1"}Sim{else}Não{/if}</td>
+                    <td>{$value.numero_processo}</td>
+                    <td>{$value.assunto_processo}</td>
+                    <td>{$value.nome_orgao}</td>
+                    <td>{$value.data_inicio}</td/>
                     <td>
-                      <a href="/admin/users/{$value.iduser}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
-                      <a href="/admin/users/{$value.iduser}/password" class="btn btn-default btn-xs"><i class="fa fa-unlock"></i> Consultar</a>
+                      <a href="/admin/users/{$value.id_processo}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                      <a href="/admin/users/{$value.id_processo}/password" class="btn btn-default btn-xs"><i class="fa fa-unlock"></i> Consultar</a>
                     </td>
                   </tr>
                   {/loop}

@@ -176,7 +176,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="/res/admin/dist/img/avatar5.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">Vinicius dos Santos</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -184,8 +184,8 @@ desired effect
                 <img src="/res/admin/dist/img/avatar5.png" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce
-                  <small>Usuário</small>
+                  Vinicius dos Santos
+                  <small>Administrador</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -209,7 +209,7 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat"><b>Perfil</b></a>
                 </div>
                 <div class="pull-right">
-                  <a href="/admin/login" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="/admin/login" class="btn btn-default btn-flat">Sair</a>
                 </div>
               </li>
             </ul>
@@ -234,7 +234,7 @@ desired effect
           <img src="/res/admin/dist/img/avatar5.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>Vinicius dos Santos</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -264,8 +264,9 @@ desired effect
           </a>
           <ul class="treeview-menu">
             <li class="active"><a href="/admin/users/create"><i class="fa fa-floppy-o" aria-hidden="true"></i><span>Cadastro</span></a></li>
-            <li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Consulta</span></a></li>
-            <li ><a href="/admin/users"><i class="fa fa-pencil" aria-hidden="true"></i><span>Movimentar</span></a></li>
+            <li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Consultar por órgao</span></a></li>
+            <li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Relatório semanal</span></a></li>
+            <li ><a href="/admin/users"><i class="fa fa-pencil" aria-hidden="true"></i><span>Localizar</span></a></li>
           </ul>
         </li>
         <li class="treeview">
