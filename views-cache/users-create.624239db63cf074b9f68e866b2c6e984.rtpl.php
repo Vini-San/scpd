@@ -31,11 +31,21 @@
             </div>
             <div class="form-group">
               <label for="id_orgao">Orgão</label>
-              <input type="text" class="form-control" id="id_orgao" name="id_orgao" placeholder="Digite o orgao">
+              <select id="id_orgao" name="id_orgao">
+                <option value="#">Selecione o órgão</option>
+                <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
+                <option value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                <?php } ?>
+              </select>
             </div>
             <div class="form-group">
               <label for="id_tipo_processo">Tipo</label>
-              <input type="text" class="form-control" id="id_tipo_processo" name="id_tipo_processo" placeholder="Digite o tipo">
+              <select id="id_tipo_processo" name="id_tipo_processo">
+                <option value="#">Selecione o Tipo</option>
+                <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
+                <option value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                <?php } ?>
+              </select>
             </div>
             <div class="form-group">
               <label for="data_inicio">Data de Inicio</label>

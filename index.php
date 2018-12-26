@@ -73,7 +73,11 @@ $app->get("/admin/users/create", function(){
 
 	$page = new PageAdmin();
 
-	$page->setTpl("users-create");
+	$user = User::listAllOrgao();
+
+	$page->setTpl("users-create", array(
+		"user"=>$user
+	));
 });
 
 //quando vai para página de update
@@ -83,7 +87,7 @@ $app->get("/admin/users/:id_processo/delete", function($id_processo){
 
 	$user = new User();
 
-	$user->get((int)$id_processo);
+	$user->getProcessoById((int)$id_processo);
 
 	$user->delete();
 
@@ -100,7 +104,7 @@ $app->get("/admin/users/:id_processo", function($id_processo){
 
 	$user = new User();
 
-	$user->get((int)$id_processo);
+	$user->getProcessoById((int)$id_processo);
 
 	$page = new PageAdmin();
 
@@ -113,6 +117,7 @@ $app->get("/admin/users/:id_processo", function($id_processo){
 $app->post("/admin/users/create", function(){
 
 	User::verifyLogin();
+	User::listAllOrgao();
 
 	$user = new User();
 
@@ -134,7 +139,7 @@ $app->post("/admin/users/:id_processo", function($id_processo){
 
 	$user = new User();
 
-	$user->get((int)$id_processo);
+	$user->getProcessoById((int)$id_processo);
 	$user->setData($_POST);
 	$user->update();
 
@@ -183,7 +188,7 @@ $app->get("/admin/docs/:iddocs", function($iduser){
 
 	$user = new User();
 
-	$user->get((int)$iduser);
+	$user->getProcessoById((int)$iduser);
 
 	$page = new PageAdmin();
 
@@ -217,7 +222,7 @@ $app->post("/admin/docs/:iduser", function($iduser){
 
 	$user = new User();
 
-	$user->get((int)$iduser);
+	$user->getProcessoById((int)$iduser);
 	$user->setData($_POST);
 	$user->update();
 

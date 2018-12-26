@@ -68,13 +68,6 @@ class User extends Model{
 
 	}
 
-	public static function listAllOrgao(){
-
-		$sql = new Sql();
-		return $sql->select("SELECT * FROM orgao ORDER BY orgao.id_hierarquia_orgao");
-
-	}
-
 	public function saveProcess(){
 
 		$sql = new Sql();
@@ -94,17 +87,31 @@ class User extends Model{
 
 	}
 
-	public function get($id_processo){
+	public function getProcessoById($id_processo){
 
 		$sql = new Sql();
 
-		$results = $sql->select("SELECT * FROM processo p INNER JOIN orgao o on o.id_orgao=o.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento WHERE p.id_processo=:id_processo GROUP BY p.id_processo", array(
+		$results = $sql->select("SELECT p.id_processo, p.numero_processo, p.id_tipo_processo, tp.tipo_processo, p.id_orgao, o.nome_orgao, p.data_inicio, p.nome_processo, p.assunto_processo FROM processo p INNER JOIN orgao o on o.id_orgao=p.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento WHERE p.id_processo=:id_processo GROUP BY p.id_processo", array(
 
 			":id_processo"=>$id_processo
 
 		));
 
 		$this->setData($results[0]);
+	}
+
+	public static function listAllOrgao(){
+
+		$sql = new Sql();
+		return $sql->select("SELECT * FROM orgao ORDER BY orgao.nome_orgao");
+
+	}
+
+	public static function listAllTipo(){
+
+		$sql = new Sql();
+		return $sql->select("SELECT * FROM tipo_processo ORDER BY tipo_processo.tipo_processo");
+
 	}
 
 	public function update(){

@@ -33,7 +33,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="id_tipo_processo">Orgão</label>
+              <label for="id_tipo_processo">Tipo</label>
               <select id="id_tipo_processo" name="id_tipo_processo">
                 <option value="<?php echo htmlspecialchars( $user["id_tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $user["tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                 <option value="1">ACI</option>
