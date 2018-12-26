@@ -77,7 +77,7 @@ $app->get("/admin/users/create", function(){
 });
 
 //quando vai para página de update
-$app->get("/admin/users/:id_processo/delete", function($iduser){
+$app->get("/admin/users/:id_processo/delete", function($id_processo){
 
 	User::verifyLogin();
 
@@ -105,7 +105,7 @@ $app->get("/admin/users/:id_processo", function($id_processo){
 	$page = new PageAdmin();
 
 	$page->setTpl("users-update", array(
-		"id_processo"=>$id_processo->getValues()
+		"user"=>$user->getValues()
 	));
 });
 
