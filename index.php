@@ -94,7 +94,7 @@ $app->get("/admin/users/:id_processo/delete", function($iduser){
 
 });
 
-$app->get("/admin/users/:id_processo", function($iduser){
+$app->get("/admin/users/:id_processo", function($id_processo){
 
 	User::verifyLogin();
 
@@ -105,7 +105,7 @@ $app->get("/admin/users/:id_processo", function($iduser){
 	$page = new PageAdmin();
 
 	$page->setTpl("users-update", array(
-		"user"=>$id_processo->getValues()
+		"id_processo"=>$id_processo->getValues()
 	));
 });
 
