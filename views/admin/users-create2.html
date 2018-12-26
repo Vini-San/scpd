@@ -34,23 +34,23 @@
                                         <label for="id_orgao" class="col-form-label col-form-label-sm">ORGÃO DE ORIGEM:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-8">
-                                        <select id="id_orgao" name="id_orgao">
+                                        <select id="id_tipo_processo" name="id_tipo_processo">
                                             <option value="#">SELECIONE</option>
-                                            {loop="$orgao"}
-                                            <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
+                                            {loop="$tipo"}
+                                            <option value="{$value.id_tipo_processo}">{$value.id_tipo_processo}</option>
                                             {/loop}
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-10 col-sm-5 col-md-4">
-                                        <label for="id_tipo_processo" class="col-form-label col-form-label-sm">TIPO:</label>
+                                        <label for="id_tipo_processo" class="col-form-label col-form-label-sm">TIPO DOCUMENTO:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-8">
                                         <select id="id_tipo_processo" name="id_tipo_processo">
                                             <option value="#">SELECIONE</option>
-                                            {loop="$tipo"}
-                                            <option value="{$value.id_tipo_processo}">{$value.tipo_processo}</option>
+                                            {loop="$orgao"}
+                                            <option value="{$value.id_orgao}">{$value.id_orgao}</option>
                                             {/loop}
                                         </select>
                                     </div>
@@ -116,9 +116,9 @@
                                                         <label class="col-form-label col-form-label-sm">Origem:</label>
                                                     </div>
                                                     <div class="col-sm-12 col-md-12 text-black">
-                                                        <select class="btn btn-sm" id="id_orgao_movimento" name="id_orgao_movimento">
+                                                        <select class="btn btn-sm" id="id_orgao" name="id_orgao">
                                                             <option value="#">SELECIONE</option>
-                                                            {loop="$orgao"}
+                                                            {loop="$user"}
                                                             <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
                                                             {/loop}
                                                         </select>
@@ -131,7 +131,7 @@
                                                 <label class="col-form-label col-form-label-sm">Observações:</label>
                                             </div>
                                             <div class="col-sm-12 col-md-12">
-                                                <input type="text" class="form-control form-control-sm" name="observacoes" required/>
+                                                <input type="text" class="form-control form-control-sm" required/>
                                             </div>
                                         </div>
                                     </div>

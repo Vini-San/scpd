@@ -3,31 +3,36 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Lista de Processos
+    Cadastro do Processo
   </h1>
+  <ol class="breadcrumb">
+    <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="/admin/users">Processos</a></li>
+    <li class="active"><a href="/admin/users/create">Cadastrar</a></li>
+  </ol>
 </section>
 
 <!-- Main content -->
 <section class="content">
 
   <div class="row">
-  	<div class="col-md-12">
-  		<div class="box box-primary">
+    <div class="col-md-12">
+      <div class="box box-success">
         <div class="box-header with-border">
-          <h3 class="box-title">Editar Processo</h3>
+          <h3 class="box-title">Novo Processo</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/users/{$user.id_processo}" method="post">
+        <form role="form" action="/admin/users/create" method="post">
           <div class="box-body">
             <div class="form-group">
-              <label for="numero_processo">Numero</label>
-              <input type="text" class="form-control" id="numero_processo" name="numero_processo" placeholder="Digite o numero" value="{$user.numero_processo}">
+              <label for="numero_processo">Numero do Processo</label>
+              <input type="text" class="form-control" id="numero_processo" name="numero_processo" placeholder="Digite o numero do processo">
             </div>
             <div class="form-group">
               <label for="id_orgao">Orgão</label>
               <select id="id_orgao" name="id_orgao">
-                <option value="{$user.id_orgao}">{$user.nome_orgao}</option>
+                <option value="#">Selecione o órgão</option>
                 {loop="$orgao"}
                 <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
                 {/loop}
@@ -36,32 +41,32 @@
             <div class="form-group">
               <label for="id_tipo_processo">Tipo</label>
               <select id="id_tipo_processo" name="id_tipo_processo">
-                <option value="{$user.id_tipo_processo}">{$user.tipo_processo}</option>
+                <option value="#">Selecione o Tipo</option>
                 {loop="$tipo"}
                 <option value="{$value.id_tipo_processo}">{$value.tipo_processo}</option>
                 {/loop}
               </select>
             </div>
             <div class="form-group">
-              <label for="data_inicio">Data Inicio</label>
-              <input type="text" class="form-control" id="data_inicio" name="data_inicio" placeholder="Digite a data"  value="{$user.data_inicio}">
+              <label for="data_inicio">Data de Inicio</label>
+              <input type="text" class="form-control" id="data_inicio" name="data_inicio" placeholder="Digite a data de início (ano-mês-dia)">
             </div>
             <div class="form-group">
               <label for="nome_processo">Nome</label>
-              <input type="text" class="form-control" id="nome_processo" name="nome_processo" placeholder="Digite o nome" value="{$user.nome_processo}">
+              <input type="text" class="form-control" id="nome_processo" name="nome_processo" placeholder="Digite o nome">
             </div>
             <div class="form-group">
               <label for="assunto_processo">Assunto</label>
-              <input type="text" class="form-control" id="assunto_processo" name="assunto_processo" placeholder="Digite o assunto" value="{$user.assunto_processo}">
+              <input type="text" class="form-control" id="assunto_processo" name="assunto_processo" placeholder="Digite o assunto">
             </div>
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-success">Cadastrar</button>
           </div>
         </form>
       </div>
-  	</div>
+    </div>
   </div>
 
 </section>

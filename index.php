@@ -73,10 +73,12 @@ $app->get("/admin/users/create", function(){
 
 	$page = new PageAdmin();
 
-	$user = User::listAllOrgao();
+	$orgao = User::listAllOrgao();
+	$tipo = User::listAllTipo();
 
 	$page->setTpl("users-create", array(
-		"user"=>$user
+		"orgao"=>$orgao,
+		"tipo"=>$tipo
 	));
 });
 
@@ -106,10 +108,15 @@ $app->get("/admin/users/:id_processo", function($id_processo){
 
 	$user->getProcessoById((int)$id_processo);
 
+	$orgao = User::listAllOrgao();
+	$tipo = User::listAllTipo();
+
 	$page = new PageAdmin();
 
 	$page->setTpl("users-update", array(
-		"user"=>$user->getValues()
+		"user"=>$user->getValues(),
+		"orgao"=>$orgao,
+		"tipo"=>$tipo
 	));
 });
 
@@ -118,12 +125,13 @@ $app->post("/admin/users/create", function(){
 
 	User::verifyLogin();
 	User::listAllOrgao();
+	User::listAllTipo();
 
 	$user = new User();
 
 	$user->setData($_POST);
 
-	$user->saveProcess();	
+	$user->saveProcesso();	
 
 	header("Location: /admin/users");
 
@@ -141,7 +149,7 @@ $app->post("/admin/users/:id_processo", function($id_processo){
 
 	$user->getProcessoById((int)$id_processo);
 	$user->setData($_POST);
-	$user->update();
+	$user->updateProcesso();
 
 	header("Location: /admin/users");
 	exit;

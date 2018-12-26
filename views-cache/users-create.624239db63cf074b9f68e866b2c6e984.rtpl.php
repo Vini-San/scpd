@@ -1,75 +1,152 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
-<section class="content-header">
-  <h1>
-    Cadastro do Processo
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="/admin/users">Processos</a></li>
-    <li class="active"><a href="/admin/users/create">Cadastrar</a></li>
-  </ol>
-</section>
+    <section class="content-header">
+    <h2>
+        Cadastro do Processo/Novo Processo
+    </h2>
+    <ol class="breadcrumb">
+        <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/admin/users">Processos</a></li>
+        <li class="active"><a href="/admin/users/create">Cadastrar</a></li>
+    </ol>
+    </section>
 
-<!-- Main content -->
-<section class="content">
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="box box-success">
-        <div class="box-header with-border">
-          <h3 class="box-title">Novo Processo</h3>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-success">
+                    <!-- form start -->
+                    <form role="form" action="/admin/users/create" method="post">
+                        <div class="box-body">
+                            <div class="col-12 col-sm-10 col-md-6">
+                                <div class="form-group row">
+                                    <div class="col-10 col-sm-5 col-md-4">
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm">NÚMERO DO PROCESSO:</label>
+                                    </div>
+                                    <div class="col-10 col-sm-6 col-md-6">
+                                        <input type="text" class="form-control form-control-sm" id="numero_processo" name="numero_processo" placeholder="Informe o numero do processo" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-10 col-sm-5 col-md-4">
+                                        <label for="id_orgao" class="col-form-label col-form-label-sm">ORGÃO DE ORIGEM:</label>
+                                    </div>
+                                    <div class="col-10 col-sm-6 col-md-8">
+                                        <select id="id_orgao" name="id_orgao">
+                                            <option value="#">SELECIONE</option>
+                                            <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>
+                                            <option value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-10 col-sm-5 col-md-4">
+                                        <label for="id_tipo_processo" class="col-form-label col-form-label-sm">TIPO:</label>
+                                    </div>
+                                    <div class="col-10 col-sm-6 col-md-8">
+                                        <select id="id_tipo_processo" name="id_tipo_processo">
+                                            <option value="#">SELECIONE</option>
+                                            <?php $counter1=-1;  if( isset($tipo) && ( is_array($tipo) || $tipo instanceof Traversable ) && sizeof($tipo) ) foreach( $tipo as $key1 => $value1 ){ $counter1++; ?>
+                                            <option value="<?php echo htmlspecialchars( $value1["id_tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="col-0 col-sm-10 col-md-6">
+                                <div class="form-group row">
+                                    <div class="col-10 col-sm-5 col-md-3">
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm">DATA INICIO:</label>
+                                    </div>
+                                    <div class="col-8 col-sm-6 col-md-6">
+                                        <input type="text" class="form-control form-control-sm" id="data_inicio" name="data_inicio" placeholder="aaaa-mm-dd">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-10 col-sm-8 col-md-3">
+                                        <label for="nome_processo" class="col-form-label col-form-label-sm">NOME:</label>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-8">
+                                        <input type="text" class="form-control form-control-sm" id="nome_processo" name="nome_processo" placeholder="Informe o nome" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-10 col-sm-8 col-md-3">
+                                        <label for="assunto_processo" class="col-form-label col-form-label-sm">ASSUNTO:</label>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-8">
+                                        <input type="text" class="form-control form-control-sm" id="assunto_processo" name="assunto_processo" placeholder="Informe o assunto" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="box-body">
+                            <div class="content bg-primary">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>ENTRADA</h4>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-md-4">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <label class="col-form-label col-form-label-sm">Data:</label>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <input type="text" class="form-control form-control-sm"id="data" name="data" placeholder="aaaa-mm-dd">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-3">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <label class="col-form-label col-form-label-sm">Hora:</label>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <input type="text" class="form-control form-control-sm" value="10:00" required="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-5">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <label class="col-form-label col-form-label-sm">Origem:</label>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-12 text-black">
+                                                        <select class="btn btn-sm" id="id_orgao_movimento" name="id_orgao_movimento">
+                                                            <option value="#">SELECIONE</option>
+                                                            <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>
+                                                            <option value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-10 col-md-12">
+                                                <label class="col-form-label col-form-label-sm">Observações:</label>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12">
+                                                <input type="text" class="form-control form-control-sm" name="observacoes" required/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+                            <button type="button" class="btn btn-primary btn-sm">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <!-- /.box-header -->
-        <!-- form start -->
-        <form role="form" action="/admin/users/create" method="post">
-          <div class="box-body">
-            <div class="form-group">
-              <label for="numero_processo">Numero do Processo</label>
-              <input type="text" class="form-control" id="numero_processo" name="numero_processo" placeholder="Digite o numero do processo">
-            </div>
-            <div class="form-group">
-              <label for="id_orgao">Orgão</label>
-              <select id="id_orgao" name="id_orgao">
-                <option value="#">Selecione o órgão</option>
-                <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
-                <option value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
-                <?php } ?>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="id_tipo_processo">Tipo</label>
-              <select id="id_tipo_processo" name="id_tipo_processo">
-                <option value="#">Selecione o Tipo</option>
-                <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
-                <option value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
-                <?php } ?>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="data_inicio">Data de Inicio</label>
-              <input type="date" class="form-control" id="data_inicio" name="data_inicio" placeholder="Digite a data de início">
-            </div>
-            <div class="form-group">
-              <label for="nome_processo">Nome</label>
-              <input type="text" class="form-control" id="nome_processo" name="nome_processo" placeholder="Digite o nome">
-            </div>
-            <div class="form-group">
-              <label for="assunto_processo">Assunto</label>
-              <input type="text" class="form-control" id="assunto_processo" name="assunto_processo" placeholder="Digite o assunto">
-            </div>
-          </div>
-          <!-- /.box-body -->
-          <div class="box-footer">
-            <button type="submit" class="btn btn-success">Cadastrar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-</section>
+    </section>
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->

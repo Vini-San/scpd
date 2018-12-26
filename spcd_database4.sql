@@ -2,7 +2,7 @@
 -- Servidor:                     127.0.0.1
 -- Versão do servidor:           10.1.37-MariaDB - mariadb.org binary distribution
 -- OS do Servidor:               Win32
--- HeidiSQL Versão:              9.4.0.5125
+-- HeidiSQL Versão:              9.5.0.5196
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `documento` (
   `id_orgao` int(11) DEFAULT NULL,
   `id_tipo_documento` int(11) DEFAULT NULL,
   `data_inicio` datetime DEFAULT NULL,
-  `remetente_documento` varchar(255) DEFAULT NULL,
+  `nome_documento` varchar(255) DEFAULT NULL,
   `assunto_documento` varchar(255) DEFAULT NULL,
   `id_processo_documento` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_documento`),
@@ -35,7 +35,10 @@ CREATE TABLE IF NOT EXISTS `documento` (
   CONSTRAINT `documento_ibfk_3` FOREIGN KEY (`id_processo_documento`) REFERENCES `processo_documento` (`id_processo_documento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela scpd.documento: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `documento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `documento` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela scpd.hierarquia_orgao
 CREATE TABLE IF NOT EXISTS `hierarquia_orgao` (
   `id_hierarquia_orgao` int(11) NOT NULL AUTO_INCREMENT,
@@ -43,7 +46,13 @@ CREATE TABLE IF NOT EXISTS `hierarquia_orgao` (
   PRIMARY KEY (`id_hierarquia_orgao`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela scpd.hierarquia_orgao: ~2 rows (aproximadamente)
+/*!40000 ALTER TABLE `hierarquia_orgao` DISABLE KEYS */;
+INSERT INTO `hierarquia_orgao` (`id_hierarquia_orgao`, `tipo_hierarquia`) VALUES
+	(1, 'interno'),
+	(2, 'externo');
+/*!40000 ALTER TABLE `hierarquia_orgao` ENABLE KEYS */;
+
 -- Copiando estrutura para função scpd.logar
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` FUNCTION `logar`(pcpf varchar(11), psenha varchar(200)) RETURNS varchar(100) CHARSET latin1
@@ -97,9 +106,9 @@ CREATE TABLE IF NOT EXISTS `movimento` (
   `id_movimento` int(11) NOT NULL AUTO_INCREMENT,
   `id_processo_documento` int(11) DEFAULT NULL,
   `id_tipo_movimento` int(11) DEFAULT NULL,
-  `data_movimento` datetime DEFAULT NULL,
+  `proc_data_entrada` datetime DEFAULT NULL,
   `id_orgao` int(11) DEFAULT NULL,
-  `observacoes` longtext,
+  `observacoes_proc_entrada` longtext,
   PRIMARY KEY (`id_movimento`),
   KEY `id_orgao` (`id_orgao`),
   KEY `id_processo_documento` (`id_processo_documento`),
@@ -109,7 +118,10 @@ CREATE TABLE IF NOT EXISTS `movimento` (
   CONSTRAINT `movimento_ibfk_3` FOREIGN KEY (`id_tipo_movimento`) REFERENCES `tipo_movimento` (`id_tipo_movimento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela scpd.movimento: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `movimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `movimento` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela scpd.nivel_usuario
 CREATE TABLE IF NOT EXISTS `nivel_usuario` (
   `id_nivel_usuario` int(11) NOT NULL AUTO_INCREMENT,
@@ -117,7 +129,13 @@ CREATE TABLE IF NOT EXISTS `nivel_usuario` (
   PRIMARY KEY (`id_nivel_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela scpd.nivel_usuario: ~2 rows (aproximadamente)
+/*!40000 ALTER TABLE `nivel_usuario` DISABLE KEYS */;
+INSERT INTO `nivel_usuario` (`id_nivel_usuario`, `nivel`) VALUES
+	(1, 'administrador'),
+	(2, 'usuario');
+/*!40000 ALTER TABLE `nivel_usuario` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela scpd.orgao
 CREATE TABLE IF NOT EXISTS `orgao` (
   `id_orgao` int(11) NOT NULL AUTO_INCREMENT,
@@ -128,7 +146,15 @@ CREATE TABLE IF NOT EXISTS `orgao` (
   CONSTRAINT `orgao_ibfk_1` FOREIGN KEY (`id_hierarquia_orgao`) REFERENCES `hierarquia_orgao` (`id_hierarquia_orgao`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela scpd.orgao: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `orgao` DISABLE KEYS */;
+INSERT INTO `orgao` (`id_orgao`, `nome_orgao`, `id_hierarquia_orgao`) VALUES
+	(1, 'DGI', 1),
+	(2, 'SEEDUC', 2),
+	(3, 'TJRJ', 2),
+	(4, 'CVT Campinho', 1);
+/*!40000 ALTER TABLE `orgao` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela scpd.processo
 CREATE TABLE IF NOT EXISTS `processo` (
   `id_processo` int(11) NOT NULL AUTO_INCREMENT,
@@ -146,9 +172,19 @@ CREATE TABLE IF NOT EXISTS `processo` (
   CONSTRAINT `processo_ibfk_1` FOREIGN KEY (`id_orgao`) REFERENCES `orgao` (`id_orgao`),
   CONSTRAINT `processo_ibfk_2` FOREIGN KEY (`id_tipo_processo`) REFERENCES `tipo_processo` (`id_tipo_processo`),
   CONSTRAINT `processo_ibfk_3` FOREIGN KEY (`id_processo_documento`) REFERENCES `processo_documento` (`id_processo_documento`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela scpd.processo: ~6 rows (aproximadamente)
+/*!40000 ALTER TABLE `processo` DISABLE KEYS */;
+INSERT INTO `processo` (`id_processo`, `numero_processo`, `id_orgao`, `id_tipo_processo`, `data_inicio`, `nome_processo`, `assunto_processo`, `id_processo_documento`) VALUES
+	(1, 'wcr3456', 4, 1, '2017-10-25 00:00:00', 'joão das couves', 'Processo em andamento no CVT', 1),
+	(2, 'aci954567', 3, 2, '2017-08-29 00:00:00', 'maria', 'Processo derivado do TJ', 1),
+	(3, 'proc567', 2, 3, '2015-05-12 09:59:43', 'teste', 'assuntoteste', 1),
+	(4, 'ACI/5256', 1, 1, '2018-01-24 00:00:00', 'teste2', 'assuntotestedois', 1),
+	(5, 'Proc/53178', 2, 2, '2017-10-28 00:00:00', 'JosÃ©', 'Processo Externo', 1),
+	(6, 'numero9876465', 2, 3, '2011-08-15 00:00:00', 'thales', 'Furto de equipamento do Faeterj', 1);
+/*!40000 ALTER TABLE `processo` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela scpd.processo_documento
 CREATE TABLE IF NOT EXISTS `processo_documento` (
   `id_processo_documento` int(11) NOT NULL AUTO_INCREMENT,
@@ -156,7 +192,45 @@ CREATE TABLE IF NOT EXISTS `processo_documento` (
   PRIMARY KEY (`id_processo_documento`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela scpd.processo_documento: ~2 rows (aproximadamente)
+/*!40000 ALTER TABLE `processo_documento` DISABLE KEYS */;
+INSERT INTO `processo_documento` (`id_processo_documento`, `tipo_processo_documento`) VALUES
+	(1, 'processo'),
+	(2, 'documento');
+/*!40000 ALTER TABLE `processo_documento` ENABLE KEYS */;
+
+-- Copiando estrutura para procedure scpd.salvarprocesso
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `salvarprocesso`(
+	IN `pnumero_processo` VARCHAR(255),
+	IN `procid_orgao` int,
+	IN `pid_tipo_processo` int,
+	IN `pdata_inicio` datetime,
+	IN `pnome_processo` varchar (255),
+	IN `passunto_processo` varchar (255),
+	IN `movid_tipo_movimento` int,
+	IN `movproc_data_entrada` datetime,
+	IN `movid_orgao` int,
+	IN `movobservacoes_proc_entrada` longtext
+	
+)
+BEGIN
+
+	DECLARE vidprocesso INT;
+    
+	INSERT INTO processo (numero_processo, id_orgao, id_tipo_processo, data_inicio, nome_processo, assunto_processo, id_processo_documento)
+    VALUES(pnumero_processo, pid_orgao, pid_tipo_processo, pdata_inicio, pnome_processo, passunto_processo, 1);
+    
+    SET vidprocesso = LAST_INSERT_ID();
+    
+    INSERT INTO movimento (id_processo_documento, id_tipo_movimento, proc_data_entrada, id_orgao, observacoes_proc_entrada)
+    VALUES(vidprocesso, 2, movproc_data_entrada, movid_orgao, movobservacoes_proc_entrada);
+    
+    SELECT * FROM processo a INNER JOIN movimento b USING(id_movimento) WHERE a.id_processo = LAST_INSERT_ID();
+    
+END//
+DELIMITER ;
+
 -- Copiando estrutura para tabela scpd.situacao_usuario
 CREATE TABLE IF NOT EXISTS `situacao_usuario` (
   `id_situacao_usuario` int(11) NOT NULL AUTO_INCREMENT,
@@ -164,7 +238,13 @@ CREATE TABLE IF NOT EXISTS `situacao_usuario` (
   PRIMARY KEY (`id_situacao_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela scpd.situacao_usuario: ~2 rows (aproximadamente)
+/*!40000 ALTER TABLE `situacao_usuario` DISABLE KEYS */;
+INSERT INTO `situacao_usuario` (`id_situacao_usuario`, `situacao`) VALUES
+	(1, 'inativo'),
+	(2, 'ativo');
+/*!40000 ALTER TABLE `situacao_usuario` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela scpd.tipo_documento
 CREATE TABLE IF NOT EXISTS `tipo_documento` (
   `id_tipo_documento` int(11) NOT NULL AUTO_INCREMENT,
@@ -172,7 +252,10 @@ CREATE TABLE IF NOT EXISTS `tipo_documento` (
   PRIMARY KEY (`id_tipo_documento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela scpd.tipo_documento: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `tipo_documento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tipo_documento` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela scpd.tipo_movimento
 CREATE TABLE IF NOT EXISTS `tipo_movimento` (
   `id_tipo_movimento` int(11) NOT NULL,
@@ -180,15 +263,25 @@ CREATE TABLE IF NOT EXISTS `tipo_movimento` (
   PRIMARY KEY (`id_tipo_movimento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela scpd.tipo_movimento: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `tipo_movimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tipo_movimento` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela scpd.tipo_processo
 CREATE TABLE IF NOT EXISTS `tipo_processo` (
   `id_tipo_processo` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_processo` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id_tipo_processo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela scpd.tipo_processo: ~2 rows (aproximadamente)
+/*!40000 ALTER TABLE `tipo_processo` DISABLE KEYS */;
+INSERT INTO `tipo_processo` (`id_tipo_processo`, `tipo_processo`) VALUES
+	(1, 'ACI'),
+	(2, 'Processo Disciplinar'),
+	(3, 'Furto');
+/*!40000 ALTER TABLE `tipo_processo` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela scpd.usuario
 CREATE TABLE IF NOT EXISTS `usuario` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
@@ -210,7 +303,13 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   CONSTRAINT `usuario_ibfk_3` FOREIGN KEY (`id_nivel_usuario`) REFERENCES `nivel_usuario` (`id_nivel_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela scpd.usuario: ~2 rows (aproximadamente)
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` (`id_usuario`, `nome_usuario`, `cpf`, `email`, `senha`, `tentativa`, `id_orgao`, `id_nivel_usuario`, `id_situacao_usuario`) VALUES
+	(1, 'Jose Luiz Garcia', '1234', 'luiz@email.com', '123456', NULL, 1, 1, NULL),
+	(2, 'Vinicius dos Santos', 'admin', 'vinicius@email.com', '$2y$12$YlooCyNvyTji8bPRcrfNfOKnVMmZA9ViM2A3IpFjmrpIbp5ovNmga', NULL, 1, 2, NULL);
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

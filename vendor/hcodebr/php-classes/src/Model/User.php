@@ -64,14 +64,14 @@ class User extends Model{
 	public static function listAll(){
 
 		$sql = new Sql();
-		return $sql->select("SELECT * FROM processo p INNER JOIN orgao o on o.id_orgao=o.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento GROUP BY p.id_processo");
+		return $sql->select("SELECT * FROM processo p INNER JOIN orgao o on o.id_orgao=p.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento GROUP BY p.id_processo");
 
 	}
 
-	public function saveProcess(){
+	public function saveProcesso(){
 
 		$sql = new Sql();
-		$results = $sql->query("INSERT INTO processo values(null, :numero_processo, :id_orgao, :id_tipo_processo, :data_inicio, :nome_processo, :assunto_processo; id_processo_documento)", array(
+		$results = $sql->select("CALL salvarprocesso (:numero_processo, :id_orgao, :id_tipo_processo, :data_inicio, :nome_processo, :assunto_processo, :data, :id_orgao, :observacoes)", array(
 
 			":numero_processo"=>$this->getnumero_processo(),
 			":id_orgao"=>$this->getid_orgao(),
@@ -79,8 +79,9 @@ class User extends Model{
 			":data_inicio"=>$this->getdata_inicio(),
 			":nome_processo"=>$this->getnome_processo(),
 			":assunto_processo"=>$this->getassunto_processo(),
-			":id_processo_documento"=>$this->getid_processo_documento()
-
+			":data"=>$this->getdata(),
+			":id_orgao_movimento"=>$this->getid_orgao(),
+			":observacoes"=>$this->getobservacoes()
 		));
 
 		$this->setData($results[0]);
@@ -114,7 +115,7 @@ class User extends Model{
 
 	}
 
-	public function update(){
+	public function updateProcesso(){
 
 		$sql = new Sql();
 		$results = $sql->query("UPDATE processo p SET p.numero_processo=:numero_processo, p.id_orgao=:id_orgao, p.id_tipo_processo=:id_tipo_processo, p.data_inicio=:data_inicio, p.nome_processo=:nome_processo, p.assunto_processo=:assunto_processo WHERE p.id_processo=:id_processo", array(
@@ -125,10 +126,9 @@ class User extends Model{
 			":data_inicio"=>$this->getdata_inicio(),
 			":nome_processo"=>$this->getnome_processo(),
 			":assunto_processo"=>$this->getassunto_processo()
-
 		));
 
-		$this->setData($results[0]);
+		//$this->setData($results[0]);
 
 	}
 
