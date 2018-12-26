@@ -57,12 +57,12 @@ $app->get("/admin/users", function(){
 
 	User::verifyLogin();
 
-	$users = User::listAll();
+	$user = User::listAll();
 
 	$page = new PageAdmin();
 
 	$page->setTpl("users", array(
-		"users"=>$users
+		"users"=>$user
 	));
 });
 

@@ -21,7 +21,7 @@
         <form role="form" action="/admin/users/<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post">
           <div class="box-body">
             <div class="form-group">
-              <label for="desperson">Numero</label>
+              <label for="numero_processo">Numero</label>
               <input type="text" class="form-control" id="numero_processo" name="numero_processo" placeholder="Digite o numero" value="<?php echo htmlspecialchars( $user["numero_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
             <div class="form-group">
