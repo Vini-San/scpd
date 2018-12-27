@@ -57,7 +57,7 @@ $app->get("/admin/users", function(){
 
 	User::verifyLogin();
 
-	$user = User::listAll();
+	$user = User::listAllProcesso();
 
 	$page = new PageAdmin();
 
@@ -169,7 +169,7 @@ $app->get("/admin/docs", function(){
 
 	User::verifyLogin();
 
-	$users = User::listAll();
+	$users = User::listAllProcesso();
 
 	$page = new PageAdmin();
 

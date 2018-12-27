@@ -1,15 +1,14 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-<!-- Content Header (Page header) -->
+    <!-- Content Header (Page header) -->
     <section class="content-header">
-    <h2>
-        Cadastro do Processo/Novo Processo
-    </h2>
-    <ol class="breadcrumb">
-        <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/admin/users">Processos</a></li>
-        <li class="active"><a href="/admin/users/create">Cadastrar</a></li>
-    </ol>
+        <h1>
+        EDITAR MOVIMENTO
+        </h1>
+        <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">atual</li>
+        </ol>
     </section>
 
     <!-- Main content -->
@@ -17,7 +16,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-success">
-                    <!-- form start -->
                     <form role="form" action="/admin/users/create" method="post">
                         <div class="box-body">
                             <div class="col-12 col-sm-10 col-md-6">
@@ -26,33 +24,21 @@
                                         <label for="numero_processo" class="col-form-label col-form-label-sm">NÚMERO DO PROCESSO:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-6">
-                                        <input type="text" class="form-control form-control-sm" id="numero_processo" name="numero_processo" placeholder="Informe o numero do processo" required>
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm">12345678</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-10 col-sm-5 col-md-4">
                                         <label for="id_orgao" class="col-form-label col-form-label-sm">ORGÃO DE ORIGEM:</label>
                                     </div>
-                                    <div class="col-10 col-sm-6 col-md-8">
-                                        <select id="id_orgao" name="id_orgao">
-                                            <option value="#">SELECIONE</option>
-                                            {loop="$user"}
-                                            <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
-                                            {/loop}
-                                        </select>
-                                    </div>
+                                    <label for="numero_processo" class="col-form-label col-form-label-sm">CVT Campinhos</label>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-10 col-sm-5 col-md-4">
                                         <label for="id_tipo_processo" class="col-form-label col-form-label-sm">TIPO DOCUMENTO:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-8">
-                                        <select id="id_tipo_processo" name="id_tipo_processo">
-                                            <option value="#">SELECIONE</option>
-                                            {loop="$user"}
-                                            <option value="{$value.id_orgao}">{$value.id_orgao}</option>
-                                            {/loop}
-                                        </select>
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm">4</label>
                                     </div>
                                 </div> 
                             </div>
@@ -62,7 +48,7 @@
                                         <label for="data_inicio" class="col-form-label col-form-label-sm">DATA INICIO:</label>
                                     </div>
                                     <div class="col-8 col-sm-6 col-md-6">
-                                        <input type="text" class="form-control form-control-sm" id="data_inicio" name="data_inicio" placeholder="aaaa-mm-dd">
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm">2018-12-17</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -70,7 +56,7 @@
                                         <label for="nome_processo" class="col-form-label col-form-label-sm">NOME:</label>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-8">
-                                        <input type="text" class="form-control form-control-sm" id="nome_processo" name="nome_processo" placeholder="Informe o nome" required>
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm">Vinicius dos Santos</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -78,13 +64,12 @@
                                         <label for="assunto_processo" class="col-form-label col-form-label-sm">ASSUNTO:</label>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-8">
-                                        <input type="text" class="form-control form-control-sm" id="assunto_processo" name="assunto_processo" placeholder="Informe o assunto" required>
+                                        <label for="assunto_processo" class="col-form-label col-form-label-sm">Processos</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="box-body">
+                        <div class="box box-body">
                             <div class="content bg-primary">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -139,14 +124,15 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
-                            <button type="button" class="btn btn-primary btn-sm">Cancelar</button>
+                            <button type="submit" class="btn btn-info btn-sm">SALVAR</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <!-- Your Page Content Here -->
     </section>
-<!-- /.content -->
+    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+    <!-- /.content-wrapper -->
+      

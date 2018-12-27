@@ -189,8 +189,8 @@ desired effect
                 </p>
               </li>
               <!-- Menu Body -->
-              <li class="user-body">
-                <!--<div class="row">
+              <!--<li class="user-body">
+                <div class="row">
                   <div class="col-xs-4 text-center">
                     <a href="#">Followers</a>
                   </div>
@@ -200,9 +200,8 @@ desired effect
                   <div class="col-xs-4 text-center">
                     <a href="#">Friends</a>
                   </div>
-                </div>-->
-                <!-- /.row -->
-              </li>
+                </div>
+              </li>-->
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
@@ -263,13 +262,13 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="/admin/users/create"><i class="fa fa-floppy-o" aria-hidden="true"></i><span>Cadastro</span></a></li>
-            <li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Consultar por órgao</span></a></li>
-            <li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Relatório semanal</span></a></li>
-            <li ><a href="/admin/users"><i class="fa fa-pencil" aria-hidden="true"></i><span>Localizar</span></a></li>
+            <li class="active"><a href="/admin/users/create"><i class="fa fa-floppy-o" aria-hidden="true"></i><span>Cadastrar</span></a></li>
+            <!--<li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Consultar por órgao</span></a></li>
+            <li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Relatório semanal</span></a></li>-->
+            <li ><a href="/admin/users"><i class="fa fa-pencil" aria-hidden="true"></i><span>Consultar Todos</span></a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <!--<li class="treeview">
           <a href="#"><i class="fa fa-file-text-o"></i> <span>Documentos</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -280,7 +279,7 @@ desired effect
             <li ><a href="/admin/docs"><i class="fa fa-search" aria-hidden="true"></i><span>Consulta</span></a></li>
             <li ><a href="/admin/users"><i class="fa fa-pencil" aria-hidden="true"></i><span>Movimentar</span></a></li>
           </ul>
-        </li>
+        </li>-->
       </ul>
       <!-- /.sidebar-menu -->
     </section>

@@ -17,7 +17,8 @@ class User extends Model{
 
 		if (count($results) === 0){
 
-			throw new \Exception("Usuário inexistente ou senha inválida");
+			//throw new \Exception("Usuário inexistente ou senha inválida");
+			header("Location: /admin/login");
 			
 		}
 
@@ -35,7 +36,8 @@ class User extends Model{
 
 		} else {
 
-			throw new \Exception("Usuário inexistente ou senha inválida");
+			//throw new \Exception("Usuário inexistente ou senha inválida");
+			header("Location: /admin/login");
 
 		}
 	}
@@ -61,11 +63,38 @@ class User extends Model{
 
 	}
 
-	public static function listAll(){
+	public static function listAllOrgao(){
+
+		$sql = new Sql();
+		return $sql->select("SELECT * FROM orgao ORDER BY orgao.nome_orgao");
+
+	}
+
+	public static function listAllTipo(){
+
+		$sql = new Sql();
+		return $sql->select("SELECT * FROM tipo_processo ORDER BY tipo_processo.tipo_processo");
+
+	}
+
+	public static function listAllProcesso(){
 
 		$sql = new Sql();
 		return $sql->select("SELECT * FROM processo p INNER JOIN orgao o on o.id_orgao=p.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento GROUP BY p.id_processo");
 
+	}
+
+	public function getProcessoById($id_processo){
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT p.id_processo, p.numero_processo, p.id_tipo_processo, tp.tipo_processo, p.id_orgao, o.nome_orgao, p.data_inicio, p.nome_processo, p.assunto_processo FROM processo p INNER JOIN orgao o on o.id_orgao=p.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento WHERE p.id_processo=:id_processo GROUP BY p.id_processo", array(
+
+			":id_processo"=>$id_processo
+
+		));
+
+		$this->setData($results[0]);
 	}
 
 	public function saveProcesso(){
@@ -85,33 +114,6 @@ class User extends Model{
 		));
 
 		$this->setData($results[0]);
-
-	}
-
-	public function getProcessoById($id_processo){
-
-		$sql = new Sql();
-
-		$results = $sql->select("SELECT p.id_processo, p.numero_processo, p.id_tipo_processo, tp.tipo_processo, p.id_orgao, o.nome_orgao, p.data_inicio, p.nome_processo, p.assunto_processo FROM processo p INNER JOIN orgao o on o.id_orgao=p.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento WHERE p.id_processo=:id_processo GROUP BY p.id_processo", array(
-
-			":id_processo"=>$id_processo
-
-		));
-
-		$this->setData($results[0]);
-	}
-
-	public static function listAllOrgao(){
-
-		$sql = new Sql();
-		return $sql->select("SELECT * FROM orgao ORDER BY orgao.nome_orgao");
-
-	}
-
-	public static function listAllTipo(){
-
-		$sql = new Sql();
-		return $sql->select("SELECT * FROM tipo_processo ORDER BY tipo_processo.tipo_processo");
 
 	}
 

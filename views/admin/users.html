@@ -3,11 +3,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Lista de Usuários
+    Lista de Processos
   </h1>
   <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active"><a href="/admin/users">Consulta</a></li>
+    <li class="active">Consultar Todos</li>
   </ol>
 </section>
 
@@ -30,8 +30,8 @@
                     <th>Assunto</th>
                     <th>Órgão</th>
                     <th>Data Início</th>
-                    <th style="width: 100px">Admin</th>
-                    <th style="width: 140px">&nbsp;</th>
+                    <th style="width: 250px"></th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -44,8 +44,8 @@
                     <td>{$value.data_inicio}</td/>
                     <td>
                       <a href="/admin/users/{$value.id_processo}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
-                      <a href="/admin/users/{$value.id_processo}/password" class="btn btn-default btn-xs"><i class="fa fa-unlock"></i> Consultar</a>
-                      <a href="/admin/users/{$value.id_processo}/password" class="btn btn-default btn-xs"><i class="fa fa-unlock"></i> Movimentar</a>
+                      <a href="/admin/users/{$value.id_processo}/password" class="btn btn-default btn-xs"><i class="fa fa-list-alt" aria-hidden="true"></i><b> Consultar</b></a>
+                      <a href="/admin/users/{$value.id_processo}/password" class="btn btn-success btn-xs"><i class="fa fa-plus-circle" aria-hidden="true"></i> Movimentar</a>
                     </td>
                   </tr>
                   {/loop}

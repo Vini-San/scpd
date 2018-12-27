@@ -5,6 +5,11 @@
   <h1>
     Lista de Processos
   </h1>
+  <ol class="breadcrumb">
+        <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/admin/users">Consultar Todos</a></li>
+        <li class="active">Editar</li>
+    </ol>
 </section>
 
 <!-- Main content -->
