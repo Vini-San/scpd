@@ -71,7 +71,7 @@ class User extends Model{
 	public function saveProcesso(){
 
 		$sql = new Sql();
-		$results = $sql->select("CALL salvarprocesso (:numero_processo, :id_orgao, :id_tipo_processo, :data_inicio, :nome_processo, :assunto_processo, :data, :id_orgao, :observacoes)", array(
+		$results = $sql->select("CALL salvarprocesso (:numero_processo, :id_orgao, :id_tipo_processo, :data_inicio, :nome_processo, :assunto_processo, :proc_data_entrada, :id_orgao_movimento, :observacoes)", array(
 
 			":numero_processo"=>$this->getnumero_processo(),
 			":id_orgao"=>$this->getid_orgao(),
@@ -79,8 +79,8 @@ class User extends Model{
 			":data_inicio"=>$this->getdata_inicio(),
 			":nome_processo"=>$this->getnome_processo(),
 			":assunto_processo"=>$this->getassunto_processo(),
-			":data"=>$this->getdata(),
-			":id_orgao_movimento"=>$this->getid_orgao(),
+			":proc_data_entrada"=>$this->getproc_data_entrada(),
+			":id_orgao_movimento"=>$this->getid_orgao_movimento(),
 			":observacoes"=>$this->getobservacoes()
 		));
 
