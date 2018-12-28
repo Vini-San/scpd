@@ -7,6 +7,7 @@ use \Slim\Slim;
 use\Hcode\Page;
 use\Hcode\PageAdmin;
 use\Hcode\Model\User;
+use\Hcode\Model\ProcessoDocumento;
 
 $app = new Slim();
 
@@ -63,6 +64,30 @@ $app->get("/admin/users", function(){
 
 	$page->setTpl("users", array(
 		"users"=>$user
+	));
+});
+
+$app->get("/admin/users/situacao/:id_processo", function($id_processo){
+
+	User::verifyLogin();
+
+	$user = new User();
+
+	$user->getProcessoById((int)$id_processo);
+
+	$movimento = new ProcessoDocumento();
+	$movimento->getProcessoMovimentoById((int)$id_processo);
+
+	$orgao = User::listAllOrgao();
+	$tipo = User::listAllTipo();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("users-situacao", array(
+		"user"=>$user->getValues(),
+		"movimento"=>$movimento->getValues(),
+		"orgao"=>$orgao,
+		"tipo"=>$tipo
 	));
 });
 
