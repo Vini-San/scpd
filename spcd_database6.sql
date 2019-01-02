@@ -116,16 +116,26 @@ CREATE TABLE IF NOT EXISTS `movimento` (
   CONSTRAINT `movimento_ibfk_1` FOREIGN KEY (`id_orgao`) REFERENCES `orgao` (`id_orgao`),
   CONSTRAINT `movimento_ibfk_2` FOREIGN KEY (`id_processo_documento`) REFERENCES `processo_documento` (`id_processo_documento`),
   CONSTRAINT `movimento_ibfk_3` FOREIGN KEY (`id_tipo_movimento`) REFERENCES `tipo_movimento` (`id_tipo_movimento`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela scpd.movimento: ~5 rows (aproximadamente)
+-- Copiando dados para a tabela scpd.movimento: ~13 rows (aproximadamente)
 /*!40000 ALTER TABLE `movimento` DISABLE KEYS */;
 INSERT INTO `movimento` (`id_movimento`, `id_processo_documento`, `id_tipo_movimento`, `proc_data_entrada`, `id_orgao`, `observacoes_proc_entrada`) VALUES
 	(1, 8, 1, '2018-12-20 00:00:00', 5, 'recebido nesta data'),
 	(2, 9, 1, '2018-12-27 00:00:00', 5, 'recebido nesta data'),
 	(6, 13, 1, '2018-12-27 00:00:00', 2, 'recebido nesta data'),
 	(8, 15, 1, '2018-12-27 00:00:00', 5, 'processo recebido'),
-	(9, 16, 1, '2018-12-27 00:00:00', 1, 'processo recebido');
+	(9, 16, 1, '2018-12-27 00:00:00', 1, 'processo recebido'),
+	(10, 16, 2, '2018-12-28 10:50:39', 4, 'Enviado'),
+	(11, 16, 1, '2018-12-29 00:00:00', 4, 'recebido pelo cvt campinho'),
+	(17, 17, 1, '2018-12-28 00:00:00', 4, 'processo recebido neste dia'),
+	(18, 17, 2, '2019-01-02 00:00:00', 3, 'processo enviado nesta data'),
+	(19, 17, 1, '2019-01-02 00:00:00', 5, 'processo recebido'),
+	(20, 17, 1, '2019-01-02 00:00:00', 1, 'processo recebido neste dia'),
+	(21, 17, 1, '2019-01-02 00:00:00', 1, 'processo recebido neste dia'),
+	(22, 17, 1, '2019-01-02 00:00:00', 1, 'processo recebido'),
+	(23, 15, 2, '2019-01-02 00:00:00', 2, 'carga'),
+	(24, 15, 2, '2019-01-02 00:00:00', 2, 'carga');
 /*!40000 ALTER TABLE `movimento` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela scpd.nivel_usuario
@@ -179,9 +189,9 @@ CREATE TABLE IF NOT EXISTS `processo` (
   CONSTRAINT `processo_ibfk_1` FOREIGN KEY (`id_orgao`) REFERENCES `orgao` (`id_orgao`),
   CONSTRAINT `processo_ibfk_2` FOREIGN KEY (`id_tipo_processo`) REFERENCES `tipo_processo` (`id_tipo_processo`),
   CONSTRAINT `processo_ibfk_3` FOREIGN KEY (`id_processo_documento`) REFERENCES `processo_documento` (`id_processo_documento`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela scpd.processo: ~18 rows (aproximadamente)
+-- Copiando dados para a tabela scpd.processo: ~16 rows (aproximadamente)
 /*!40000 ALTER TABLE `processo` DISABLE KEYS */;
 INSERT INTO `processo` (`id_processo`, `numero_processo`, `id_orgao`, `id_tipo_processo`, `data_inicio`, `nome_processo`, `assunto_processo`, `id_processo_documento`) VALUES
 	(1, 'wcr3456', 4, 1, '2017-10-25 00:00:00', 'joão das couves', 'Processo em andamento no CVT', 1),
@@ -201,7 +211,8 @@ INSERT INTO `processo` (`id_processo`, `numero_processo`, `id_orgao`, `id_tipo_p
 	(15, 'ACI/7834', 2, 1, '2016-11-28 00:00:00', 'outroteste', 'processo disciplinar', 13),
 	(16, 'Proc/9874', 4, 3, '2011-08-10 00:00:00', 'teste47', 'assuntoteste', 14),
 	(17, 'Proc/53178', 3, 2, '2018-01-24 00:00:00', 'testepg', 'Processo Externo', 15),
-	(18, 'ACI/8476', 2, 1, '2017-10-28 00:00:00', 'teste65', 'Processo SEEDUC', 16);
+	(18, 'ACI/8476', 2, 1, '2017-10-28 00:00:00', 'teste65', 'Processo SEEDUC', 16),
+	(19, 'Proc/87949', 5, 2, '2015-05-12 00:00:00', 'nomequalquer', 'Processo Disciplinar', 17);
 /*!40000 ALTER TABLE `processo` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela scpd.processo_documento
@@ -209,9 +220,9 @@ CREATE TABLE IF NOT EXISTS `processo_documento` (
   `id_processo_documento` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_processo_documento` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`id_processo_documento`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela scpd.processo_documento: ~16 rows (aproximadamente)
+-- Copiando dados para a tabela scpd.processo_documento: ~14 rows (aproximadamente)
 /*!40000 ALTER TABLE `processo_documento` DISABLE KEYS */;
 INSERT INTO `processo_documento` (`id_processo_documento`, `tipo_processo_documento`) VALUES
 	(1, 'processo'),
@@ -229,8 +240,63 @@ INSERT INTO `processo_documento` (`id_processo_documento`, `tipo_processo_docume
 	(13, 'ACI/7834'),
 	(14, 'Proc/9874'),
 	(15, 'Proc/53178'),
-	(16, 'ACI/8476');
+	(16, 'ACI/8476'),
+	(17, 'Proc/87949');
 /*!40000 ALTER TABLE `processo_documento` ENABLE KEYS */;
+
+-- Copiando estrutura para procedure scpd.salvarmovimento
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `salvarmovimento`(
+	pid_processo int,
+	pid_tipo_movimento int,
+	pproc_data_entrada datetime,
+	pid_orgao int,
+	pobservacoes_proc_entrada longtext
+
+)
+BEGIN
+
+	DECLARE vid_processo_documento int;
+	
+	SELECT p.id_processo_documento into vid_processo_documento FROM processo p WHERE p.id_processo = pid_processo;
+	
+	INSERT INTO movimento (id_processo_documento, id_tipo_movimento, proc_data_entrada, id_orgao, observacoes_proc_entrada) 
+	values (vid_processo_documento, pid_tipo_movimento, pproc_data_entrada, pid_orgao, pobservacoes_proc_entrada);
+	
+END//
+DELIMITER ;
+
+-- Copiando estrutura para procedure scpd.salvarprocesso
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `salvarprocesso`(
+	IN `pnumero_processo` VARCHAR(255),
+	IN `pid_orgao` int,
+	IN `pid_tipo_processo` int,
+	IN `pdata_inicio` datetime,
+	IN `pnome_processo` varchar (255),
+	IN `passunto_processo` varchar (255),
+	IN `movidata` datetime,
+	IN `movid_orgao` int,
+	IN `moviobservacoes` longtext
+)
+BEGIN
+
+	DECLARE vid_processo_documento INT;
+	
+	INSERT INTO processo_documento values (null, pnumero_processo);
+	
+	SELECT * FROM processo_documento pd WHERE pd.id_processo_documento = LAST_INSERT_ID();
+	
+	SET vid_processo_documento = LAST_INSERT_ID();
+	
+	INSERT INTO processo (numero_processo, id_orgao, id_tipo_processo, data_inicio, nome_processo, assunto_processo, id_processo_documento) 
+	VALUES(pnumero_processo, pid_orgao, pid_tipo_processo, pdata_inicio, pnome_processo, passunto_processo, vid_processo_documento);
+	
+	INSERT INTO MOVIMENTO (id_processo_documento, id_tipo_movimento, proc_data_entrada, id_orgao, observacoes_proc_entrada)
+	VALUES (vid_processo_documento, 1, movidata, movid_orgao, moviobservacoes);
+	
+END//
+DELIMITER ;
 
 -- Copiando estrutura para tabela scpd.situacao_usuario
 CREATE TABLE IF NOT EXISTS `situacao_usuario` (
@@ -278,7 +344,7 @@ CREATE TABLE IF NOT EXISTS `tipo_processo` (
   PRIMARY KEY (`id_tipo_processo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela scpd.tipo_processo: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela scpd.tipo_processo: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `tipo_processo` DISABLE KEYS */;
 INSERT INTO `tipo_processo` (`id_tipo_processo`, `tipo_processo`) VALUES
 	(1, 'ACI'),
