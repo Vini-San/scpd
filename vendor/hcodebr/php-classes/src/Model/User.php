@@ -84,6 +84,13 @@ class User extends Model{
 
 	}
 
+	public static function listAllTipoMovimento(){
+
+		$sql = new Sql();
+		return $sql->select("select * from tipo_movimento");
+
+	}
+
 	public function getProcessoById($id_processo){
 
 		$sql = new Sql();
@@ -97,17 +104,40 @@ class User extends Model{
 		$this->setData($results[0]);
 	}
 
-	public function getProcessoMovimentoById($id_processo){
+	public function getProcessoMovimentoById($related = true){
 
 		$sql = new Sql();
 
-		$results = $sql->select("SELECT m.id_movimento, m.id_tipo_movimento, tm.tipo_movimento, m.proc_data_entrada, m.id_orgao, m.observacoes_proc_entrada, o.nome_orgao FROM movimento m INNER JOIN orgao o on o.id_orgao=m.id_orgao INNER JOIN tipo_movimento tm on tm.id_tipo_movimento=m.id_tipo_movimento INNER JOIN processo_documento pd on pd.id_processo_documento=m.id_processo_documento INNER JOIN processo p on p.id_processo_documento=pd.id_processo_documento where p.id_processo = :id_processo", array(
+		if ($related === true){
+		return $sql->select("SELECT m.id_movimento, m.id_tipo_movimento, tm.tipo_movimento, m.proc_data_entrada, m.id_orgao, m.observacoes_proc_entrada, o.nome_orgao from movimento m 
+			INNER JOIN orgao o on o.id_orgao=m.id_orgao 
+			INNER JOIN tipo_movimento tm on tm.id_tipo_movimento=m.id_tipo_movimento 
+			WHERE id_movimento IN(
+			SELECT m.id_movimento 
+			FROM movimento m 
+			INNER JOIN processo_documento pd on pd.id_processo_documento=m.id_processo_documento 
+			INNER JOIN processo p on p.id_processo_documento=pd.id_processo_documento 
+			where p.id_processo =:id_processo) order by m.id_movimento", [
+				":id_processo"=>$this->getid_processo()
+			]);
+	} else {
 
-			":id_processo"=>$id_processo
+		return $sql->select("SELECT m.id_movimento, m.id_tipo_movimento, tm.tipo_movimento, m.proc_data_entrada, m.id_orgao, m.observacoes_proc_entrada, o.nome_orgao from movimento m 
+			INNER JOIN orgao o on o.id_orgao=m.id_orgao 
+			INNER JOIN tipo_movimento tm on tm.id_tipo_movimento=m.id_tipo_movimento 
+			WHERE m.id_movimento not IN(
+			SELECT m.id_movimento 
+			FROM movimento m 
+			INNER JOIN processo_documento pd on pd.id_processo_documento=m.id_processo_documento 
+			INNER JOIN processo p on p.id_processo_documento=pd.id_processo_documento 
+			where p.id_processo =:id_processo) order by m.id_movimento", [
+				":id_processo"=>$this->getid_processo()
+			]);
 
-		));
+	}
 
-		$this->setData($results[0]);
+		
+		//$this->setData($results[0]);
 	}
 
 	public function saveProcesso(){
@@ -121,6 +151,22 @@ class User extends Model{
 			":data_inicio"=>$this->getdata_inicio(),
 			":nome_processo"=>$this->getnome_processo(),
 			":assunto_processo"=>$this->getassunto_processo(),
+			":proc_data_entrada"=>$this->getproc_data_entrada(),
+			":id_orgao_movimento"=>$this->getid_orgao_movimento(),
+			":observacoes"=>$this->getobservacoes()
+		));
+
+		$this->setData($results[0]);
+
+	}
+
+	public function saveMovimento(){
+
+		$sql = new Sql();
+		$results = $sql->select("CALL salvarmovimento (:id_processo, :id_tipo_movimento, :proc_data_entrada, :id_orgao_movimento, :observacoes)", array(
+
+			":id_processo"=>$this->getid_processo(),
+			":id_tipo_movimento"=>$this->getid_tipo_movimento(),
 			":proc_data_entrada"=>$this->getproc_data_entrada(),
 			":id_orgao_movimento"=>$this->getid_orgao_movimento(),
 			":observacoes"=>$this->getobservacoes()

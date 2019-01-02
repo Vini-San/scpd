@@ -1,4 +1,4 @@
-    <!-- Content Wrapper. Contains page content -->
+<?php if(!class_exists('Rain\Tpl')){exit;}?>    <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -7,7 +7,8 @@
         </h1>
         <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">atual</li>
+        <li><a href="/admin/users">Consultar Todos</a></li>
+        <li class="active">Movimentar Processo</li>
         </ol>
     </section>
 
@@ -16,7 +17,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-success">
-                    <form role="form" action="/admin/users/create" method="post">
+                    <form role="form" action="/admin/movimentar" method="post">
                         <div class="box-body">
                             <div class="col-12 col-sm-10 col-md-6">
                                 <div class="form-group row">
@@ -24,21 +25,21 @@
                                         <label for="numero_processo" class="col-form-label col-form-label-sm">NÚMERO DO PROCESSO:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-6">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$user.numero_processo}</label>
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["numero_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-10 col-sm-5 col-md-4">
                                         <label for="id_orgao" class="col-form-label col-form-label-sm">ORGÃO DE ORIGEM:</label>
                                     </div>
-                                    <label for="numero_processo" class="col-form-label col-form-label-sm">{$user.nome_orgao}</label>
+                                    <label for="numero_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-10 col-sm-5 col-md-4">
                                         <label for="id_tipo_processo" class="col-form-label col-form-label-sm">TIPO DOCUMENTO:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-8">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$user.tipo_processo}</label>
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                     </div>
                                 </div> 
                             </div>
@@ -48,7 +49,7 @@
                                         <label for="data_inicio" class="col-form-label col-form-label-sm">DATA INICIO:</label>
                                     </div>
                                     <div class="col-8 col-sm-6 col-md-6">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm">{$user.data_inicio}</label>
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["data_inicio"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -56,7 +57,7 @@
                                         <label for="nome_processo" class="col-form-label col-form-label-sm">NOME:</label>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-8">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm">{$user.nome_processo}</label>
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["nome_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -64,7 +65,7 @@
                                         <label for="assunto_processo" class="col-form-label col-form-label-sm">ASSUNTO:</label>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-8">
-                                        <label for="assunto_processo" class="col-form-label col-form-label-sm">{$user.assunto_processo}</label>
+                                        <label for="assunto_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["assunto_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -82,16 +83,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {loop="$movimento"}
+                                        <?php $counter1=-1;  if( isset($movimento) && ( is_array($movimento) || $movimento instanceof Traversable ) && sizeof($movimento) ) foreach( $movimento as $key1 => $value1 ){ $counter1++; ?>
                                         <tr>
-                                            <td>{$value.tipo_movimento}</td>
-                                            <td>{$value.nome_orgao}</td>
-                                            <td>{$value.proc_data_entrada}</td>
-                                            <td>{$value.observacoes_proc_entrada}</td>
+                                            <td><?php echo htmlspecialchars( $value1["tipo_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                                            <td><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                                            <td><?php echo htmlspecialchars( $value1["proc_data_entrada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                                            <td><?php echo htmlspecialchars( $value1["observacoes_proc_entrada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                                             <td>
                                                 <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
                                             </td>
                                         </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table> 
                             </div>
@@ -110,10 +112,11 @@
                                             <label class="col-form-label col-form-label-sm ">TIPO DE MOVIMENTO:</label>
                                         </div>
                                         <div class="col-sm-12 col-md-12 text-black">
-                                            <select class="custom-select custom-select-sm" required>
+                                            <select class="custom-select custom-select-sm" name="id_tipo_movimento" id="id_tipo_movimento" required>
                                                 <option value="" disabled selected>SELECIONE</option>
-                                                <option value="1">ENTRADA</option>
-                                                <option value="2">SAÍDA</option>
+                                                <?php $counter1=-1;  if( isset($tipomovimento) && ( is_array($tipomovimento) || $tipomovimento instanceof Traversable ) && sizeof($tipomovimento) ) foreach( $tipomovimento as $key1 => $value1 ){ $counter1++; ?>
+                                                <option value="<?php echo htmlspecialchars( $value1["id_tipo_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["tipo_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -124,7 +127,7 @@
                                                     <label class="col-form-label col-form-label-sm">Data:</label>
                                                 </div>
                                                 <div class="col-sm-12 col-md-12">
-                                                    <input type="date" class="form-control form-control-sm">
+                                                    <input type="text" class="form-control form-control-sm" name="proc_data_entrada" id="proc_data_entrada">
                                                 </div>
                                             </div>
                                         </div>
@@ -134,7 +137,7 @@
                                                     <label class="col-form-label col-form-label-sm">Hora:</label>
                                                 </div>
                                                 <div class="col-sm-12 col-md-12">
-                                                    <input type="time" class="form-control form-control-sm" required="">
+                                                    <input type="time" class="form-control form-control-sm">
                                                 </div>
                                             </div>
                                         </div>
@@ -144,12 +147,11 @@
                                                     <label class="col-form-label col-form-label-sm ">SELECIONE ORGÃO:</label>
                                                 </div>
                                                 <div class="col-sm-12 col-md-12 text-black">
-                                                    <select class="custom-select custom-select-sm" required>
+                                                    <select class="custom-select custom-select-sm" name="id_orgao" id="id_orgao" required>
                                                         <option value="" disabled selected>SELECIONE</option>
-                                                        <option value="1">DETTRRAN</option>
-                                                        <option value="2">CEFFEET</option>
-                                                        <option value="3">FETPW</option>
-                                                        <option value="4">SADDA</option>
+                                                        <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>
+                                                        <option value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                                        <?php } ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -160,7 +162,9 @@
                                             <label class="col-form-label col-form-label-sm">Observações:</label>
                                         </div>
                                         <div class="col-sm-12 col-md-12">
-                                            <input type="text" class="form-control form-control-sm" required/>
+                                            <input type="text" class="form-control form-control-sm" name="observacoes_proc_entrada" id="observacoes_proc_entrada" required/>
+                                            <!-- aqui eu vou passar o id_processo_documento -->
+                                            <input type="hidden" id="id_processo_documento" name="id_processo_documento" value="id_processo_documento">
                                         </div>
                                     </div>
                                     <div class="row">

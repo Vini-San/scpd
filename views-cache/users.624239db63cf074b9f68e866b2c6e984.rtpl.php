@@ -45,7 +45,7 @@
                     <td>
                       <a href="/admin/users/<?php echo htmlspecialchars( $value1["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
                       <a href="/admin/users/situacao/<?php echo htmlspecialchars( $value1["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-default btn-xs"><i class="fa fa-list-alt" aria-hidden="true"></i><b> Consultar</b></a>
-                      <a href="/admin/users/<?php echo htmlspecialchars( $value1["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/password" class="btn btn-success btn-xs"><i class="fa fa-plus-circle" aria-hidden="true"></i> Movimentar</a>
+                      <a href="/admin/users/movimentar/<?php echo htmlspecialchars( $value1["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-success btn-xs"><i class="fa fa-plus-circle" aria-hidden="true"></i> Movimentar</a>
                     </td>
                   </tr>
                   <?php } ?>

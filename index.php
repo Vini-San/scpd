@@ -7,7 +7,7 @@ use \Slim\Slim;
 use\Hcode\Page;
 use\Hcode\PageAdmin;
 use\Hcode\Model\User;
-use\Hcode\Model\ProcessoDocumento;
+//use\Hcode\Model\ProcessoDocumento;
 
 $app = new Slim();
 
@@ -75,17 +75,34 @@ $app->get("/admin/users/situacao/:id_processo", function($id_processo){
 
 	$user->getProcessoById((int)$id_processo);
 
-	$movimento = new ProcessoDocumento();
-	$movimento->getProcessoMovimentoById((int)$id_processo);
-
-	$orgao = User::listAllOrgao();
-	$tipo = User::listAllTipo();
-
 	$page = new PageAdmin();
 
 	$page->setTpl("users-situacao", array(
 		"user"=>$user->getValues(),
-		"movimento"=>$movimento->getValues(),
+		"movimento"=>$user->getProcessoMovimentoById(),
+		"sem movimento"=>$user->getProcessoMovimentoById(false)
+	));
+});
+
+$app->get("/admin/users/movimentar/:id_processo", function($id_processo){
+
+	User::verifyLogin();
+
+	$user = new User();
+
+	$user->getProcessoById((int)$id_processo);
+
+	$orgao = User::listAllOrgao();
+	$tipo = User::listAllTipo();
+	$tipomovimento = User::listAllTipoMovimento();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("users-movimentar", array(
+		"user"=>$user->getValues(),
+		"movimento"=>$user->getProcessoMovimentoById(),
+		"sem movimento"=>$user->getProcessoMovimentoById(false),
+		"tipomovimento"=>$tipomovimento,
 		"orgao"=>$orgao,
 		"tipo"=>$tipo
 	));
@@ -145,12 +162,26 @@ $app->get("/admin/users/:id_processo", function($id_processo){
 	));
 });
 
+$app->post("/admin/users/movimentar/:id_processo/add", function($id_processo){
+
+	User::verifyLogin();
+
+	$user = new User();
+
+	$user->getProcessoById((int)$id_processo);
+	
+	$user->setData($_POST);
+	$user->saveMovimento();	
+
+	header("Location: /admin/users/situacao/".$id_processo);
+	exit;
+
+});
+
 //inserindo dados no banco
 $app->post("/admin/users/create", function(){
 
 	User::verifyLogin();
-	User::listAllOrgao();
-	User::listAllTipo();
 
 	$user = new User();
 
@@ -164,6 +195,7 @@ $app->post("/admin/users/create", function(){
 
 
 });
+
 
 //para modificar dados no banco
 $app->post("/admin/users/:id_processo", function($id_processo){
@@ -180,7 +212,6 @@ $app->post("/admin/users/:id_processo", function($id_processo){
 	exit;
 
 });
-
 
 
 
