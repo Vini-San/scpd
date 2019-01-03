@@ -53,6 +53,7 @@ $app->get('/admin/logout',function(){
 
 	header("Location: /admin/login");
 });
+
 //quando entra na página de consulta
 $app->get("/admin/users", function(){
 
@@ -67,6 +68,7 @@ $app->get("/admin/users", function(){
 	));
 });
 
+//tela com situação do processo com os dados e os movimentos
 $app->get("/admin/users/situacao/:id_processo", function($id_processo){
 
 	User::verifyLogin();
@@ -84,6 +86,8 @@ $app->get("/admin/users/situacao/:id_processo", function($id_processo){
 	));
 });
 
+
+//tela para inserir novo movimento
 $app->get("/admin/users/movimentar/:id_processo", function($id_processo){
 
 	User::verifyLogin();
@@ -108,7 +112,7 @@ $app->get("/admin/users/movimentar/:id_processo", function($id_processo){
 	));
 });
 
-//quando vai para página de insert
+//tela que insere os dados do processo e sua entrada
 $app->get("/admin/users/create", function(){
 
 	User::verifyLogin();
@@ -124,7 +128,7 @@ $app->get("/admin/users/create", function(){
 	));
 });
 
-//quando vai para página de update
+//tela de deleção
 $app->get("/admin/users/:id_processo/delete", function($id_processo){
 
 	User::verifyLogin();
@@ -142,6 +146,7 @@ $app->get("/admin/users/:id_processo/delete", function($id_processo){
 
 });
 
+//tela de consulta com todos os processos cadastrados
 $app->get("/admin/users/:id_processo", function($id_processo){
 
 	User::verifyLogin();
@@ -162,6 +167,8 @@ $app->get("/admin/users/:id_processo", function($id_processo){
 	));
 });
 
+
+//controle pra inserir novo movimento
 $app->post("/admin/users/movimentar/:id_processo/add", function($id_processo){
 
 	User::verifyLogin();
@@ -178,7 +185,7 @@ $app->post("/admin/users/movimentar/:id_processo/add", function($id_processo){
 
 });
 
-//inserindo dados no banco
+//controle para inserir dados do processo e primeira movimentação
 $app->post("/admin/users/create", function(){
 
 	User::verifyLogin();
@@ -197,7 +204,7 @@ $app->post("/admin/users/create", function(){
 });
 
 
-//para modificar dados no banco
+//controle para modificar dados do processo
 $app->post("/admin/users/:id_processo", function($id_processo){
 
 	User::verifyLogin();

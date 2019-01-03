@@ -8,6 +8,7 @@
         <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li><a href="/admin/users">Consultar Todos</a></li>
+        <li><a href="/admin/users/situacao/{$user.id_processo}">Situação do Processo</a></li>
         <li class="active">Movimentar Processo</li>
         </ol>
     </section>
@@ -178,7 +179,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-sm-12 col-md-12">
-                                            <input type="text" class="form-control form-control-sm" id="id_processo" name="id_processo" placeholder="{$user.id_processo}"/>
+                                            <input type="hidden" class="form-control form-control-sm" id="id_processo" name="id_processo" value="{$user.id_processo}"/>
                                             <label class="col-form-label col-form-label-sm ">TIPO DE MOVIMENTO:</label>
                                         </div>
                                         <div class="col-sm-12 col-md-12 text-black">
@@ -240,7 +241,7 @@
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
-                            <button type="button" class="btn btn-primary btn-sm">Cancelar</button>
+                            <input type="reset" class="btn btn-primary btn-sm"/>
                         </div>
                     </form>
                 </div>

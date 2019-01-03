@@ -163,7 +163,7 @@ class User extends Model{
 	public function saveMovimento(){
 
 		$sql = new Sql();
-		$results = $sql->select("CALL salvarmovimento (:id_processo, :id_tipo_movimento, :proc_data_entrada, :id_orgao_movimento, :observacoes)", array(
+		$sql->select("CALL salvarmovimento (:id_processo, :id_tipo_movimento, :proc_data_entrada, :id_orgao_movimento, :observacoes)", array(
 
 			":id_processo"=>$this->getid_processo(),
 			":id_tipo_movimento"=>$this->getid_tipo_movimento(),
@@ -171,8 +171,6 @@ class User extends Model{
 			":id_orgao_movimento"=>$this->getid_orgao_movimento(),
 			":observacoes"=>$this->getobservacoes()
 		));
-
-		$this->setData($results[0]);
 
 	}
 

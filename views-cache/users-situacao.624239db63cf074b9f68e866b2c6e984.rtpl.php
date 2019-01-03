@@ -94,9 +94,9 @@
                                         </tr>
                                         <?php } ?>
                                     </tbody>
-                                    <a href="/admin/users/movimentar/<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Inserir Novo Movimento</a>
                                 </table> 
                             </div>
+                            <a href="/admin/users/movimentar/<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Inserir Novo Movimento</a>
                         </div>
                 </div>
             </div>
