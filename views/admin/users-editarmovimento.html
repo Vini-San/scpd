@@ -74,66 +74,56 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <div class="content bg-primary">
+                            <div class="box-body bg-primary">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-12 col-sm-12 col-md-3">
                                         <div class="col-sm-12 col-md-12">
                                             <input type="hidden" class="form-control form-control-sm" id="id_processo" name="id_processo" value="{$user.id_processo}"/>
                                             <input type="hidden" class="form-control form-control-sm" id="id_movimento" name="id_movimento" value="{$movimento.id_movimento}"/>
                                             <label class="col-form-label col-form-label-sm ">TIPO DE MOVIMENTO:</label>
                                         </div>
                                         <div class="col-sm-12 col-md-12 text-black">
-                                            <select class="custom-select custom-select-sm" id="id_tipo_movimento" name="id_tipo_movimento" required>
+                                            <select class="btn btn-md" id="id_tipo_movimento" name="id_tipo_movimento" required>
                                                 <option value="" disabled selected>{$movimento.tipo_movimento}</option>
                                                 {loop="$tipomovimento"}
                                                 <option value="{$value.id_tipo_movimento}">{$value.tipo_movimento}</option>
                                                 {/loop}
                                             </select>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-12 col-sm-12 col-md-4">
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <label class="col-form-label col-form-label-sm">Data:</label>
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <input type="text" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" value="{$movimento.proc_data_entrada}">
-                                                    </div>
-                                                </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-3">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12 col-md-12">
+                                                <label class="col-form-label col-form-label-sm">Origem:</label>
                                             </div>
-                                            <div class="col-12 col-sm-12 col-md-3">
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <label class="col-form-label col-form-label-sm">Hora:</label>
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <input type="text" class="form-control form-control-sm" value="10:00" required="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-sm-12 col-md-5">
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <label class="col-form-label col-form-label-sm">Origem:</label>
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-12 text-black">
-                                                        <select class="btn btn-sm" id="id_orgao" name="id_orgao">
-                                                            <option value="#" disabled selected>{$movimento.nome_orgao}</option>
-                                                            {loop="$orgao"}
-                                                            <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
-                                                            {/loop}
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                            <div class="col-sm-12 col-md-12 text-black">
+                                                <select class="btn btn-sm" id="id_orgao" name="id_orgao">
+                                                    <option value="#" disabled selected>{$movimento.nome_orgao}</option>
+                                                    {loop="$orgao"}
+                                                    <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
+                                                    {/loop}
+                                                </select>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4">
                                         <div class="form-group row">
-                                            <div class="col-sm-10 col-md-12">
-                                                <label class="col-form-label col-form-label-sm">Observações:</label>
+                                            <div class="col-sm-12 col-md-10">
+                                                <label class="col-form-label col-form-label-sm">Data:</label>
                                             </div>
-                                            <div class="col-sm-12 col-md-12">
-                                                <input type="text" class="form-control form-control-sm" id="observacoes_proc_entrada" name="observacoes_proc_entrada" value="{$movimento.observacoes_proc_entrada}"required/>
+                                            <div class="col-sm-12 col-md-10">
+                                                <input type="text" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" value="{$movimento.proc_data_entrada}">
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-10">
+                                    <div class="form-group row">
+                                        <div class="col-sm-10 col-md-12">
+                                            <label class="col-form-label col-form-label-sm">Observações:</label>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input type="text" class="form-control form-control-sm" id="observacoes_proc_entrada" name="observacoes_proc_entrada" value="{$movimento.observacoes_proc_entrada}"required/>
                                         </div>
                                     </div>
                                 </div>

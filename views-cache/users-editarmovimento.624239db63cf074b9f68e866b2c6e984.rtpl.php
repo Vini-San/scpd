@@ -74,66 +74,56 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <div class="content bg-primary">
+                            <div class="box-body bg-primary">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-12 col-sm-12 col-md-3">
                                         <div class="col-sm-12 col-md-12">
                                             <input type="hidden" class="form-control form-control-sm" id="id_processo" name="id_processo" value="<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
                                             <input type="hidden" class="form-control form-control-sm" id="id_movimento" name="id_movimento" value="<?php echo htmlspecialchars( $movimento["id_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
                                             <label class="col-form-label col-form-label-sm ">TIPO DE MOVIMENTO:</label>
                                         </div>
                                         <div class="col-sm-12 col-md-12 text-black">
-                                            <select class="custom-select custom-select-sm" id="id_tipo_movimento" name="id_tipo_movimento" required>
+                                            <select class="btn btn-md" id="id_tipo_movimento" name="id_tipo_movimento" required>
                                                 <option value="" disabled selected><?php echo htmlspecialchars( $movimento["tipo_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                                                 <?php $counter1=-1;  if( isset($tipomovimento) && ( is_array($tipomovimento) || $tipomovimento instanceof Traversable ) && sizeof($tipomovimento) ) foreach( $tipomovimento as $key1 => $value1 ){ $counter1++; ?>
                                                 <option value="<?php echo htmlspecialchars( $value1["id_tipo_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["tipo_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-12 col-sm-12 col-md-4">
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <label class="col-form-label col-form-label-sm">Data:</label>
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <input type="text" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" value="<?php echo htmlspecialchars( $movimento["proc_data_entrada"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                                                    </div>
-                                                </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-3">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12 col-md-12">
+                                                <label class="col-form-label col-form-label-sm">Origem:</label>
                                             </div>
-                                            <div class="col-12 col-sm-12 col-md-3">
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <label class="col-form-label col-form-label-sm">Hora:</label>
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <input type="text" class="form-control form-control-sm" value="10:00" required="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-sm-12 col-md-5">
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <label class="col-form-label col-form-label-sm">Origem:</label>
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-12 text-black">
-                                                        <select class="btn btn-sm" id="id_orgao" name="id_orgao">
-                                                            <option value="#" disabled selected><?php echo htmlspecialchars( $movimento["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
-                                                            <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>
-                                                            <option value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                            <div class="col-sm-12 col-md-12 text-black">
+                                                <select class="btn btn-sm" id="id_orgao" name="id_orgao">
+                                                    <option value="#" disabled selected><?php echo htmlspecialchars( $movimento["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                                    <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>
+                                                    <option value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                                    <?php } ?>
+                                                </select>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4">
                                         <div class="form-group row">
-                                            <div class="col-sm-10 col-md-12">
-                                                <label class="col-form-label col-form-label-sm">Observações:</label>
+                                            <div class="col-sm-12 col-md-10">
+                                                <label class="col-form-label col-form-label-sm">Data:</label>
                                             </div>
-                                            <div class="col-sm-12 col-md-12">
-                                                <input type="text" class="form-control form-control-sm" id="observacoes_proc_entrada" name="observacoes_proc_entrada" value="<?php echo htmlspecialchars( $movimento["observacoes_proc_entrada"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"required/>
+                                            <div class="col-sm-12 col-md-10">
+                                                <input type="text" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" value="<?php echo htmlspecialchars( $movimento["proc_data_entrada"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-10">
+                                    <div class="form-group row">
+                                        <div class="col-sm-10 col-md-12">
+                                            <label class="col-form-label col-form-label-sm">Observações:</label>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input type="text" class="form-control form-control-sm" id="observacoes_proc_entrada" name="observacoes_proc_entrada" value="<?php echo htmlspecialchars( $movimento["observacoes_proc_entrada"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"required/>
                                         </div>
                                     </div>
                                 </div>

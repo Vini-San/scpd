@@ -22,5 +22,4 @@
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-  
+<!-- /.content-wrapper -->

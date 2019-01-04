@@ -268,6 +268,19 @@ desired effect
             <li ><a href="/admin/users/pororgao"><i class="fa fa-search" aria-hidden="true"></i><span>Consultar por órgao</span></a></li>
           </ul>
         </li>
+        <li class="treeview">
+            <a href="#"><i class="fa fa-book fa-fw"></i> <span>Documentos</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="active"><a href="#"><i class="fa fa-floppy-o" aria-hidden="true"></i><span>Cadastrar</span></a></li>
+              <!--<li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Relatório semanal</span></a></li>-->
+              <li ><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i><span>Consultar Todos</span></a></li>
+              <li ><a href="#"><i class="fa fa-search" aria-hidden="true"></i><span>Consultar por órgao</span></a></li>
+            </ul>
+          </li>
         <!--<li class="treeview">
           <a href="#"><i class="fa fa-file-text-o"></i> <span>Documentos</span>
             <span class="pull-right-container">

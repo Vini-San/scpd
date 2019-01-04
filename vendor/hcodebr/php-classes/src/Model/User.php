@@ -165,7 +165,7 @@ class User extends Model{
 
 		$sql = new Sql();
 
-		$results = $sql->select("SELECT o.id_orgao FROM orgao o INNER JOIN processo p on p.id_orgao=o.id_orgao WHERE o.id_orgao=:id_orgao", array(
+		$results = $sql->select("SELECT o.id_orgao, o.nome_orgao FROM orgao o INNER JOIN processo p on p.id_orgao=o.id_orgao WHERE o.id_orgao=:id_orgao", array(
 
 			":id_orgao"=>$id_orgao
 
@@ -179,7 +179,7 @@ class User extends Model{
 		$sql = new Sql();
 
 		if ($related === true){
-		return $sql->select("SELECT p.id_processo, p.numero_processo, p.id_tipo_processo, p.id_orgao, o.nome_orgao, p.data_inicio, p.nome_processo, p.assunto_processo FROM processo p 
+		return $sql->select("SELECT p.id_processo, p.numero_processo, p.id_tipo_processo, p.id_orgao, p.data_inicio, p.nome_processo, p.assunto_processo FROM processo p 
 			INNER JOIN orgao o on o.id_orgao=p.id_orgao 
 			WHERE p.id_orgao IN(
 			SELECT o.id_orgao 

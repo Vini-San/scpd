@@ -16,15 +16,31 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="box box-success">
-                    <!-- form start -->
-                        <div class="box-body">
-                            <div class="row">
+                        <!-- form start -->
+                        <form role="form" action="/admin/users/resultadopororgao" method="post">
+                            <div class="box-body">
                                 <div class="col-12 col-sm-10 col-md-5">
-                                        Nova Consulta
+                                    <div class="form-group row">
+                                        <div class="col-10 col-sm-6 col-md-6">
+                                            <select class="btn btn-md" id="id_orgao" name="id_orgao" required>
+                                                <option value="#" disabled selected>SELECIONE ÓRGÃO</option>
+                                                {loop="$orgao"}
+                                                <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
+                                                {/loop}
+                                            </select>
+                                        </div>
+                                        <div class="col-10 col-sm-5 col-md-4">
+                                                <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="col-12 col-sm-10 col-md-12">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th><b>Orgão</b></th>
+                                                <th>Orgão</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -36,10 +52,10 @@
                                             </tr>
                                             {/loop}
                                         </tbody>
-                                    </table>
+                                    </table> 
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
