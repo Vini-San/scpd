@@ -161,16 +161,42 @@ class User extends Model{
 
 	}
 
-	public function getProcessoByOrgao(){
+	public function getOrgaobyId($id_orgao){
 
 		$sql = new Sql();
 
-		$results= $sql->select("SELECT p.id_processo,p.numero_processo, p.id_tipo_processo,tp.tipo_processo, p.data_inicio FROM processo p INNER JOIN orgao o on o.id_orgao=p.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento WHERE p.id_orgao=:id_orgao GROUP BY p.id_processo", array(
-				":id_orgao"=>$this->getid_orgao()
-			));
+		$results = $sql->select("SELECT o.id_orgao FROM orgao o INNER JOIN processo p on p.id_orgao=o.id_orgao WHERE o.id_orgao=:id_orgao", array(
 
-		
+			":id_orgao"=>$id_orgao
+
+		));
+
 		$this->setData($results[0]);
+	}
+
+	public function getProcessoByOrgao($related = true){
+
+		$sql = new Sql();
+
+		if ($related === true){
+		return $sql->select("SELECT p.id_processo, p.numero_processo, p.id_tipo_processo, p.id_orgao, o.nome_orgao, p.data_inicio, p.nome_processo, p.assunto_processo FROM processo p 
+			INNER JOIN orgao o on o.id_orgao=p.id_orgao 
+			WHERE p.id_orgao IN(
+			SELECT o.id_orgao 
+			FROM orgao o 
+			WHERE o.id_orgao=:id_orgao)", [
+				":id_orgao"=>$this->getid_orgao()
+			]);
+		} else {
+			return $sql->select("SELECT p.id_processo, p.numero_processo, p.id_tipo_processo, p.id_orgao, o.nome_orgao, p.data_inicio, p.nome_processo, p.assunto_processo FROM processo p 
+			INNER JOIN orgao o on o.id_orgao=p.id_orgao 
+			WHERE p.id_orgao NOT IN(
+			SELECT o.id_orgao 
+			FROM orgao o 
+			WHERE o.id_orgao=:id_orgao)", [
+				":id_orgao"=>$this->getid_orgao()
+			]);
+		}
 	}
 
 	public function saveProcesso(){

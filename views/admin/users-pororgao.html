@@ -17,7 +17,7 @@
                 <div class="col-md-12">
                     <div class="box box-success">
                         <!-- form start -->
-                        
+                        <form role="form" action="/admin/users/resultadopororgao" method="post">
                             <div class="box-body">
                                 <div class="col-12 col-sm-10 col-md-5">
                                     <div class="form-group row">
@@ -48,15 +48,14 @@
                                             {loop="$orgao"}
                                             <tr>
                                                 <td>{$value.nome_orgao}</td>
-                                                <td><a href="/admin/users/resultadopororgao/{$value.id_orgao}" class="btn btn-default btn-xs"><i class="fa fa-list-alt" aria-hidden="true"></i><b> Buscar</b></a></td>
+                                                <td><a href="/admin/users/{$value.id_orgao}/resultadopororgao" class="btn btn-default btn-xs"><i class="fa fa-list-alt" aria-hidden="true"></i><b> Buscar</b></a></td>
                                             </tr>
                                             {/loop}
                                         </tbody>
                                     </table> 
                                 </div>
                             </div>
-                        
-
+                        </form>
                     </div>
                 </div>
             </div>

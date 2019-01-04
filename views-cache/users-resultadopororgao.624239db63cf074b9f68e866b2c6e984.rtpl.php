@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -29,19 +29,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {loop="$orgao"}
+                                            <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>
                                             <tr>
-                                                <td>{$value.nome_orgao}</td>
-                                                <td><a href="/admin/users/{$value.id_orgao}/resultadopororgao" class="btn btn-default btn-xs"><i class="fa fa-list-alt" aria-hidden="true"></i><b> Buscar</b></a></td>
+                                                <td><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                                                <td><a href="/admin/users/<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/resultadopororgao" class="btn btn-default btn-xs"><i class="fa fa-list-alt" aria-hidden="true"></i><b> Buscar</b></a></td>
                                             </tr>
-                                            {/loop}
+                                            <?php } ?>
                                         </tbody>
                                     </table> 
                                 </div>
                             </div>
                             <div class="box-body">
                                 <div class="col-12 col-sm-10 col-md-12">
-                                    <h2>{$user.id_orgao}</h2>
+                                    <h2><?php echo htmlspecialchars( $user["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h2>
                                     <table class="table table-striped">
                                     <thead>
                                             <tr>
@@ -50,12 +50,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {loop="$processo"}
+                                            <?php $counter1=-1;  if( isset($processo) && ( is_array($processo) || $processo instanceof Traversable ) && sizeof($processo) ) foreach( $processo as $key1 => $value1 ){ $counter1++; ?>
                                             <tr>
-                                                <td>{$value.numero_processo}</td>
-                                                <td><a href="/admin/users/{$value.id_processo}/resultadopororgao" class="btn btn-default btn-xs"><i class="fa fa-list-alt" aria-hidden="true"></i><b> Buscar</b></a></td>
+                                                <td><?php echo htmlspecialchars( $value1["numero_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                                                <td><a href="/admin/users/<?php echo htmlspecialchars( $value1["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/resultadopororgao" class="btn btn-default btn-xs"><i class="fa fa-list-alt" aria-hidden="true"></i><b> Buscar</b></a></td>
                                             </tr>
-                                            {/loop}
+                                            <?php } ?>
                                         </tbody>
                                     </table> 
                                 </div>

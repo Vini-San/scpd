@@ -82,22 +82,22 @@ $app->get("/admin/users/pororgao", function(){
 	));
 });
 
-$app->post("/admin/users/resultadopororgao", function(){
+$app->get("/admin/users/:id_orgao/resultadopororgao", function($id_orgao){
 
 	User::verifyLogin();
 
 	$user = new User();
 
-	$user->getProcessoByOrgao();
+	$user->getOrgaobyId((int)$id_orgao);
 
 	$orgao = User::listAllOrgao();
-
-	$user->setData($_POST);
 
 	$page = new PageAdmin();
 
 	$page->setTpl("users-resultadopororgao", array(
 		"user"=>$user->getValues(),
+		"processo"=>$user->getProcessoByOrgao(),
+		"semprocesso"=>$user->getProcessoByOrgao(false),
 		"orgao"=>$orgao
 	));
 });
