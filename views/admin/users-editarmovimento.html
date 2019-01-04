@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -7,7 +7,9 @@
         </h1>
         <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">atual</li>
+        <li><a href="/admin/users">Consultar Todos</a></li>
+        <li><a href="/admin/users/situacao/{$user.id_processo}">Situação do Processo</a></li>
+        <li class="active">Editar Movimento</li>
         </ol>
     </section>
 
@@ -16,7 +18,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-success">
-                    <form role="form" action="/admin/users/create" method="post">
+                    <form role="form" action="/admin/users/editarmovimento/{$user.id_processo}/update" method="post">
                         <div class="box-body">
                             <div class="col-12 col-sm-10 col-md-6">
                                 <div class="form-group row">
@@ -24,21 +26,23 @@
                                         <label for="numero_processo" class="col-form-label col-form-label-sm">NÚMERO DO PROCESSO:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-6">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm">12345678</label>
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$user.numero_processo}</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-10 col-sm-5 col-md-4">
                                         <label for="id_orgao" class="col-form-label col-form-label-sm">ORGÃO DE ORIGEM:</label>
                                     </div>
-                                    <label for="numero_processo" class="col-form-label col-form-label-sm">CVT Campinhos</label>
+                                    <div class="col-10 col-sm-5 col-md-6">
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$user.nome_orgao}</label>    
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-10 col-sm-5 col-md-4">
                                         <label for="id_tipo_processo" class="col-form-label col-form-label-sm">TIPO DOCUMENTO:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-8">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm">4</label>
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$user.tipo_processo}</label>
                                     </div>
                                 </div> 
                             </div>
@@ -48,7 +52,7 @@
                                         <label for="data_inicio" class="col-form-label col-form-label-sm">DATA INICIO:</label>
                                     </div>
                                     <div class="col-8 col-sm-6 col-md-6">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm">2018-12-17</label>
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm">{$user.data_inicio}</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -56,7 +60,7 @@
                                         <label for="nome_processo" class="col-form-label col-form-label-sm">NOME:</label>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-8">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm">Vinicius dos Santos</label>
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm">{$user.nome_processo}</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -64,16 +68,28 @@
                                         <label for="assunto_processo" class="col-form-label col-form-label-sm">ASSUNTO:</label>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-8">
-                                        <label for="assunto_processo" class="col-form-label col-form-label-sm">Processos</label>
+                                        <label for="assunto_processo" class="col-form-label col-form-label-sm">{$user.assunto_processo}</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="box box-body">
+                        <div class="box-body">
                             <div class="content bg-primary">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h4>ENTRADA</h4>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input type="hidden" class="form-control form-control-sm" id="id_processo" name="id_processo" value="{$user.id_processo}"/>
+                                            <input type="hidden" class="form-control form-control-sm" id="id_movimento" name="id_movimento" value="{$movimento.id_movimento}"/>
+                                            <label class="col-form-label col-form-label-sm ">TIPO DE MOVIMENTO:</label>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12 text-black">
+                                            <select class="custom-select custom-select-sm" id="id_tipo_movimento" name="id_tipo_movimento" required>
+                                                <option value="" disabled selected>{$movimento.tipo_movimento}</option>
+                                                {loop="$tipomovimento"}
+                                                <option value="{$value.id_tipo_movimento}">{$value.tipo_movimento}</option>
+                                                {/loop}
+                                            </select>
+                                        </div>
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-md-4">
                                                 <div class="form-group row">
@@ -81,7 +97,7 @@
                                                         <label class="col-form-label col-form-label-sm">Data:</label>
                                                     </div>
                                                     <div class="col-sm-12 col-md-12">
-                                                        <input type="text" class="form-control form-control-sm"id="data" name="data" placeholder="aaaa-mm-dd">
+                                                        <input type="text" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" value="{$movimento.proc_data_entrada}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -102,8 +118,8 @@
                                                     </div>
                                                     <div class="col-sm-12 col-md-12 text-black">
                                                         <select class="btn btn-sm" id="id_orgao" name="id_orgao">
-                                                            <option value="#">SELECIONE</option>
-                                                            {loop="$user"}
+                                                            <option value="#" disabled selected>{$movimento.nome_orgao}</option>
+                                                            {loop="$orgao"}
                                                             <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
                                                             {/loop}
                                                         </select>
@@ -116,7 +132,7 @@
                                                 <label class="col-form-label col-form-label-sm">Observações:</label>
                                             </div>
                                             <div class="col-sm-12 col-md-12">
-                                                <input type="text" class="form-control form-control-sm" required/>
+                                                <input type="text" class="form-control form-control-sm" id="observacoes_proc_entrada" name="observacoes_proc_entrada" value="{$movimento.observacoes_proc_entrada}"required/>
                                             </div>
                                         </div>
                                     </div>
@@ -124,7 +140,8 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-info btn-sm">SALVAR</button>
+                            <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+                            <input type="reset" class="btn btn-primary btn-sm"/>
                         </div>
                     </form>
                 </div>
@@ -132,7 +149,6 @@
         </div>
         <!-- Your Page Content Here -->
     </section>
-    <!-- /.content -->
+        <!-- /.content -->
 </div>
-    <!-- /.content-wrapper -->
-      
+      <!-- /.content-wrapper -->

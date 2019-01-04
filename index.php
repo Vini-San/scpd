@@ -68,6 +68,40 @@ $app->get("/admin/users", function(){
 	));
 });
 
+$app->get("/admin/users/pororgao", function(){
+
+	User::verifyLogin();
+
+	$orgao = User::listAllOrgao();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("users-pororgao", array(
+		"orgao"=>$orgao
+
+	));
+});
+
+$app->post("/admin/users/resultadopororgao", function(){
+
+	User::verifyLogin();
+
+	$user = new User();
+
+	$user->getProcessoByOrgao();
+
+	$orgao = User::listAllOrgao();
+
+	$user->setData($_POST);
+
+	$page = new PageAdmin();
+
+	$page->setTpl("users-resultadopororgao", array(
+		"user"=>$user->getValues(),
+		"orgao"=>$orgao
+	));
+});
+
 //tela com situação do processo com os dados e os movimentos
 $app->get("/admin/users/situacao/:id_processo", function($id_processo){
 
@@ -106,6 +140,33 @@ $app->get("/admin/users/movimentar/:id_processo", function($id_processo){
 		"user"=>$user->getValues(),
 		"movimento"=>$user->getProcessoMovimentoById(),
 		"sem movimento"=>$user->getProcessoMovimentoById(false),
+		"tipomovimento"=>$tipomovimento,
+		"orgao"=>$orgao,
+		"tipo"=>$tipo
+	));
+});
+
+$app->get("/admin/users/:id_movimento/editarmovimento/:id_processo", function($id_movimento, $id_processo){
+
+	User::verifyLogin();
+
+	$user = new User();
+
+	$user->getProcessoById((int)$id_processo);
+
+	$movimento = new User();
+
+	$movimento->getMovimentoById((int)$id_movimento);
+
+	$orgao = User::listAllOrgao();
+	$tipo = User::listAllTipo();
+	$tipomovimento = User::listAllTipoMovimento();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("users-editarmovimento", array(
+		"user"=>$user->getValues(),
+		"movimento"=>$movimento->getValues(),
 		"tipomovimento"=>$tipomovimento,
 		"orgao"=>$orgao,
 		"tipo"=>$tipo
@@ -216,6 +277,24 @@ $app->post("/admin/users/:id_processo", function($id_processo){
 	$user->updateProcesso();
 
 	header("Location: /admin/users");
+	exit;
+
+});
+
+$app->post("/admin/users/editarmovimento/:id_processo/update", function($id_processo){
+
+	User::verifyLogin();
+
+	$user = new User();
+
+	$user->getProcessoById((int)$id_processo);
+	
+	$user->setData($_POST);
+	
+	$user->updateMovimento();
+
+
+	header("Location: /admin/users/situacao/".$id_processo);
 	exit;
 
 });

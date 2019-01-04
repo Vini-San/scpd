@@ -90,7 +90,7 @@
                                     <div class="col-md-12">
                                         <h4>ENTRADA</h4>
                                         <div class="row">
-                                            <div class="col-12 col-sm-12 col-md-4">
+                                            <div class="col-12 col-sm-12 col-md-3">
                                                 <div class="form-group row">
                                                     <div class="col-sm-12 col-md-12">
                                                         <label class="col-form-label col-form-label-sm">Data:</label>
@@ -100,24 +100,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-sm-12 col-md-3">
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <label class="col-form-label col-form-label-sm">Hora:</label>
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <input type="text" class="form-control form-control-sm" value="10:00" required="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-sm-12 col-md-5">
+                                            <div class="col-12 col-sm-12 col-md-2">
                                                 <div class="form-group row">
                                                     <div class="col-sm-12 col-md-12">
                                                         <label class="col-form-label col-form-label-sm">Origem:</label>
                                                     </div>
                                                     <div class="col-sm-12 col-md-12 text-black">
-                                                        <select class="btn btn-sm" id="id_orgao_movimento" name="id_orgao_movimento">
-                                                            <option value="#">SELECIONE</option>
+                                                        <select class="btn btn-md" id="id_orgao_movimento" name="id_orgao_movimento">
+                                                            <option class="pl-3 pr-3" value="#">SELECIONE</option>
                                                             <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>
                                                             <option value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                                                             <?php } ?>
@@ -126,11 +116,13 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12">
                                         <div class="form-group row">
-                                            <div class="col-sm-10 col-md-12">
+                                            <div class="col-sm-10 col-md-10">
                                                 <label class="col-form-label col-form-label-sm">Observações:</label>
                                             </div>
-                                            <div class="col-sm-12 col-md-12">
+                                            <div class="col-sm-12 col-md-10">
                                                 <input type="text" class="form-control form-control-sm" id="observacoes" name="observacoes" required/>
                                             </div>
                                         </div>

@@ -263,9 +263,9 @@ desired effect
           </a>
           <ul class="treeview-menu">
             <li class="active"><a href="/admin/users/create"><i class="fa fa-floppy-o" aria-hidden="true"></i><span>Cadastrar</span></a></li>
-            <!--<li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Consultar por órgao</span></a></li>
-            <li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Relatório semanal</span></a></li>-->
+            <!--<li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Relatório semanal</span></a></li>-->
             <li ><a href="/admin/users"><i class="fa fa-pencil" aria-hidden="true"></i><span>Consultar Todos</span></a></li>
+            <li ><a href="/admin/users/pororgao"><i class="fa fa-search" aria-hidden="true"></i><span>Consultar por órgao</span></a></li>
           </ul>
         </li>
         <!--<li class="treeview">

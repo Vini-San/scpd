@@ -109,10 +109,12 @@ class User extends Model{
 		$sql = new Sql();
 
 		if ($related === true){
-		return $sql->select("SELECT m.id_movimento, m.id_tipo_movimento, tm.tipo_movimento, m.proc_data_entrada, m.id_orgao, m.observacoes_proc_entrada, o.nome_orgao from movimento m 
+		return $sql->select("SELECT m.id_movimento, m.id_tipo_movimento, tm.tipo_movimento, m.proc_data_entrada, m.id_orgao, m.observacoes_proc_entrada, o.nome_orgao, p.id_processo from movimento m 
 			INNER JOIN orgao o on o.id_orgao=m.id_orgao 
 			INNER JOIN tipo_movimento tm on tm.id_tipo_movimento=m.id_tipo_movimento 
-			WHERE id_movimento IN(
+			INNER JOIN processo_documento pd on pd.id_processo_documento=m.id_processo_documento 
+			INNER JOIN processo p on p.id_processo_documento=pd.id_processo_documento
+			WHERE m.id_movimento IN(
 			SELECT m.id_movimento 
 			FROM movimento m 
 			INNER JOIN processo_documento pd on pd.id_processo_documento=m.id_processo_documento 
@@ -122,9 +124,11 @@ class User extends Model{
 			]);
 	} else {
 
-		return $sql->select("SELECT m.id_movimento, m.id_tipo_movimento, tm.tipo_movimento, m.proc_data_entrada, m.id_orgao, m.observacoes_proc_entrada, o.nome_orgao from movimento m 
+		return $sql->select("SELECT m.id_movimento, m.id_tipo_movimento, tm.tipo_movimento, m.proc_data_entrada, m.id_orgao, m.observacoes_proc_entrada, o.nome_orgao, p.id_processo from movimento m 
 			INNER JOIN orgao o on o.id_orgao=m.id_orgao 
 			INNER JOIN tipo_movimento tm on tm.id_tipo_movimento=m.id_tipo_movimento 
+			INNER JOIN processo_documento pd on pd.id_processo_documento=m.id_processo_documento 
+			INNER JOIN processo p on p.id_processo_documento=pd.id_processo_documento
 			WHERE m.id_movimento not IN(
 			SELECT m.id_movimento 
 			FROM movimento m 
@@ -138,6 +142,35 @@ class User extends Model{
 
 		
 		//$this->setData($results[0]);
+	}
+
+	public function getMovimentoById($id_movimento){
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT m.id_movimento, m.id_tipo_movimento, tm.tipo_movimento, m.proc_data_entrada, m.id_orgao, m.observacoes_proc_entrada, o.nome_orgao from movimento m 
+			INNER JOIN orgao o on o.id_orgao=m.id_orgao 
+			INNER JOIN tipo_movimento tm on tm.id_tipo_movimento=m.id_tipo_movimento 
+			WHERE m.id_movimento=:id_movimento", [
+
+			":id_movimento"=>$id_movimento
+
+		]);
+
+		$this->setData($results[0]);
+
+	}
+
+	public function getProcessoByOrgao(){
+
+		$sql = new Sql();
+
+		$results= $sql->select("SELECT p.id_processo,p.numero_processo, p.id_tipo_processo,tp.tipo_processo, p.data_inicio FROM processo p INNER JOIN orgao o on o.id_orgao=p.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento WHERE p.id_orgao=:id_orgao GROUP BY p.id_processo", array(
+				":id_orgao"=>$this->getid_orgao()
+			));
+
+		
+		$this->setData($results[0]);
 	}
 
 	public function saveProcesso(){
@@ -185,6 +218,21 @@ class User extends Model{
 			":data_inicio"=>$this->getdata_inicio(),
 			":nome_processo"=>$this->getnome_processo(),
 			":assunto_processo"=>$this->getassunto_processo()
+		));
+
+		//$this->setData($results[0]);
+
+	}
+
+	public function updateMovimento(){
+
+		$sql = new Sql();
+		$results = $sql->query("UPDATE movimento m SET m.id_tipo_movimento=:id_tipo_movimento, m.proc_data_entrada=:proc_data_entrada, m.id_orgao=:id_orgao, m.observacoes_proc_entrada=:observacoes_proc_entrada WHERE m.id_movimento=:id_movimento", array(
+			":id_movimento"=>$this->getid_movimento(),
+			":id_tipo_movimento"=>$this->getid_tipo_movimento(),
+			":proc_data_entrada"=>$this->getproc_data_entrada(),
+			":id_orgao"=>$this->getid_orgao(),
+			":observacoes_proc_entrada"=>$this->getobservacoes_proc_entrada()
 		));
 
 		//$this->setData($results[0]);

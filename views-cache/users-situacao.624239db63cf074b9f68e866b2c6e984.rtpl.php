@@ -31,7 +31,9 @@
                                     <div class="col-10 col-sm-5 col-md-4">
                                         <label for="id_orgao" class="col-form-label col-form-label-sm">ORGÃO DE ORIGEM:</label>
                                     </div>
-                                    <label for="numero_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
+                                    <div class="col-10 col-sm-5 col-md-6">
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>    
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-10 col-sm-5 col-md-4">
@@ -89,7 +91,7 @@
                                             <td><?php echo htmlspecialchars( $value1["proc_data_entrada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                                             <td><?php echo htmlspecialchars( $value1["observacoes_proc_entrada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                                             <td>
-                                                <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                                                <a href="/admin/users/<?php echo htmlspecialchars( $value1["id_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/editarmovimento/<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
                                             </td>
                                         </tr>
                                         <?php } ?>

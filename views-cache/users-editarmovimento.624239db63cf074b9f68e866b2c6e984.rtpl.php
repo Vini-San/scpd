@@ -1,15 +1,16 @@
-<!-- Content Wrapper. Contains page content -->
+<?php if(!class_exists('Rain\Tpl')){exit;}?>    <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-<!-- Content Header (Page header) -->
+    <!-- Content Header (Page header) -->
     <section class="content-header">
-    <h2>
-        Cadastro do Processo/Novo Processo
-    </h2>
-    <ol class="breadcrumb">
-        <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/admin/users">Processos</a></li>
-        <li class="active"><a href="/admin/users/create">Cadastrar</a></li>
-    </ol>
+        <h1>
+        EDITAR MOVIMENTO
+        </h1>
+        <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li><a href="/admin/users">Consultar Todos</a></li>
+        <li><a href="/admin/users/situacao/<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">Situação do Processo</a></li>
+        <li class="active">Editar Movimento</li>
+        </ol>
     </section>
 
     <!-- Main content -->
@@ -17,8 +18,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-success">
-                    <!-- form start -->
-                    <form role="form" action="/admin/users/create" method="post">
+                    <form role="form" action="/admin/users/editarmovimento/<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/update" method="post">
                         <div class="box-body">
                             <div class="col-12 col-sm-10 col-md-6">
                                 <div class="form-group row">
@@ -26,20 +26,15 @@
                                         <label for="numero_processo" class="col-form-label col-form-label-sm">NÚMERO DO PROCESSO:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-6">
-                                        <input type="text" class="form-control form-control-sm" id="numero_processo" name="numero_processo" placeholder="Informe o numero do processo" required>
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["numero_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-10 col-sm-5 col-md-4">
                                         <label for="id_orgao" class="col-form-label col-form-label-sm">ORGÃO DE ORIGEM:</label>
                                     </div>
-                                    <div class="col-10 col-sm-6 col-md-8">
-                                        <select id="id_tipo_processo" name="id_tipo_processo">
-                                            <option value="#">SELECIONE</option>
-                                            {loop="$tipo"}
-                                            <option value="{$value.id_tipo_processo}">{$value.id_tipo_processo}</option>
-                                            {/loop}
-                                        </select>
+                                    <div class="col-10 col-sm-5 col-md-6">
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>    
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -47,12 +42,7 @@
                                         <label for="id_tipo_processo" class="col-form-label col-form-label-sm">TIPO DOCUMENTO:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-8">
-                                        <select id="id_tipo_processo" name="id_tipo_processo">
-                                            <option value="#">SELECIONE</option>
-                                            {loop="$orgao"}
-                                            <option value="{$value.id_orgao}">{$value.id_orgao}</option>
-                                            {/loop}
-                                        </select>
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                     </div>
                                 </div> 
                             </div>
@@ -62,7 +52,7 @@
                                         <label for="data_inicio" class="col-form-label col-form-label-sm">DATA INICIO:</label>
                                     </div>
                                     <div class="col-8 col-sm-6 col-md-6">
-                                        <input type="text" class="form-control form-control-sm" id="data_inicio" name="data_inicio" placeholder="aaaa-mm-dd">
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["data_inicio"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -70,7 +60,7 @@
                                         <label for="nome_processo" class="col-form-label col-form-label-sm">NOME:</label>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-8">
-                                        <input type="text" class="form-control form-control-sm" id="nome_processo" name="nome_processo" placeholder="Informe o nome" required>
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["nome_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -78,17 +68,28 @@
                                         <label for="assunto_processo" class="col-form-label col-form-label-sm">ASSUNTO:</label>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-8">
-                                        <input type="text" class="form-control form-control-sm" id="assunto_processo" name="assunto_processo" placeholder="Informe o assunto" required>
+                                        <label for="assunto_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["assunto_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="box-body">
                             <div class="content bg-primary">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h4>ENTRADA</h4>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input type="hidden" class="form-control form-control-sm" id="id_processo" name="id_processo" value="<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
+                                            <input type="hidden" class="form-control form-control-sm" id="id_movimento" name="id_movimento" value="<?php echo htmlspecialchars( $movimento["id_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
+                                            <label class="col-form-label col-form-label-sm ">TIPO DE MOVIMENTO:</label>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12 text-black">
+                                            <select class="custom-select custom-select-sm" id="id_tipo_movimento" name="id_tipo_movimento" required>
+                                                <option value="" disabled selected><?php echo htmlspecialchars( $movimento["tipo_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                                <?php $counter1=-1;  if( isset($tipomovimento) && ( is_array($tipomovimento) || $tipomovimento instanceof Traversable ) && sizeof($tipomovimento) ) foreach( $tipomovimento as $key1 => $value1 ){ $counter1++; ?>
+                                                <option value="<?php echo htmlspecialchars( $value1["id_tipo_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["tipo_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-md-4">
                                                 <div class="form-group row">
@@ -96,7 +97,7 @@
                                                         <label class="col-form-label col-form-label-sm">Data:</label>
                                                     </div>
                                                     <div class="col-sm-12 col-md-12">
-                                                        <input type="text" class="form-control form-control-sm"id="data" name="data" placeholder="aaaa-mm-dd">
+                                                        <input type="text" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" value="<?php echo htmlspecialchars( $movimento["proc_data_entrada"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -117,10 +118,10 @@
                                                     </div>
                                                     <div class="col-sm-12 col-md-12 text-black">
                                                         <select class="btn btn-sm" id="id_orgao" name="id_orgao">
-                                                            <option value="#">SELECIONE</option>
-                                                            {loop="$user"}
-                                                            <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
-                                                            {/loop}
+                                                            <option value="#" disabled selected><?php echo htmlspecialchars( $movimento["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                                            <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>
+                                                            <option value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                                            <?php } ?>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -131,7 +132,7 @@
                                                 <label class="col-form-label col-form-label-sm">Observações:</label>
                                             </div>
                                             <div class="col-sm-12 col-md-12">
-                                                <input type="text" class="form-control form-control-sm" required/>
+                                                <input type="text" class="form-control form-control-sm" id="observacoes_proc_entrada" name="observacoes_proc_entrada" value="<?php echo htmlspecialchars( $movimento["observacoes_proc_entrada"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"required/>
                                             </div>
                                         </div>
                                     </div>
@@ -140,13 +141,14 @@
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
-                            <button type="button" class="btn btn-primary btn-sm">Cancelar</button>
+                            <input type="reset" class="btn btn-primary btn-sm"/>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <!-- Your Page Content Here -->
     </section>
-<!-- /.content -->
+        <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+      <!-- /.content-wrapper -->
