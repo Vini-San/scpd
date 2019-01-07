@@ -50,7 +50,7 @@
                                         <label for="data_inicio" class="col-form-label col-form-label-sm">DATA INICIO:</label>
                                     </div>
                                     <div class="col-8 col-sm-6 col-md-6">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["data_inicio"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm"><?php echo formatDate($user["data_inicio"]); ?></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -88,7 +88,7 @@
                                         <tr>
                                             <td><?php echo htmlspecialchars( $value1["tipo_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                                             <td><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                                            <td><?php echo htmlspecialchars( $value1["proc_data_entrada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                                            <td><?php echo formatDate($value1["proc_data_entrada"]); ?></td>
                                             <td><?php echo htmlspecialchars( $value1["observacoes_proc_entrada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                                             <td>
                                                 <a href="/admin/users/<?php echo htmlspecialchars( $value1["id_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/editarmovimento/<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>

@@ -62,7 +62,7 @@
                                         <label for="data_inicio" class="col-form-label col-form-label-sm">DATA INICIO:</label>
                                     </div>
                                     <div class="col-8 col-sm-6 col-md-6">
-                                        <input type="text" class="form-control form-control-sm" id="data_inicio" name="data_inicio" placeholder="aaaa-mm-dd">
+                                        <input type="date" class="form-control form-control-sm" id="data_inicio" name="data_inicio">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -96,7 +96,7 @@
                                                         <label class="col-form-label col-form-label-sm">Data:</label>
                                                     </div>
                                                     <div class="col-sm-12 col-md-12">
-                                                        <input type="text" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" placeholder="aaaa-mm-dd">
+                                                        <input type="date" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" placeholder="aaaa-mm-dd">
                                                     </div>
                                                 </div>
                                             </div>

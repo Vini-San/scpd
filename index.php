@@ -9,6 +9,13 @@ use\Hcode\PageAdmin;
 use\Hcode\Model\User;
 //use\Hcode\Model\ProcessoDocumento;
 
+function formatDate($date)
+{
+
+	return date('d/m/Y', strtotime($date));
+
+}
+
 $app = new Slim();
 
 $app->config('debug', true);
@@ -253,6 +260,10 @@ $app->post("/admin/users/create", function(){
 
 	$user = new User();
 
+	$_POST["data_inicio"] = date("Y-m-d", strtotime($_POST["data_inicio"]));
+	
+	$_POST["proc_data_entrada"] = date("Y-m-d", strtotime($_POST["proc_data_entrada"]));
+
 	$user->setData($_POST);
 
 	$user->saveProcesso();	
@@ -272,6 +283,8 @@ $app->post("/admin/users/:id_processo", function($id_processo){
 
 	$user = new User();
 
+	$_POST["data_inicio"] = implode('-', array_reverse(explode('/', ($_POST["data_inicio"]))));
+
 	$user->getProcessoById((int)$id_processo);
 	$user->setData($_POST);
 	$user->updateProcesso();
@@ -288,6 +301,8 @@ $app->post("/admin/users/editarmovimento/:id_processo/update", function($id_proc
 	$user = new User();
 
 	$user->getProcessoById((int)$id_processo);
+
+	$_POST["proc_data_entrada"] = implode('-', array_reverse(explode('/', ($_POST["proc_data_entrada"]))));
 	
 	$user->setData($_POST);
 	

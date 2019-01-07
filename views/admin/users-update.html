@@ -49,7 +49,7 @@
             </div>
             <div class="form-group">
               <label for="data_inicio">Data Inicio</label>
-              <input type="text" class="form-control" id="data_inicio" name="data_inicio" placeholder="Digite a data"  value="{$user.data_inicio}">
+              <input type="text" class="form-control" id="data_inicio" name="data_inicio" placeholder="Digite a data"  value="{function="formatDate($user.data_inicio)"}">
             </div>
             <div class="form-group">
               <label for="nome_processo">Nome</label>

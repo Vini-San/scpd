@@ -50,7 +50,7 @@
                                         <label for="data_inicio" class="col-form-label col-form-label-sm">DATA INICIO:</label>
                                     </div>
                                     <div class="col-8 col-sm-6 col-md-6">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm">{$user.data_inicio}</label>
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm">{function="formatDate($user.data_inicio)"}</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -88,7 +88,7 @@
                                         <tr>
                                             <td>{$value.tipo_movimento}</td>
                                             <td>{$value.nome_orgao}</td>
-                                            <td>{$value.proc_data_entrada}</td>
+                                            <td>{function="formatDate($value.proc_data_entrada)"}</td>
                                             <td>{$value.observacoes_proc_entrada}</td>
                                             <td>
                                                 <a href="/admin/users/{$value.id_movimento}/editarmovimento/{$user.id_processo}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>

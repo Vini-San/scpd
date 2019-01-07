@@ -52,7 +52,7 @@
                                         <label for="data_inicio" class="col-form-label col-form-label-sm">DATA INICIO:</label>
                                     </div>
                                     <div class="col-8 col-sm-6 col-md-6">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["data_inicio"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm"><?php echo formatDate($user["data_inicio"]); ?></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -112,7 +112,7 @@
                                                 <label class="col-form-label col-form-label-sm">Data:</label>
                                             </div>
                                             <div class="col-sm-12 col-md-10">
-                                                <input type="text" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" value="<?php echo htmlspecialchars( $movimento["proc_data_entrada"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                                <input type="text" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" value="<?php echo formatDate($movimento["proc_data_entrada"]); ?>">
                                             </div>
                                         </div>
                                     </div>

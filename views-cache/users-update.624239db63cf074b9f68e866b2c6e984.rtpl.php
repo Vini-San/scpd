@@ -49,7 +49,7 @@
             </div>
             <div class="form-group">
               <label for="data_inicio">Data Inicio</label>
-              <input type="text" class="form-control" id="data_inicio" name="data_inicio" placeholder="Digite a data"  value="<?php echo htmlspecialchars( $user["data_inicio"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+              <input type="text" class="form-control" id="data_inicio" name="data_inicio" placeholder="Digite a data"  value="<?php echo formatDate($user["data_inicio"]); ?>">
             </div>
             <div class="form-group">
               <label for="nome_processo">Nome</label>
