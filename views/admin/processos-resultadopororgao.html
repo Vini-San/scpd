@@ -3,13 +3,13 @@
         <!-- Content Header (Page header) -->
             <section class="content-header">
             <h4>
-                <b>Consulta por Orgão</b>
+                <b>Consultar por Orgão</b>
             </h4>
             <ol class="breadcrumb">
                 <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="/admin/users">Consultar Todos</a></li>
+                <li><a href="/admin/processos">Consultar Todos</a></li>
                 <li><a href="javascript:window.history.go(-1)">Voltar</a></li>
-                <li class="active">Cadastrar</li>
+                <li class="active">Resulta Consulta de Processos por Órgão</li>
             </ol>
             </section>
             <!-- Main content -->
@@ -18,7 +18,7 @@
                     <div class="col-md-12">
                         <div class="box box-success">
                             <!-- form start -->
-                            <form role="form" action="/admin/users/resultadopororgao" method="post">
+                            <form role="form" action="/admin/processos/resultadopororgao" method="post">
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-12 col-sm-10 col-md-5">
@@ -52,7 +52,7 @@
                                                         <td>{$value.numero_processo}</td>
                                                         <td>{$value.assunto_processo}</td>
                                                         <td>{function="formatDate($value.data_inicio)"}</td>
-                                                        <td><a href="/admin/users/situacao/{$value.id_processo}" class="btn btn-default btn-xs"><i class="fa fa-list-alt" aria-hidden="true"></i><b> Consultar</b></a></td>
+                                                        <td><a href="/admin/processos/situacao/{$value.id_processo}" class="btn btn-default btn-xs"><i class="fa fa-list-alt" aria-hidden="true"></i><b> Consultar</b></a></td>
                                                     </tr>
                                                     {/loop}
                                                 </tbody>

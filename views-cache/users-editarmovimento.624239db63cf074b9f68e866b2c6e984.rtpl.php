@@ -112,7 +112,7 @@
                                                 <label class="col-form-label col-form-label-sm">Data:</label>
                                             </div>
                                             <div class="col-sm-12 col-md-10">
-                                                <input type="text" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" value="<?php echo formatDate($movimento["proc_data_entrada"]); ?>">
+                                                <input type="text" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" value="<?php echo formatDate($movimento["proc_data_entrada"]); ?>" placeholder="dd/mm/yyyy">
                                             </div>
                                         </div>
                                     </div>

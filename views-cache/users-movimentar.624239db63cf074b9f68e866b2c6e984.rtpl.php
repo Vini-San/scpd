@@ -2,9 +2,9 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>
-        SITUAÇÃO DO PROCESSO
-        </h1>
+        <h4>
+        <b>SITUAÇÃO DO PROCESSO</b>
+        </h4>
         <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li><a href="/admin/users">Consultar Todos</a></li>
@@ -52,7 +52,7 @@
                                         <label for="data_inicio" class="col-form-label col-form-label-sm">DATA INICIO:</label>
                                     </div>
                                     <div class="col-8 col-sm-6 col-md-6">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["data_inicio"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm"><?php echo formatDate($user["data_inicio"]); ?></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -119,7 +119,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-3">
+                                    <div class="col-12 col-sm-12 col-md-6">
                                         <div class="form-group row">
                                             <div class="col-sm-12 col-md-12">
                                                 <label class="col-form-label col-form-label-sm">Origem:</label>
@@ -134,13 +134,13 @@
                                             </div>
                                         </div> 
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-4">
+                                    <div class="col-12 col-sm-12 col-md-3">
                                         <div class="form-group row">
                                             <div class="col-sm-12 col-md-10">
                                                 <label class="col-form-label col-form-label-sm">Data:</label>
                                             </div>
                                             <div class="col-sm-12 col-md-10">
-                                                <input type="text" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" placeholder="aaaa-mm-dd">
+                                                <input type="date" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" placeholder="aaaa-mm-dd">
                                             </div>
                                         </div> 
                                     </div>

@@ -2,9 +2,9 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
         <section class="content-header">
-        <h2>
-            Consultar por Órgão
-        </h2>
+        <h4>
+            <b>Consultar por Órgão</b>
+        </h4>
         <ol class="breadcrumb">
             <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Consultar por Órgão</li>
@@ -20,23 +20,18 @@
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-12 col-sm-10 col-md-5">
-                                        Nova Consulta
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th><b>Orgão</b></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {loop="$orgao"}
-                                            <tr>
-                                                <td>{$value.nome_orgao}</td>
-                                                <td><a href="/admin/users/{$value.id_orgao}/resultadopororgao" class="btn btn-default btn-xs"><i class="fa fa-list-alt" aria-hidden="true"></i><b> Buscar</b></a></td>
-                                            </tr>
+                                    Nova Consulta
+                                    <div class="dropdown scroll">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            Orgão
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            {loop="$orgao"}  
+                                            <li><a href="/admin/users/{$value.id_orgao}/resultadopororgao">{$value.nome_orgao}</a></li>
                                             {/loop}
-                                        </tbody>
-                                    </table>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>

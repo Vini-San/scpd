@@ -7,7 +7,7 @@
   </h4>
   <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/admin/users">Consultar Todos</a></li>
+        <li><a href="/admin/processos">Consultar Todos</a></li>
         <li class="active">Editar</li>
     </ol>
 </section>
@@ -23,7 +23,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/users/<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post">
+        <form role="form" action="/admin/processos/<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post">
           <div class="box-body">
             <div class="form-group">
               <label for="numero_processo">Numero</label>

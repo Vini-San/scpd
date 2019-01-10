@@ -59,6 +59,13 @@ class Page {
 		return $this->tpl->draw($name, $returnHtml);
 		
 	}
+
+	public function setTpl2($name1,$name2,$data = array(),$returnHtml = false){
+		
+		$this->setData($data);
+		return $this->tpl->draw($name1,$name2,$returnHtml);
+		
+	}
 }
 
  ?>

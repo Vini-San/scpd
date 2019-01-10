@@ -7,7 +7,7 @@
         </h4>
         <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home </a></li>
-        <li><a href="/admin/users">Consultar Todos</a></li>
+        <li><a href="/admin/processos">Consultar Todos</a></li>
         <li class="active">Situação do Processo</li>
         </ol>
     </section>
@@ -43,7 +43,7 @@
                                     <label for="numero_processo" class="col-form-label col-form-label-sm">{$user.tipo_processo}</label>
                                 </div>
                             </div>
-                            <a href="/admin/users/{$user.id_processo}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar os dados do processo</a> 
+                            <a href="/admin/processos/{$user.id_processo}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar os dados do processo</a> 
                         </div>
                         <div class="col-0 col-sm-10 col-md-6">
                             <div class="form-group row">
@@ -93,13 +93,13 @@
                                         <td>{function="formatDate($value.proc_data_entrada)"}</td>
                                         <td>{$value.observacoes_proc_entrada}</td>
                                         <td>
-                                            <a href="/admin/users/{$value.id_movimento}/editarmovimento/{$user.id_processo}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                                            <a href="/admin/processos/{$value.id_movimento}/editarmovimento/{$user.id_processo}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
                                         </td>
                                     </tr>
                                     {/loop}
                                 </tbody>
                             </table>
-                        <a href="/admin/users/movimentar/{$user.id_processo}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Inserir Novo Movimento</a>     
+                        <a href="/admin/processos/movimentar/{$user.id_processo}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Inserir Novo Movimento</a>     
                         </div>
                     </div>
                 </div>

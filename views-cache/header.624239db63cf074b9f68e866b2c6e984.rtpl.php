@@ -114,58 +114,58 @@ desired effect
           <li class="dropdown notifications-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
+              <i class="fa fa-sitemap" aria-hidden="true"></i>
+              <span class="label label-warning">*</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
+              <li class="header">Cadastros Administrativos</li>
               <li>
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
                   <li><!-- start notification -->
                     <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                      <i class="fa fa-building" aria-hidden="true"></i> Cadastrar Novo Orgão
                     </a>
                   </li>
                   <!-- end notification -->
                 </ul>
               </li>
-              <li class="footer"><a href="#">View all</a></li>
+              <li class="footer"><a href="#">total de cadastros</a></li>
             </ul>
           </li>
           <!-- Tasks Menu -->
           <li class="dropdown tasks-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-flag-o"></i>
-              <span class="label label-danger">9</span>
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+              <span class="label label-danger">2</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 9 tasks</li>
+              <li class="header">Usuários</li>
               <li>
                 <!-- Inner menu: contains the tasks -->
                 <ul class="menu">
                   <li><!-- Task item -->
-                    <a href="#">
+                    <a href="/admin/users/create">
                       <!-- Task title and progress text -->
                       <h3>
-                        Design some buttons
-                        <small class="pull-right">20%</small>
+                        Cadastrar Novo Usuário
+                        <small class="pull-right"><i class="fa fa-user" aria-hidden="true"></i></small>
                       </h3>
                       <!-- The progress bar -->
-                      <div class="progress xs">
-                        <!-- Change the css width attribute to simulate progress -->
+                      <!--<div class="progress xs">
+                        Change the css width attribute to simulate progress
                         <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                           <span class="sr-only">20% Complete</span>
                         </div>
-                      </div>
+                      </div>-->
                     </a>
                   </li>
                   <!-- end task item -->
                 </ul>
               </li>
               <li class="footer">
-                <a href="#">View all tasks</a>
+                <a href="/admin/users">Ver todos os Usuários</a>
               </li>
             </ul>
           </li>
@@ -262,13 +262,13 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="/admin/users/create"><i class="fa fa-floppy-o" aria-hidden="true"></i><span>Cadastrar</span></a></li>
+            <li class="active"><a href="/admin/processos/create"><i class="fa fa-floppy-o" aria-hidden="true"></i><span>Cadastrar</span></a></li>
             <!--<li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Relatório semanal</span></a></li>-->
-            <li ><a href="/admin/users"><i class="fa fa-pencil" aria-hidden="true"></i><span>Consultar Todos</span></a></li>
-            <li ><a href="/admin/users/pororgao"><i class="fa fa-search" aria-hidden="true"></i><span>Consultar por órgao</span></a></li>
+            <li ><a href="/admin/processos"><i class="fa fa-pencil" aria-hidden="true"></i><span>Consultar Todos</span></a></li>
+            <li ><a href="/admin/processos/pororgao"><i class="fa fa-search" aria-hidden="true"></i><span>Consultar por órgao</span></a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <!--<li class="treeview">
             <a href="#"><i class="fa fa-book fa-fw"></i> <span>Documentos</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -276,12 +276,12 @@ desired effect
             </a>
             <ul class="treeview-menu">
               <li class="active"><a href="#"><i class="fa fa-floppy-o" aria-hidden="true"></i><span>Cadastrar</span></a></li>
-              <!--<li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Relatório semanal</span></a></li>-->
+              <li ><a href="/admin/users"><i class="fa fa-search" aria-hidden="true"></i><span>Relatório semanal</span></a></li>
               <li ><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i><span>Consultar Todos</span></a></li>
               <li ><a href="#"><i class="fa fa-search" aria-hidden="true"></i><span>Consultar por órgao</span></a></li>
             </ul>
           </li>
-        <!--<li class="treeview">
+        <li class="treeview">
           <a href="#"><i class="fa fa-file-text-o"></i> <span>Documentos</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
