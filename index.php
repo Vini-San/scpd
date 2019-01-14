@@ -202,23 +202,25 @@ $app->get("/admin/users/create", function(){
 });
 
 //tela de consulta com todos os processos cadastrados
-$app->get("/admin/users/:id_processo", function($id_processo){
+$app->get("/admin/users/:id_usuario", function($id_usuario){
 
 	User::verifyLogin();
 
-	$user = new Processo();
+	$user = new User();
 
-	$user->getProcessoById((int)$id_processo);
+	$user->listUsuarioById((int)$id_usuario);
 
 	$orgao = User::listAllOrgao();
-	$tipo = User::listAllTipo();
+	$nivel = User::listAllNivelUsuario();
+	$situacao = User::listAllSituacaoUsuario();
 
 	$page = new PageAdmin();
 
 	$page->setTpl("users-update", array(
 		"user"=>$user->getValues(),
 		"orgao"=>$orgao,
-		"tipo"=>$tipo
+		"nivel"=>$nivel,
+		"situacao"=>$situacao
 	));
 });
 

@@ -159,7 +159,7 @@ class Processo extends Model{
 	public function updateProcesso(){
 
 		$sql = new Sql();
-		$results = $sql->query("UPDATE processo p SET p.numero_processo=:numero_processo, p.id_orgao=:id_orgao, p.id_tipo_processo=:id_tipo_processo, p.data_inicio=:data_inicio, p.nome_processo=:nome_processo, p.assunto_processo=:assunto_processo WHERE p.id_processo=:id_processo", array(
+		$sql->query("UPDATE processo p SET p.numero_processo=:numero_processo, p.id_orgao=:id_orgao, p.id_tipo_processo=:id_tipo_processo, p.data_inicio=:data_inicio, p.nome_processo=:nome_processo, p.assunto_processo=:assunto_processo WHERE p.id_processo=:id_processo", array(
 			":id_processo"=>$this->getid_processo(),
 			":numero_processo"=>$this->getnumero_processo(),
 			":id_orgao"=>$this->getid_orgao(),

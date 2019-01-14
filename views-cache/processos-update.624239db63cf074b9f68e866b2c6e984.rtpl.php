@@ -32,7 +32,7 @@
             <div class="form-group">
               <label for="id_orgao">Orgão</label>
               <select id="id_orgao" name="id_orgao">
-                <option value="<?php echo htmlspecialchars( $user["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $user["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                <option value="<?php echo htmlspecialchars( $user["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled selected><?php echo htmlspecialchars( $user["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                 <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>
                 <option value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                 <?php } ?>
@@ -41,7 +41,7 @@
             <div class="form-group">
               <label for="id_tipo_processo">Tipo</label>
               <select id="id_tipo_processo" name="id_tipo_processo">
-                <option value="<?php echo htmlspecialchars( $user["id_tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $user["tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                <option value="<?php echo htmlspecialchars( $user["id_tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled selected><?php echo htmlspecialchars( $user["tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                 <?php $counter1=-1;  if( isset($tipo) && ( is_array($tipo) || $tipo instanceof Traversable ) && sizeof($tipo) ) foreach( $tipo as $key1 => $value1 ){ $counter1++; ?>
                 <option value="<?php echo htmlspecialchars( $value1["id_tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                 <?php } ?>

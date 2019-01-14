@@ -93,6 +93,19 @@ class User extends Model{
 
 	}
 
+	public function listUsuarioById($id_usuario)
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT u.id_usuario, u.nome_usuario, u.cpf, u.email, u.senha, u.id_orgao, o.nome_orgao, u.id_nivel_usuario, nu.nivel, u.id_situacao_usuario, su.situacao FROM usuario u inner join orgao o on o.id_orgao=u.id_orgao inner join nivel_usuario nu on nu.id_nivel_usuario=u.id_nivel_usuario inner join situacao_usuario su on su.id_situacao_usuario=u.id_situacao_usuario where u.id_usuario = :id_usuario", array(
+			":id_usuario"=>$id_usuario
+		));
+
+		$this->setData($results[0]);
+
+	}
+
 	public static function listAllUsuario()
 	{
 

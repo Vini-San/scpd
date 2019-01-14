@@ -32,7 +32,7 @@
             <div class="form-group">
               <label for="id_orgao">Orgão</label>
               <select id="id_orgao" name="id_orgao">
-                <option value="{$user.id_orgao}">{$user.nome_orgao}</option>
+                <option value="{$user.id_orgao}" disabled selected>{$user.nome_orgao}</option>
                 {loop="$orgao"}
                 <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
                 {/loop}
@@ -41,7 +41,7 @@
             <div class="form-group">
               <label for="id_tipo_processo">Tipo</label>
               <select id="id_tipo_processo" name="id_tipo_processo">
-                <option value="{$user.id_tipo_processo}">{$user.tipo_processo}</option>
+                <option value="{$user.id_tipo_processo}" disabled selected>{$user.tipo_processo}</option>
                 {loop="$tipo"}
                 <option value="{$value.id_tipo_processo}">{$value.tipo_processo}</option>
                 {/loop}
