@@ -123,14 +123,14 @@ desired effect
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
                   <li><!-- start notification -->
-                    <a href="#">
+                    <a href="/admin/orgaos/create">
                       <i class="fa fa-building" aria-hidden="true"></i> Cadastrar Novo Orgão
                     </a>
                   </li>
                   <!-- end notification -->
                 </ul>
               </li>
-              <li class="footer"><a href="#">total de cadastros</a></li>
+              <li class="footer"><a href="/admin/orgaos">Todos os Órgãos</a></li>
             </ul>
           </li>
           <!-- Tasks Menu -->

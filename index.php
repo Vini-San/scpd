@@ -542,6 +542,55 @@ $app->post("/admin/docs/:iduser", function($iduser){
 
 });
 
+/////////////////////////////////////////////////////////////
+//parte de órgãos
+
+//quando vai para página de insert
+$app->get("/admin/orgaos", function(){
+
+	User::verifyLogin();
+
+	$orgao = User::listAllOrgao();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("orgaos", array(
+		"orgaos"=>$orgao
+	));
+});
+
+$app->get("/admin/orgaos/create", function(){
+
+	User::verifyLogin();
+
+	$hierarquia = User::listAllHierarquiaOrgao();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("orgaos-create", array(
+		"hierarquia"=>$hierarquia
+	));
+});
+
+$app->get("/admin/orgaos/:id_orgao/resultadopororgao", function($id_orgao){
+
+	User::verifyLogin();
+
+	$user = new User();
+
+	$user->listOrgaobyId((int)$id_orgao);
+
+	$orgao = User::listAllOrgao();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("orgaos-resultadopororgao", array(
+		"users"=>$user->getValues(),
+		"orgaos"=>$orgao
+	));
+});
+
+
 $app->run();
 
  ?>

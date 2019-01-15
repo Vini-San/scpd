@@ -93,6 +93,18 @@ class User extends Model{
 
 	}
 
+	public function saveOrgao()
+	{
+
+		$sql = new Sql();
+
+		$sql->query("INSERT into orgao values (:nome_orgao, :id_hierarquia_orgao)", array(
+			":nome_orgao"=>$this->getnome_orgao(),
+			":id_hierarquia_orgao"=>$this->getid_hierarquia_orgao()
+		));
+
+	}
+
 	public function updateUsuario()
 	{
 
@@ -158,6 +170,19 @@ class User extends Model{
 		$this->setData($results[0]);
 	}
 
+	public function listOrgaobyId($id_orgao)
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM orgao where id_orgao=:id_orgao", [
+			":id_orgao"=>$id_orgao
+		]);
+
+		$this->setData($results[0]);
+
+	}
+
 	public function listUsuarioByOrgao($related = true)
 	{
 
@@ -176,6 +201,7 @@ class User extends Model{
 
 	}
 
+
 	public static function listAllUsuario()
 	{
 
@@ -188,14 +214,7 @@ class User extends Model{
 	public static function listAllOrgao(){
 
 		$sql = new Sql();
-		return $sql->select("SELECT * FROM orgao ORDER BY orgao.nome_orgao");
-
-	}
-
-	public static function CountAllOrgao(){
-
-		$sql = new Sql();
-		return $sql->select("SELECT count(orgao.id_orgao) as nrorgao FROM orgao");
+		return $sql->select("SELECT o.id_orgao, o.nome_orgao, o.id_hierarquia_orgao, hq.tipo_hierarquia FROM orgao o INNER JOIN hierarquia_orgao hq ON hq.id_hierarquia_orgao=o.id_hierarquia_orgao ORDER BY o.nome_orgao");
 
 	}
 
@@ -238,6 +257,13 @@ class User extends Model{
 
 		$sql = new Sql();
 		return $sql->select("select * from situacao_usuario");
+
+	}
+
+	public static function listAllHierarquiaOrgao(){
+
+		$sql = new Sql();
+		return $sql->select("select * from hierarquia_orgao");
 
 	}
 
