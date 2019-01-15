@@ -93,16 +93,86 @@ class User extends Model{
 
 	}
 
+	public function updateUsuario()
+	{
+
+		$sql = new Sql();
+
+		$sql->query("UPDATE usuario u SET u.nome_usuario=:nome_usuario, u.cpf=:cpf, u.email=:email, u.id_orgao=:id_orgao, u.id_nivel_usuario=:id_nivel_usuario, u.id_situacao_usuario=:id_situacao_usuario where u.id_usuario=:id_usuario", [
+			":id_usuario"=>$this->getid_usuario(),
+			":nome_usuario"=>$this->getnome_usuario(),
+			":cpf"=>$this->getcpf(),
+			":email"=>$this->getemail(),
+			":id_orgao"=>$this->getid_orgao(),
+			":id_nivel_usuario"=>$this->getid_nivel_usuario(),
+			":id_situacao_usuario"=>$this->getid_situacao_usuario()
+		]);
+
+	}
+
+	public function updatePassword()
+	{
+
+		$sql = new Sql();
+
+		$sql->query("UPDATE usuario u SET u.senha=:senha where u.id_usuario=:id_usuario", [
+			":id_usuario"=>$this->getid_usuario(),
+			":senha"=>User::getPasswordHash($this->getsenha())
+		]);
+
+	}
+
+
 	public function listUsuarioById($id_usuario)
 	{
 
 		$sql = new Sql();
 
-		$results = $sql->select("SELECT u.id_usuario, u.nome_usuario, u.cpf, u.email, u.senha, u.id_orgao, o.nome_orgao, u.id_nivel_usuario, nu.nivel, u.id_situacao_usuario, su.situacao FROM usuario u inner join orgao o on o.id_orgao=u.id_orgao inner join nivel_usuario nu on nu.id_nivel_usuario=u.id_nivel_usuario inner join situacao_usuario su on su.id_situacao_usuario=u.id_situacao_usuario where u.id_usuario = :id_usuario", array(
+		$results = $sql->select("SELECT u.id_usuario, u.nome_usuario, u.cpf, u.email, u.id_orgao, o.nome_orgao, u.id_nivel_usuario, nu.nivel, u.id_situacao_usuario, su.situacao FROM usuario u inner join orgao o on o.id_orgao=u.id_orgao inner join nivel_usuario nu on nu.id_nivel_usuario=u.id_nivel_usuario inner join situacao_usuario su on su.id_situacao_usuario=u.id_situacao_usuario where u.id_usuario = :id_usuario", array(
 			":id_usuario"=>$id_usuario
 		));
 
 		$this->setData($results[0]);
+
+	}
+
+	public static function listOrgaoByUsuarioActive()
+	{
+
+		$sql = new Sql();
+
+		return $sql->select("SELECT distinct o.* FROM orgao o INNER JOIN usuario u on u.id_orgao=o.id_orgao");
+
+	}
+
+	public function getOrgaobyId($id_orgao){
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT o.id_orgao, o.nome_orgao FROM orgao o INNER JOIN usuario u on u.id_orgao=o.id_orgao WHERE o.id_orgao=:id_orgao", array(
+
+			":id_orgao"=>$id_orgao
+
+		));
+
+		$this->setData($results[0]);
+	}
+
+	public function listUsuarioByOrgao($related = true)
+	{
+
+		$sql = new Sql();
+
+		if ($related === true){
+		return $sql->select("SELECT u.id_usuario, u.nome_usuario, u.cpf, o.nome_orgao, nu.nivel, su.situacao FROM usuario u inner join orgao o on o.id_orgao=u.id_orgao inner join nivel_usuario nu on nu.id_nivel_usuario=u.id_nivel_usuario inner join situacao_usuario su on su.id_situacao_usuario=u.id_situacao_usuario WHERE o.id_orgao IN (SELECT o.id_orgao FROM orgao o INNER JOIN usuario u on u.id_orgao = o.id_orgao where u.id_orgao=:id_orgao) group BY u.id_usuario", [
+			":id_orgao"=>$this->getid_orgao()
+		]);
+
+		} else {
+		return $sql->select("SELECT u.id_usuario, u.nome_usuario, u.cpf, o.nome_orgao, nu.nivel, su.situacao FROM usuario u inner join orgao o on o.id_orgao=u.id_orgao inner join nivel_usuario nu on nu.id_nivel_usuario=u.id_nivel_usuario inner join situacao_usuario su on su.id_situacao_usuario=u.id_situacao_usuario WHERE o.id_orgao NOT IN (SELECT o.id_orgao FROM orgao o INNER JOIN usuario u on u.id_orgao = o.id_orgao where u.id_orgao=:id_orgao) group BY u.id_usuario", [
+			":id_orgao"=>$this->getid_orgao()
+		]);			
+		}
 
 	}
 

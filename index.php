@@ -70,120 +70,17 @@ $app->get("/admin/users", function(){
 	User::verifyLogin();
 
 	$user = User::listAllUsuario();
+	$orgao = User::listOrgaoByUsuarioActive();
 
 	$page = new PageAdmin();
 
 	$page->setTpl("users", array(
-		"users"=>$user
-	));
-});
-
-$app->get("/admin/users/pororgao", function(){
-
-	User::verifyLogin();
-
-	$orgao = User::listAllOrgaoActive();
-
-	$page = new PageAdmin();
-
-	$page->setTpl("users-pororgao", array(
-		"orgao"=>$orgao
-
-	));
-});
-
-$app->get("/admin/users/:id_orgao/resultadopororgao", function($id_orgao){
-
-	User::verifyLogin();
-
-	$processo = new Processo();
-
-	$processo->getOrgaobyId((int)$id_orgao);
-
-	$orgao = User::listAllOrgaoActive();
-
-	$page = new PageAdmin();
-
-	$page->setTpl("users-resultadopororgao", array(
-		"user"=>$processo->getValues(),
-		"processo"=>$processo->getProcessoByOrgao(),
-		"semprocesso"=>$processo->getProcessoByOrgao(false),
-		"orgao"=>$orgao
-	));
-});
-
-//tela com situação do processo com os dados e os movimentos
-$app->get("/admin/users/situacao/:id_processo", function($id_processo){
-
-	User::verifyLogin();
-
-	$user = new Processo();
-
-	$user->getProcessoById((int)$id_processo);
-
-	$page = new PageAdmin();
-
-	$page->setTpl("users-situacao", array(
-		"user"=>$user->getValues(),
-		"movimento"=>$user->getProcessoMovimentoById(),
-		"sem movimento"=>$user->getProcessoMovimentoById(false)
-	));
-});
-
-
-//tela para inserir novo movimento
-$app->get("/admin/users/movimentar/:id_processo", function($id_processo){
-
-	User::verifyLogin();
-
-	$user = new Processo();
-
-	$user->getProcessoById((int)$id_processo);
-
-	$orgao = User::listAllOrgao();
-	$tipo = User::listAllTipo();
-	$tipomovimento = User::listAllTipoMovimento();
-
-	$page = new PageAdmin();
-
-	$page->setTpl("users-movimentar", array(
-		"user"=>$user->getValues(),
-		"movimento"=>$user->getProcessoMovimentoById(),
-		"sem movimento"=>$user->getProcessoMovimentoById(false),
-		"tipomovimento"=>$tipomovimento,
+		"users"=>$user,
 		"orgao"=>$orgao,
-		"tipo"=>$tipo
 	));
 });
 
-$app->get("/admin/users/:id_movimento/editarmovimento/:id_processo", function($id_movimento, $id_processo){
-
-	User::verifyLogin();
-
-	$user = new Processo();
-
-	$user->getProcessoById((int)$id_processo);
-
-	$movimento = new Processo();
-
-	$movimento->getMovimentoById((int)$id_movimento);
-
-	$orgao = User::listAllOrgao();
-	$tipo = User::listAllTipo();
-	$tipomovimento = User::listAllTipoMovimento();
-
-	$page = new PageAdmin();
-
-	$page->setTpl("users-editarmovimento", array(
-		"user"=>$user->getValues(),
-		"movimento"=>$movimento->getValues(),
-		"tipomovimento"=>$tipomovimento,
-		"orgao"=>$orgao,
-		"tipo"=>$tipo
-	));
-});
-
-//tela que insere os dados do processo e sua entrada
+//tela que insere os dados do usuário
 $app->get("/admin/users/create", function(){
 
 	User::verifyLogin();
@@ -201,7 +98,7 @@ $app->get("/admin/users/create", function(){
 	));
 });
 
-//tela de consulta com todos os processos cadastrados
+//tela de consulta com todos os usuários cadastrados
 $app->get("/admin/users/:id_usuario", function($id_usuario){
 
 	User::verifyLogin();
@@ -224,25 +121,51 @@ $app->get("/admin/users/:id_usuario", function($id_usuario){
 	));
 });
 
-
-//controle pra inserir novo movimento
-$app->post("/admin/users/movimentar/:id_processo/add", function($id_processo){
+$app->get("/admin/users/:id_orgao/resultadopororgao", function($id_orgao){
 
 	User::verifyLogin();
 
-	$user = new Processo();
+	$user = new User();
 
-	$user->getProcessoById((int)$id_processo);
-	
-	$user->setData($_POST);
-	$user->saveMovimentoProcesso();	
+	$user->getOrgaobyId((int)$id_orgao);
 
-	header("Location: /admin/users/situacao/".$id_processo);
-	exit;
+	$orgao = User::listOrgaoByUsuarioActive();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("users-resultadopororgao", array(
+		"users"=>$user->getValues(),
+		"resultadousuario"=>$user->listUsuarioByOrgao(),
+		"semusuario"=>$user->listUsuarioByOrgao(false),
+		"orgao"=>$orgao
+	));
+});
+
+$app->get("/admin/updatepassword/:id_usuario", function($id_usuario){
+
+	User::verifyLogin();
+
+	$user = new User();
+
+	$user->listUsuarioById((int)$id_usuario);
+
+	$orgao = User::listAllOrgao();
+	$nivel = User::listAllNivelUsuario();
+	$situacao = User::listAllSituacaoUsuario();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("users-updatepassword", array(
+		"user"=>$user->getValues(),
+		"orgao"=>$orgao,
+		"nivel"=>$nivel,
+		"situacao"=>$situacao
+	));
 
 });
 
-//controle para inserir dados do processo e primeira movimentação
+
+//controle para inserir dados do usuário
 $app->post("/admin/users/create", function(){
 
 	User::verifyLogin();
@@ -261,45 +184,36 @@ $app->post("/admin/users/create", function(){
 });
 
 
-//controle para modificar dados do processo
-$app->post("/admin/users/:id_processo", function($id_processo){
+//controle para modificar dados do usuário
+$app->post("/admin/users/:id_usuario", function($id_usuario){
 
 	User::verifyLogin();
 
-	$user = new Processo();
+	$user = new User();
 
-	$_POST["data_inicio"] = implode('-', array_reverse(explode('/', ($_POST["data_inicio"]))));
-
-	$user->getProcessoById((int)$id_processo);
+	$user->listUsuarioById((int)$id_usuario);
 	$user->setData($_POST);
-	$user->updateProcesso();
+	$user->updateUsuario();
 
 	header("Location: /admin/users");
 	exit;
 
 });
 
-$app->post("/admin/users/editarmovimento/:id_processo/update", function($id_processo){
+$app->post("/admin/updatepassword/:id_usuario", function($id_usuario){
 
 	User::verifyLogin();
 
-	$user = new Processo();
+	$user = new User();
 
-	$user->getProcessoById((int)$id_processo);
-
-	$_POST["proc_data_entrada"] = implode('-', array_reverse(explode('/', ($_POST["proc_data_entrada"]))));
-	
+	$user->listUsuarioById((int)$id_usuario);
 	$user->setData($_POST);
-	
-	$user->updateMovimento();
+	$user->updatePassword();
 
-
-	header("Location: /admin/users/situacao/".$id_processo);
+	header("Location: /admin/users");
 	exit;
 
 });
-
-
 
 
 
@@ -350,8 +264,8 @@ $app->get("/admin/processos/:id_orgao/resultadopororgao", function($id_orgao){
 	$page = new PageAdmin();
 
 	$page->setTpl("processos-resultadopororgao", array(
-		"user"=>$processo->getValues(),
-		"processo"=>$processo->getProcessoByOrgao(),
+		"processo"=>$processo->getValues(),
+		"resultadoprocesso"=>$processo->getProcessoByOrgao(),
 		"semprocesso"=>$processo->getProcessoByOrgao(false),
 		"orgao"=>$orgao
 	));
@@ -362,16 +276,16 @@ $app->get("/admin/processos/situacao/:id_processo", function($id_processo){
 
 	User::verifyLogin();
 
-	$user = new Processo();
+	$processo = new Processo();
 
-	$user->getProcessoById((int)$id_processo);
+	$processo->getProcessoById((int)$id_processo);
 
 	$page = new PageAdmin();
 
 	$page->setTpl("processos-situacao", array(
-		"user"=>$user->getValues(),
-		"movimento"=>$user->getProcessoMovimentoById(),
-		"sem movimento"=>$user->getProcessoMovimentoById(false)
+		"processo"=>$processo->getValues(),
+		"movimento"=>$processo->getProcessoMovimentoById(),
+		"sem movimento"=>$processo->getProcessoMovimentoById(false)
 	));
 });
 
@@ -381,9 +295,9 @@ $app->get("/admin/processos/movimentar/:id_processo", function($id_processo){
 
 	User::verifyLogin();
 
-	$user = new Processo();
+	$processo = new Processo();
 
-	$user->getProcessoById((int)$id_processo);
+	$processo->getProcessoById((int)$id_processo);
 
 	$orgao = User::listAllOrgao();
 	$tipo = User::listAllTipo();
@@ -392,22 +306,22 @@ $app->get("/admin/processos/movimentar/:id_processo", function($id_processo){
 	$page = new PageAdmin();
 
 	$page->setTpl("processos-movimentar", array(
-		"user"=>$user->getValues(),
-		"movimento"=>$user->getProcessoMovimentoById(),
-		"sem movimento"=>$user->getProcessoMovimentoById(false),
+		"processo"=>$processo->getValues(),
+		"movimento"=>$processo->getProcessoMovimentoById(),
+		"sem movimento"=>$processo->getProcessoMovimentoById(false),
 		"tipomovimento"=>$tipomovimento,
 		"orgao"=>$orgao,
 		"tipo"=>$tipo
 	));
 });
 
-$app->get("/admin/users/:id_movimento/editarmovimento/:id_processo", function($id_movimento, $id_processo){
+$app->get("/admin/processos/:id_movimento/editarmovimento/:id_processo", function($id_movimento, $id_processo){
 
 	User::verifyLogin();
 
-	$user = new Processo();
+	$processo = new Processo();
 
-	$user->getProcessoById((int)$id_processo);
+	$processo->getProcessoById((int)$id_processo);
 
 	$movimento = new Processo();
 
@@ -419,8 +333,8 @@ $app->get("/admin/users/:id_movimento/editarmovimento/:id_processo", function($i
 
 	$page = new PageAdmin();
 
-	$page->setTpl("users-editarmovimento", array(
-		"user"=>$user->getValues(),
+	$page->setTpl("processos-editarmovimento", array(
+		"processo"=>$processo->getValues(),
 		"movimento"=>$movimento->getValues(),
 		"tipomovimento"=>$tipomovimento,
 		"orgao"=>$orgao,
@@ -471,14 +385,14 @@ $app->post("/admin/processos/movimentar/:id_processo/add", function($id_processo
 
 	User::verifyLogin();
 
-	$user = new Processo();
+	$processo = new Processo();
 
-	$user->getProcessoById((int)$id_processo);
+	$processo->getProcessoById((int)$id_processo);
 
 	$_POST["proc_data_entrada"] = date("Y-m-d", strtotime($_POST["proc_data_entrada"]));
 	
-	$user->setData($_POST);
-	$user->saveMovimentoProcesso();	
+	$processo->setData($_POST);
+	$processo->saveMovimentoProcesso();	
 
 	header("Location: /admin/processos/situacao/".$id_processo);
 	exit;
@@ -490,17 +404,17 @@ $app->post("/admin/processos/create", function(){
 
 	User::verifyLogin();
 
-	$user = new User();
+	$processo = new Processo();
 
 	$_POST["data_inicio"] = date("Y-m-d", strtotime($_POST["data_inicio"]));
 	
 	$_POST["proc_data_entrada"] = date("Y-m-d", strtotime($_POST["proc_data_entrada"]));
 
-	$user->setData($_POST);
+	$processo->setData($_POST);
 
-	$user->saveProcesso();	
+	$processo->saveProcesso();	
 
-	header("Location: /admin/users");
+	header("Location: /admin/processos");
 
 	exit;
 
@@ -526,7 +440,7 @@ $app->post("/admin/processos/:id_processo", function($id_processo){
 
 });
 
-$app->post("/admin/users/editarmovimento/:id_processo/update", function($id_processo){
+$app->post("/admin/processos/editarmovimento/:id_processo/update", function($id_processo){
 
 	User::verifyLogin();
 
@@ -541,7 +455,7 @@ $app->post("/admin/users/editarmovimento/:id_processo/update", function($id_proc
 	$user->updateMovimento();
 
 
-	header("Location: /admin/users/situacao/".$id_processo);
+	header("Location: /admin/processos/situacao/".$id_processo);
 	exit;
 
 });

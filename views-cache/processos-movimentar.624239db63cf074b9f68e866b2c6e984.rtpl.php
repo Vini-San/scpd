@@ -8,7 +8,7 @@
         <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li><a href="/admin/processos">Consultar Todos</a></li>
-        <li><a href="/admin/processos/situacao/<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">Situação do Processo</a></li>
+        <li><a href="/admin/processos/situacao/<?php echo htmlspecialchars( $processo["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">Situação do Processo</a></li>
         <li class="active">Movimentar Processo</li>
         </ol>
     </section>
@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-success">
-                    <form role="form" action="/admin/processos/movimentar/<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/add" method="post">
+                    <form role="form" action="/admin/processos/movimentar/<?php echo htmlspecialchars( $processo["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/add" method="post">
                         <div class="box-body">
                             <div class="col-12 col-sm-10 col-md-6">
                                 <div class="form-group row">
@@ -26,7 +26,7 @@
                                         <label for="numero_processo" class="col-form-label col-form-label-sm">NÚMERO DO PROCESSO:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-6">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["numero_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $processo["numero_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -34,7 +34,7 @@
                                         <label for="id_orgao" class="col-form-label col-form-label-sm">ORGÃO DE ORIGEM:</label>
                                     </div>
                                     <div class="col-10 col-sm-5 col-md-6">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>    
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $processo["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>    
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -42,7 +42,7 @@
                                         <label for="id_tipo_processo" class="col-form-label col-form-label-sm">TIPO DOCUMENTO:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-8">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $processo["tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                     </div>
                                 </div> 
                             </div>
@@ -52,7 +52,7 @@
                                         <label for="data_inicio" class="col-form-label col-form-label-sm">DATA INICIO:</label>
                                     </div>
                                     <div class="col-8 col-sm-6 col-md-6">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm"><?php echo formatDate($user["data_inicio"]); ?></label>
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm"><?php echo formatDate($processo["data_inicio"]); ?></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -60,7 +60,7 @@
                                         <label for="nome_processo" class="col-form-label col-form-label-sm">NOME:</label>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-8">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["nome_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $processo["nome_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -68,7 +68,7 @@
                                         <label for="assunto_processo" class="col-form-label col-form-label-sm">ASSUNTO:</label>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-8">
-                                        <label for="assunto_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $user["assunto_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
+                                        <label for="assunto_processo" class="col-form-label col-form-label-sm"><?php echo htmlspecialchars( $processo["assunto_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                                             <td><?php echo formatDate($value1["proc_data_entrada"]); ?></td>
                                             <td><?php echo htmlspecialchars( $value1["observacoes_proc_entrada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                                             <td>
-                                                <a href="/admin/processos/<?php echo htmlspecialchars( $value1["id_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/editarmovimento/<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                                                <a href="/admin/processos/<?php echo htmlspecialchars( $value1["id_movimento"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/editarmovimento/<?php echo htmlspecialchars( $processo["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
                                             </td>
                                         </tr>
                                         <?php } ?>
@@ -107,7 +107,7 @@
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-3">
                                         <div class="col-sm-12 col-md-12">
-                                            <input type="hidden" class="form-control form-control-sm" id="id_processo" name="id_processo" value="<?php echo htmlspecialchars( $user["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
+                                            <input type="hidden" class="form-control form-control-sm" id="id_processo" name="id_processo" value="<?php echo htmlspecialchars( $processo["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
                                             <label class="col-form-label col-form-label-sm ">TIPO DE MOVIMENTO:</label>
                                         </div>
                                         <div class="col-sm-12 col-md-12 text-black">

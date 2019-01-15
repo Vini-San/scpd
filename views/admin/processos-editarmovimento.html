@@ -7,8 +7,8 @@
         </h4>
         <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li><a href="/admin/users">Consultar Todos</a></li>
-        <li><a href="/admin/users/situacao/{$user.id_processo}">Situação do Processo</a></li>
+        <li><a href="/admin/processos">Consultar Todos</a></li>
+        <li><a href="/admin/processos/situacao/{$processo.id_processo}">Situação do Processo</a></li>
         <li class="active">Editar Movimento</li>
         </ol>
     </section>
@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-success">
-                    <form role="form" action="/admin/users/editarmovimento/{$user.id_processo}/update" method="post">
+                    <form role="form" action="/admin/processos/editarmovimento/{$processo.id_processo}/update" method="post">
                         <div class="box-body">
                             <div class="col-12 col-sm-10 col-md-6">
                                 <div class="form-group row">
@@ -26,7 +26,7 @@
                                         <label for="numero_processo" class="col-form-label col-form-label-sm">NÚMERO DO PROCESSO:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-6">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$user.numero_processo}</label>
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$processo.numero_processo}</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -34,7 +34,7 @@
                                         <label for="id_orgao" class="col-form-label col-form-label-sm">ORGÃO DE ORIGEM:</label>
                                     </div>
                                     <div class="col-10 col-sm-5 col-md-6">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$user.nome_orgao}</label>    
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$processo.nome_orgao}</label>    
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -42,7 +42,7 @@
                                         <label for="id_tipo_processo" class="col-form-label col-form-label-sm">TIPO DOCUMENTO:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-8">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$user.tipo_processo}</label>
+                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$processo.tipo_processo}</label>
                                     </div>
                                 </div> 
                             </div>
@@ -52,7 +52,7 @@
                                         <label for="data_inicio" class="col-form-label col-form-label-sm">DATA INICIO:</label>
                                     </div>
                                     <div class="col-8 col-sm-6 col-md-6">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm">{function="formatDate($user.data_inicio)"}</label>
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm">{function="formatDate($processo.data_inicio)"}</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -60,7 +60,7 @@
                                         <label for="nome_processo" class="col-form-label col-form-label-sm">NOME:</label>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-8">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm">{$user.nome_processo}</label>
+                                        <label for="data_inicio" class="col-form-label col-form-label-sm">{$processo.nome_processo}</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -68,7 +68,7 @@
                                         <label for="assunto_processo" class="col-form-label col-form-label-sm">ASSUNTO:</label>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-8">
-                                        <label for="assunto_processo" class="col-form-label col-form-label-sm">{$user.assunto_processo}</label>
+                                        <label for="assunto_processo" class="col-form-label col-form-label-sm">{$processo.assunto_processo}</label>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +78,7 @@
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-3">
                                         <div class="col-sm-12 col-md-12">
-                                            <input type="hidden" class="form-control form-control-sm" id="id_processo" name="id_processo" value="{$user.id_processo}"/>
+                                            <input type="hidden" class="form-control form-control-sm" id="id_processo" name="id_processo" value="{$processo.id_processo}"/>
                                             <input type="hidden" class="form-control form-control-sm" id="id_movimento" name="id_movimento" value="{$movimento.id_movimento}"/>
                                             <label class="col-form-label col-form-label-sm ">TIPO DE MOVIMENTO:</label>
                                         </div>

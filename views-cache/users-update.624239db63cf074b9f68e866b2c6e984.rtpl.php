@@ -18,25 +18,26 @@
             <div class="col-md-12">
                 <div class="box box-success">
                     <!-- form start -->
-                    <form role="form" action="/admin/users/:id_processo" method="post">
+                    <form role="form" action="/admin/users/<?php echo htmlspecialchars( $user["id_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post">
                         <div class="box-body">
                             <div class="col-12 col-sm-10 col-md-6">
                                 <div class="form-group row">
                                     <div class="col-10 col-sm-5 col-md-8">
                                         <label for="nome_usuario" class="col-form-label col-form-label-sm">NOME DO USUÁRIO</label>
-                                        <input type="text" class="form-control form-control-sm" id="nome_usuario" name="nome_usuario" placeholder="<?php echo htmlspecialchars( $user["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required>
+                                        <input type="hidden" class="form-control form-control-sm" id="id_usuario" name="id_usuario" value="<?php echo htmlspecialchars( $user["id_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
+                                        <input type="text" class="form-control form-control-sm" id="nome_usuario" name="nome_usuario" value="<?php echo htmlspecialchars( $user["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-10 col-sm-5 col-md-8">
-                                        <label for="id_orgao" class="col-form-label col-form-label-sm">CPF</label>
-                                        <input type="text" class="form-control form-control-sm" id="cpf" name="cpf" placeholder="<?php echo htmlspecialchars( $user["cpf"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required>
+                                        <label for="cpf" class="col-form-label col-form-label-sm">CPF</label>
+                                        <input type="text" class="form-control form-control-sm" id="cpf" name="cpf" value="<?php echo htmlspecialchars( $user["cpf"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-10 col-sm-5 col-md-8">
-                                        <label for="id_tipo_processo" class="col-form-label col-form-label-sm">E-MAIL</label>
-                                        <input type="text" class="form-control form-control-sm" id="email" name="email" placeholder="<?php echo htmlspecialchars( $user["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required>
+                                        <label for="email" class="col-form-label col-form-label-sm">E-MAIL</label>
+                                        <input type="text" class="form-control form-control-sm" id="email" name="email" value="<?php echo htmlspecialchars( $user["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -50,7 +51,7 @@
                                 <div class="form-group row">
                                     <div class="col-12 col-sm-12 col-md-2">
                                         <div class="col-sm-12 col-md-12">
-                                            <label class="col-form-label col-form-label-sm">ÓRGÃO</label>
+                                            <label for="id_orgao" class="col-form-label col-form-label-sm">ÓRGÃO</label>
                                         </div>
                                         <div class="col-sm-12 col-md-12 text-black">
                                             <select class="btn btn-md btn-default" id="id_orgao" name="id_orgao" required>
@@ -65,7 +66,7 @@
                                 <div class="form-group row">
                                     <div class="col-12 col-sm-12 col-md-2">
                                         <div class="col-sm-12 col-md-12">
-                                            <label class="col-form-label col-form-label-sm">NÍVEL</label>
+                                            <label for="id_nivel_usuario" class="col-form-label col-form-label-sm">NÍVEL</label>
                                         </div>
                                         <div class="col-sm-12 col-md-12 text-black">
                                             <select class="btn btn-md btn-default" id="id_nivel_usuario" name="id_nivel_usuario" required>
@@ -80,10 +81,10 @@
                                 <div class="form-group row">
                                     <div class="col-12 col-sm-12 col-md-2">
                                         <div class="col-sm-12 col-md-12">
-                                            <label class="col-form-label col-form-label-sm">SITUAÇÃO</label>
+                                            <label for="id_situacao_usuario" class="col-form-label col-form-label-sm">SITUAÇÃO</label>
                                         </div>
                                         <div class="col-sm-12 col-md-12 text-black">
-                                            <select class="btn btn-md btn-default" id="id_nivel_usuario" name="id_nivel_usuario" required>
+                                            <select class="btn btn-md btn-default" id="id_situacao_usuario" name="id_situacao_usuario" required>
                                                 <option class="pl-3 pr-3" value="<?php echo htmlspecialchars( $user["id_situacao_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled selected><?php echo htmlspecialchars( $user["situacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                                                 <?php $counter1=-1;  if( isset($situacao) && ( is_array($situacao) || $situacao instanceof Traversable ) && sizeof($situacao) ) foreach( $situacao as $key1 => $value1 ){ $counter1++; ?>
                                                 <option value="<?php echo htmlspecialchars( $value1["id_situacao_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["situacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>

@@ -9,7 +9,7 @@
                 <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="/admin/processos">Consultar Todos</a></li>
                 <li><a href="javascript:window.history.go(-1)">Voltar</a></li>
-                <li class="active">Resulta Consulta de Processos por Órgão</li>
+                <li class="active">Processos por Órgão de <?php echo htmlspecialchars( $processo["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?> </li>
             </ol>
             </section>
             <!-- Main content -->
@@ -30,13 +30,12 @@
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                     <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>  
-                                                    <li><a href="/admin/users/<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/resultadopororgao"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+                                                    <li><a href="/admin/processos/<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/resultadopororgao"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
                                                     <?php } ?>
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-10 col-md-6">
-                                            Resultados para <?php echo htmlspecialchars( $user["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
@@ -47,7 +46,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $counter1=-1;  if( isset($processo) && ( is_array($processo) || $processo instanceof Traversable ) && sizeof($processo) ) foreach( $processo as $key1 => $value1 ){ $counter1++; ?>
+                                                    <?php $counter1=-1;  if( isset($resultadoprocesso) && ( is_array($resultadoprocesso) || $resultadoprocesso instanceof Traversable ) && sizeof($resultadoprocesso) ) foreach( $resultadoprocesso as $key1 => $value1 ){ $counter1++; ?>
                                                     <tr>
                                                         <td><?php echo htmlspecialchars( $value1["numero_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                                                         <td><?php echo htmlspecialchars( $value1["assunto_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>

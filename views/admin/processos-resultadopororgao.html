@@ -9,7 +9,7 @@
                 <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="/admin/processos">Consultar Todos</a></li>
                 <li><a href="javascript:window.history.go(-1)">Voltar</a></li>
-                <li class="active">Resulta Consulta de Processos por Órgão</li>
+                <li class="active">Processos por Órgão de {$processo.nome_orgao} </li>
             </ol>
             </section>
             <!-- Main content -->
@@ -30,13 +30,12 @@
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                     {loop="$orgao"}  
-                                                    <li><a href="/admin/users/{$value.id_orgao}/resultadopororgao">{$value.nome_orgao}</a></li>
+                                                    <li><a href="/admin/processos/{$value.id_orgao}/resultadopororgao">{$value.nome_orgao}</a></li>
                                                     {/loop}
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-10 col-md-6">
-                                            Resultados para {$user.nome_orgao}
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
@@ -47,7 +46,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {loop="$processo"}
+                                                    {loop="$resultadoprocesso"}
                                                     <tr>
                                                         <td>{$value.numero_processo}</td>
                                                         <td>{$value.assunto_processo}</td>

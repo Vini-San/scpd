@@ -176,7 +176,7 @@ class Processo extends Model{
 	public function updateMovimento(){
 
 		$sql = new Sql();
-		$results = $sql->query("UPDATE movimento m SET m.id_tipo_movimento=:id_tipo_movimento, m.proc_data_entrada=:proc_data_entrada, m.id_orgao=:id_orgao, m.observacoes_proc_entrada=:observacoes_proc_entrada WHERE m.id_movimento=:id_movimento", array(
+		$sql->query("UPDATE movimento m SET m.id_tipo_movimento=:id_tipo_movimento, m.proc_data_entrada=:proc_data_entrada, m.id_orgao=:id_orgao, m.observacoes_proc_entrada=:observacoes_proc_entrada WHERE m.id_movimento=:id_movimento", array(
 			":id_movimento"=>$this->getid_movimento(),
 			":id_tipo_movimento"=>$this->getid_tipo_movimento(),
 			":proc_data_entrada"=>$this->getproc_data_entrada(),

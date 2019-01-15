@@ -1,44 +1,72 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-        <section class="content-header">
-        <h4>
-            <b>Consultar por Órgão</b>
-        </h4>
-        <ol class="breadcrumb">
-            <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Consultar por Órgão</li>
-        </ol>
-        </section>
-    
-        <!-- Main content -->
-        <section class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box box-success">
-                    <!-- form start -->
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-12 col-sm-10 col-md-5">
-                                    Nova Consulta
-                                    <div class="dropdown scroll">
-                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            Orgão
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                            {loop="$orgao"}  
-                                            <li><a href="/admin/users/{$value.id_orgao}/resultadopororgao">{$value.nome_orgao}</a></li>
-                                            {/loop}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h4>
+    <b>Lista de Usuários</b>
+  </h4>
+  <ol class="breadcrumb">
+    <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Consultar Todos Usuários</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            
+            <div class="box-header">
+              <div class="dropdown scroll">
+                <label for="numero_processo" style="width: 120px">Buscar por órgão </label>
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Orgão <span class="caret"></span></button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  {loop="$orgao"}
+                  <li><a href="/admin/users/{$value.id_orgao}/resultadopororgao">{$value.nome_orgao}</a></li>
+                  {/loop}
+                </ul>
+              </div>
             </div>
-        </section>
-    <!-- /.content -->
+
+            <div class="box-body no-padding">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th style="width: 250px">Nome</th>
+                    <th>Login</th>
+                    <th>Órgão</th>
+                    <th>Nível</th>
+                    <th>Situação</th>
+                    <th style="width: 150px"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  {loop="$users"}
+                  <tr>
+                    <td></td>
+                    <td>{$value.nome_usuario}</td>
+                    <td>{$value.cpf}</td>
+                    <td>{$value.nome_orgao}</td>
+                    <td>{$value.nivel}</td/>
+                    <td>{$value.situacao}</td/>
+                    <td>
+                      <a href="/admin/users/{$value.id_usuario}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                    </td>
+                  </tr>
+                  {/loop}
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
     </div>
-    <!-- /.content-wrapper -->
+  </div>
+
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
