@@ -27,7 +27,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <p><img width="90" class="ml-2" src="/res/admin/dist/img/Faetec2.png"></p>
+    <p><img width="90" class="ml-2" src="/res/admin/dist/img/FAETEC(2).png"></p>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

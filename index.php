@@ -8,6 +8,7 @@ use\Hcode\Page;
 use\Hcode\PageAdmin;
 use\Hcode\Model\User;
 use\Hcode\Model\Processo;
+use\Hcode\Model\Documentos;
 //use\Hcode\Model\ProcessoDocumento;
 
 function formatDate($date)
@@ -161,9 +162,7 @@ $app->get("/admin/updatepassword/:id_usuario", function($id_usuario){
 		"nivel"=>$nivel,
 		"situacao"=>$situacao
 	));
-
 });
-
 
 //controle para inserir dados do usuário
 $app->post("/admin/users/create", function(){
@@ -177,12 +176,8 @@ $app->post("/admin/users/create", function(){
 	$user->saveUsuario();	
 
 	header("Location: /admin/users");
-
 	exit;
-
-
 });
-
 
 //controle para modificar dados do usuário
 $app->post("/admin/users/:id_usuario", function($id_usuario){
@@ -221,9 +216,7 @@ $app->post("/admin/updatepassword/:id_usuario", function($id_usuario){
 //////////////////////////////////////////////////////////////////////////////////////////
 //parte dos processos
 
-
-
-//quando entra na página de consulta
+//quando entra na página para consultar todos os processos
 $app->get("/admin/processos", function(){
 
 	User::verifyLogin();
@@ -237,11 +230,12 @@ $app->get("/admin/processos", function(){
 	));
 });
 
+//tela para mostrar orgãos na parte de processos
 $app->get("/admin/processos/pororgao", function(){
 
 	User::verifyLogin();
 
-	$orgao = User::listAllOrgaoActive();
+	$orgao = User::listAllProcessoOrgaoActive();
 
 	$page = new PageAdmin();
 
@@ -251,6 +245,7 @@ $app->get("/admin/processos/pororgao", function(){
 	));
 });
 
+//tela para mostrar resultado da busca de processos por orgãos
 $app->get("/admin/processos/:id_orgao/resultadopororgao", function($id_orgao){
 
 	User::verifyLogin();
@@ -259,7 +254,7 @@ $app->get("/admin/processos/:id_orgao/resultadopororgao", function($id_orgao){
 
 	$processo->getOrgaobyId((int)$id_orgao);
 
-	$orgao = User::listAllOrgaoActive();
+	$orgao = User::listAllProcessoOrgaoActive();
 
 	$page = new PageAdmin();
 
@@ -289,7 +284,6 @@ $app->get("/admin/processos/situacao/:id_processo", function($id_processo){
 	));
 });
 
-
 //tela para inserir novo movimento
 $app->get("/admin/processos/movimentar/:id_processo", function($id_processo){
 
@@ -315,6 +309,7 @@ $app->get("/admin/processos/movimentar/:id_processo", function($id_processo){
 	));
 });
 
+//tela para editar movimento
 $app->get("/admin/processos/:id_movimento/editarmovimento/:id_processo", function($id_movimento, $id_processo){
 
 	User::verifyLogin();
@@ -379,7 +374,6 @@ $app->get("/admin/processos/:id_processo", function($id_processo){
 	));
 });
 
-
 //controle pra inserir novo movimento
 $app->post("/admin/processos/movimentar/:id_processo/add", function($id_processo){
 
@@ -396,7 +390,6 @@ $app->post("/admin/processos/movimentar/:id_processo/add", function($id_processo
 
 	header("Location: /admin/processos/situacao/".$id_processo);
 	exit;
-
 });
 
 //controle para inserir dados do processo e primeira movimentação
@@ -417,10 +410,7 @@ $app->post("/admin/processos/create", function(){
 	header("Location: /admin/processos");
 
 	exit;
-
-
 });
-
 
 //controle para modificar dados do processo
 $app->post("/admin/processos/:id_processo", function($id_processo){
@@ -457,90 +447,243 @@ $app->post("/admin/processos/editarmovimento/:id_processo/update", function($id_
 
 	header("Location: /admin/processos/situacao/".$id_processo);
 	exit;
-
 });
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //agora vem a parte dos documentos
-
-
-
-
-//quando entra na página de consulta
+//quando entra na página para consultar todos os processos
 $app->get("/admin/docs", function(){
 
 	User::verifyLogin();
 
-	$users = Processo::listAllProcesso();
+	$docs = Documentos::listAllDocs();
 
 	$page = new PageAdmin();
 
 	$page->setTpl("docs", array(
-		"users"=>$users
+		"docs"=>$docs
 	));
 });
 
-//quando vai para página de insert
-$app->get("/admin/docs/docs-create", function(){
+$app->get("/admin/docs/pororgao", function(){
+
+	User::verifyLogin();
+
+	$orgao = User::listAllDocumentoOrgaoActive();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("docs-pororgao", array(
+		"orgao"=>$orgao
+
+	));
+});
+
+$app->get("/admin/docs/situacao/:id_documento", function($id_documento){
+
+	User::verifyLogin();
+
+	$docs = new Documentos();
+
+	$docs->getDocumentoById((int)$id_documento);
+
+	$page = new PageAdmin();
+
+	$page->setTpl("docs-situacao", array(
+		"docs"=>$docs->getValues(),
+		"movimento"=>$docs->getDocumentoMovimentoById(),
+		"sem movimento"=>$docs->getDocumentoMovimentoById(false)
+	));
+});
+
+$app->get("/admin/docs/movimentar/:id_documento", function($id_documento){
+
+	User::verifyLogin();
+
+	$docs = new Documentos();
+
+	$docs->getDocumentoById((int)$id_documento);
+
+	$orgao = User::listAllOrgao();
+	$tipo = User::listAllTipoDocumento();
+	$tipomovimento = User::listAllTipoMovimento();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("docs-movimentar", array(
+		"docs"=>$docs->getValues(),
+		"movimento"=>$docs->getDocumentoMovimentoById(),
+		"sem movimento"=>$docs->getDocumentoMovimentoById(false),
+		"tipomovimento"=>$tipomovimento,
+		"orgao"=>$orgao,
+		"tipo"=>$tipo
+	));
+});
+
+$app->get("/admin/docs/:id_movimento/editarmovimento/:id_documento", function($id_movimento, $id_documento){
+
+	User::verifyLogin();
+
+	$docs = new Documentos();
+
+	$docs->getDocumentoById((int)$id_documento);
+
+	$movimento = new Documentos();
+
+	$movimento->getMovimentoById((int)$id_movimento);
+
+	$orgao = User::listAllOrgao();
+	$tipo = User::listAllTipoDocumento();
+	$tipomovimento = User::listAllTipoMovimento();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("docs-editarmovimento", array(
+		"docs"=>$docs->getValues(),
+		"movimento"=>$movimento->getValues(),
+		"tipomovimento"=>$tipomovimento,
+		"orgao"=>$orgao,
+		"tipo"=>$tipo
+	));
+});
+
+//tela que insere os dados do processo e sua entrada
+$app->get("/admin/docs/create", function(){
 
 	User::verifyLogin();
 
 	$page = new PageAdmin();
 
-	$page->setTpl("docs-create");
+	$orgao = User::listAllOrgao();
+	$tipo = User::listAllTipoDocumento();
+
+	$page->setTpl("docs-create", array(
+		"orgao"=>$orgao,
+		"tipo"=>$tipo
+	));
 });
 
-//quando vai para página de update
-
-$app->get("/admin/docs/:iddocs", function($iduser){
+//tela de consulta com todos os processos cadastrados
+$app->get("/admin/docs/:id_documento", function($id_documento){
 
 	User::verifyLogin();
 
-	$user = new User();
+	$docs = new Documentos();
 
-	$user->getProcessoById((int)$iduser);
+	$docs->getDocumentoById((int)$id_documento);
+
+	$orgao = User::listAllOrgao();
+	$tipo = User::listAllTipoDocumento();
 
 	$page = new PageAdmin();
 
 	$page->setTpl("docs-update", array(
-		"user"=>$user->getValues()
+		"docs"=>$docs->getValues(),
+		"orgao"=>$orgao,
+		"tipo"=>$tipo
 	));
 });
 
-//inserindo dados no banco
-$app->post("/admin/docs/docs-create", function(){
+$app->get("/admin/docs/:id_orgao/resultadopororgao", function($id_orgao){
 
 	User::verifyLogin();
 
-	$user = new User();
+	$docs = new Documentos();
 
-	$user->setData($_POST);
+	$docs->getOrgaobyId((int)$id_orgao);
 
-	$user->saveProcess();	
+	$orgao = User::listAllDocumentoOrgaoActive();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("docs-resultadopororgao", array(
+		"docs"=>$docs->getValues(),
+		"resultadodocumento"=>$docs->getDocumentoByOrgao(),
+		"semprocesso"=>$docs->getDocumentoByOrgao(false),
+		"orgao"=>$orgao
+	));
+});
+
+
+
+$app->post("/admin/docs/movimentar/:id_documento/add", function($id_documento){
+
+	User::verifyLogin();
+
+	$docs = new Documentos();
+
+	$docs->getDocumentoById((int)$id_documento);
+
+	$_POST["proc_data_entrada"] = date("Y-m-d", strtotime($_POST["proc_data_entrada"]));
+	
+	$docs->setData($_POST);
+	$docs->saveMovimentoDocumento();	
+
+	header("Location: /admin/docs/situacao/".$id_documento);
+	exit;
+});
+
+//controle para inserir dados do processo e primeira movimentação
+$app->post("/admin/docs/create", function(){
+
+	User::verifyLogin();
+
+	$docs = new Documentos();
+
+	$_POST["data_inicio"] = date("Y-m-d", strtotime($_POST["data_inicio"]));
+	
+	$_POST["proc_data_entrada"] = date("Y-m-d", strtotime($_POST["proc_data_entrada"]));
+
+	$docs->setData($_POST);
+
+	$docs->saveDocs();	
 
 	header("Location: /admin/docs");
 
 	exit;
-
-
 });
 
-//para modificar dados no banco
-$app->post("/admin/docs/:iduser", function($iduser){
+//controle para modificar dados do processo
+$app->post("/admin/docs/:id_documento", function($id_documento){
 
 	User::verifyLogin();
 
-	$user = new User();
+	$docs = new Documentos();
 
-	$user->getProcessoById((int)$iduser);
-	$user->setData($_POST);
-	$user->update();
+	$_POST["data_inicio"] = implode('-', array_reverse(explode('/', ($_POST["data_inicio"]))));
 
-	header("Location: /admin/docs");
+	$docs->getDocumentoById((int)$id_documento);
+	$docs->setData($_POST);
+	$docs->updateDoc();
+
+	header("Location: /admin/docs/situacao/".$id_documento);
 	exit;
 
 });
+
+$app->post("/admin/docs/editarmovimento/:id_documento/update", function($id_documento){
+
+	User::verifyLogin();
+
+	$docs = new Documentos();
+
+	$docs->getDocumentoById((int)$id_documento);
+
+	$_POST["proc_data_entrada"] = implode('-', array_reverse(explode('/', ($_POST["proc_data_entrada"]))));
+	
+	$docs->setData($_POST);
+	
+	$docs->updateMovimento();
+
+
+	header("Location: /admin/docs/situacao/".$id_documento);
+	exit;
+});
+
+
+
+
 
 /////////////////////////////////////////////////////////////
 //parte de órgãos
@@ -588,6 +731,53 @@ $app->get("/admin/orgaos/:id_orgao/resultadopororgao", function($id_orgao){
 		"users"=>$user->getValues(),
 		"orgaos"=>$orgao
 	));
+});
+
+$app->get("/admin/orgaos/:id_orgao", function($id_orgao){
+
+	User::verifyLogin();
+
+	$user = new User();
+	
+	$user->listOrgaobyId((int)$id_orgao);
+
+	$orgao = User::listAllOrgao();
+
+	$hierarquia = User::listAllHierarquiaOrgao();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("orgaos-update", array(
+		"users"=>$user->getValues(),
+		"hierarquia"=>$hierarquia
+	));
+});
+
+$app->post("/admin/orgaos/create", function(){
+
+	User::verifyLogin();
+
+	$user = new User();
+
+	$user->setData($_POST);
+	$user->saveOrgao();
+
+	header("Location: /admin/orgaos");
+	exit;
+});
+
+$app->post("/admin/orgaos/:id_orgao", function($id_orgao){
+
+	User::verifyLogin();
+
+	$user = new User();
+
+	$user->listOrgaobyId((int)$id_orgao);
+	$user->setData($_POST);
+	$user->updateOrgao();
+
+	header("Location: /admin/orgaos");
+	exit;
 });
 
 

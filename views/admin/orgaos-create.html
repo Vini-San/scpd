@@ -18,7 +18,7 @@
             <div class="col-md-12">
                 <div class="box box-success">
                     <!-- form start -->
-                    <form role="form" action="/admin/users/create" method="post">
+                    <form role="form" action="/admin/orgaos/create" method="post">
                         <div class="box-body">
                             <div class="col-12 col-sm-10 col-md-6">
                                 <div class="form-group row">
@@ -28,11 +28,11 @@
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-2">
                                         <div class="col-sm-12 col-md-12">
-                                            <label class="col-form-label col-form-label-sm">ÓRGÃO</label>
+                                            <label class="col-form-label col-form-label-sm">HIERARQUIA</label>
                                         </div>
                                         <div class="col-sm-12 col-md-12 text-black">
-                                            <select class="btn btn-md btn-default" id="id_orgao" name="id_orgao" required>
-                                                <option class="pl-3 pr-3" value="#">SELECIONE</option>
+                                            <select class="btn btn-md btn-default" id="id_hierarquia_orgao" name="id_hierarquia_orgao" required>
+                                                <option class="pl-3 pr-3" value="#" disabled selected>SELECIONE</option>
                                                 {loop="$hierarquia"}
                                                 <option value="{$value.id_hierarquia_orgao}">{$value.tipo_hierarquia}</option>
                                                 {/loop}

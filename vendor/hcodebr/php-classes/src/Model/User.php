@@ -98,7 +98,7 @@ class User extends Model{
 
 		$sql = new Sql();
 
-		$sql->query("INSERT into orgao values (:nome_orgao, :id_hierarquia_orgao)", array(
+		$sql->query("INSERT into orgao values (NULL, :nome_orgao, :id_hierarquia_orgao)", array(
 			":nome_orgao"=>$this->getnome_orgao(),
 			":id_hierarquia_orgao"=>$this->getid_hierarquia_orgao()
 		));
@@ -130,6 +130,19 @@ class User extends Model{
 		$sql->query("UPDATE usuario u SET u.senha=:senha where u.id_usuario=:id_usuario", [
 			":id_usuario"=>$this->getid_usuario(),
 			":senha"=>User::getPasswordHash($this->getsenha())
+		]);
+
+	}
+
+	public function updateOrgao()
+	{
+
+		$sql = new Sql();
+
+		$sql->query("UPDATE orgao o SET o.nome_orgao=:nome_orgao, o.id_hierarquia_orgao=:id_hierarquia_orgao where o.id_orgao=:id_orgao", [
+			":id_orgao"=>$this->getid_orgao(),
+			":nome_orgao"=>$this->getnome_orgao(),
+			":id_hierarquia_orgao"=>$this->getid_hierarquia_orgao()
 		]);
 
 	}
@@ -175,7 +188,7 @@ class User extends Model{
 
 		$sql = new Sql();
 
-		$results = $sql->select("SELECT * FROM orgao where id_orgao=:id_orgao", [
+		$results = $sql->select("SELECT o.id_orgao, o.nome_orgao, o.id_hierarquia_orgao, ho.tipo_hierarquia FROM orgao o INNER JOIN hierarquia_orgao ho on ho.id_hierarquia_orgao=o.id_hierarquia_orgao where o.id_orgao=:id_orgao", [
 			":id_orgao"=>$id_orgao
 		]);
 
@@ -218,10 +231,17 @@ class User extends Model{
 
 	}
 
-	public static function listAllOrgaoActive(){
+	public static function listAllProcessoOrgaoActive(){
 
 		$sql = new Sql();
 		return $sql->select("SELECT distinct o.* FROM orgao o INNER JOIN processo p on p.id_orgao=o.id_orgao");
+
+	}
+
+	public static function listAllDocumentoOrgaoActive(){
+
+		$sql = new Sql();
+		return $sql->select("SELECT distinct o.* FROM orgao o INNER JOIN documento d on d.id_orgao=o.id_orgao");
 
 	}
 
@@ -236,6 +256,13 @@ class User extends Model{
 
 		$sql = new Sql();
 		return $sql->select("SELECT * FROM tipo_processo ORDER BY tipo_processo.tipo_processo");
+
+	}
+
+	public static function listAllTipoDocumento(){
+
+		$sql = new Sql();
+		return $sql->select("SELECT * FROM tipo_documento ORDER BY tipo_documento.tipo_documento");
 
 	}
 

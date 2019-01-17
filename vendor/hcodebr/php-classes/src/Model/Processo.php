@@ -125,7 +125,7 @@ class Processo extends Model{
 	public function saveProcesso(){
 
 		$sql = new Sql();
-		$results = $sql->select("CALL salvarprocesso (:numero_processo, :id_orgao, :id_tipo_processo, DATE_FORMAT(:data_inicio, '%Y-%m-%d'), :nome_processo, :assunto_processo, DATE_FORMAT(:proc_data_entrada, '%Y-%m-%d'), :id_orgao_movimento, :observacoes)", array(
+		$results = $sql->select("CALL salvarprocesso (:numero_processo, :id_orgao, :id_tipo_processo, :data_inicio, :nome_processo, :assunto_processo, :proc_data_entrada, :id_orgao_movimento, :observacoes)", array(
 
 			":numero_processo"=>$this->getnumero_processo(),
 			":id_orgao"=>$this->getid_orgao(),

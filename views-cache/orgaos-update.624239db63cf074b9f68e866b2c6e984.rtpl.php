@@ -7,7 +7,7 @@
     </h4>
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/admin/orgao">Consultar Todos Órgãos</a></li>
+        <li><a href="/admin/orgaos">Consultar Todos Órgãos</a></li>
         <li class="active">Cadastrar Órgão</li>
     </ol>
     </section>
@@ -18,13 +18,13 @@
             <div class="col-md-12">
                 <div class="box box-success">
                     <!-- form start -->
-                    <form role="form" action="/admin/orgaos/create" method="post">
+                    <form role="form" action="/admin/orgaos/<?php echo htmlspecialchars( $users["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post">
                         <div class="box-body">
                             <div class="col-12 col-sm-10 col-md-6">
                                 <div class="form-group row">
                                     <div class="col-10 col-sm-5 col-md-8">
                                         <label for="nome_orgao" class="col-form-label col-form-label-sm">ÓRGÃO</label>
-                                        <input type="text" class="form-control form-control-sm" id="nome_orgao" name="nome_orgao" placeholder="Informe o Órgão" required>
+                                        <input type="text" class="form-control form-control-sm" id="nome_orgao" name="nome_orgao" value="<?php echo htmlspecialchars( $users["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-2">
                                         <div class="col-sm-12 col-md-12">
@@ -32,7 +32,7 @@
                                         </div>
                                         <div class="col-sm-12 col-md-12 text-black">
                                             <select class="btn btn-md btn-default" id="id_hierarquia_orgao" name="id_hierarquia_orgao" required>
-                                                <option class="pl-3 pr-3" value="#" disabled selected>SELECIONE</option>
+                                                <option class="pl-3 pr-3" value="<?php echo htmlspecialchars( $users["id_hierarquia_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled selected><?php echo htmlspecialchars( $users["tipo_hierarquia"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                                                 <?php $counter1=-1;  if( isset($hierarquia) && ( is_array($hierarquia) || $hierarquia instanceof Traversable ) && sizeof($hierarquia) ) foreach( $hierarquia as $key1 => $value1 ){ $counter1++; ?>
                                                 <option value="<?php echo htmlspecialchars( $value1["id_hierarquia_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["tipo_hierarquia"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                                                 <?php } ?>

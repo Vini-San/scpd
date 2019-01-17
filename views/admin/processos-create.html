@@ -18,7 +18,7 @@
             <div class="col-md-12">
                 <div class="box box-success">
                     <!-- form start -->
-                    <form role="form" action="/admin/users/create" method="post">
+                    <form role="form" action="/admin/processos/create" method="post">
                         <div class="box-body">
                             <div class="col-12 col-sm-10 col-md-6">
                                 <div class="form-group row">

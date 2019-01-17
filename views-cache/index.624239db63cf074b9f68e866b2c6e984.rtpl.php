@@ -15,7 +15,7 @@
     <section class="content">
         <div class="row">
             <div class="col-md-12">
-                <img width="500" src="/res/admin/dist/img/Faetec.png">
+                <img width="500" src="/res/admin/dist/img/FAETEC(2).png">
             </div>
         </div>
       <!-- Your Page Content Here -->
