@@ -7,7 +7,7 @@
             </h4>
             <ol class="breadcrumb">
                 <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="/admin/processos">Consultar Todos</a></li>
+                <li><a href="/admin/docs">Consultar Todos os Documentos</a></li>
                 <li><a href="javascript:window.history.go(-1)">Voltar</a></li>
                 <li class="active">Processos por Órgão de <?php echo htmlspecialchars( $docs["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?> </li>
             </ol>

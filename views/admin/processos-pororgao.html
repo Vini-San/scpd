@@ -7,6 +7,7 @@
         </h4>
         <ol class="breadcrumb">
             <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="javascript:window.history.go(-1)">Voltar Anterior</a></li>
             <li class="active">Consultar por Órgão</li>
         </ol>
         </section>

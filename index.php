@@ -164,6 +164,22 @@ $app->get("/admin/updatepassword/:id_usuario", function($id_usuario){
 	));
 });
 
+//tela com situação do processo com os dados e os movimentos
+$app->get("/admin/users/situacao/:id_usuario", function($id_usuario){
+
+	User::verifyLogin();
+
+	$user = new User();
+
+	$user->listUsuarioById((int)$id_usuario);
+
+	$page = new PageAdmin();
+
+	$page->setTpl("users-situacao", array(
+		"user"=>$user->getValues()
+	));
+});
+
 //controle para inserir dados do usuário
 $app->post("/admin/users/create", function(){
 
@@ -190,7 +206,7 @@ $app->post("/admin/users/:id_usuario", function($id_usuario){
 	$user->setData($_POST);
 	$user->updateUsuario();
 
-	header("Location: /admin/users");
+	header("Location: /admin/users/situacao/".$id_usuario);
 	exit;
 
 });

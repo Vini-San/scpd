@@ -7,6 +7,7 @@
   </h4>
   <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="javascript:window.history.go(-1)">Voltar Anterior</a></li>
     <li class="active">Consultar Todos Usuários</li>
   </ol>
 </section>
@@ -55,7 +56,7 @@
                     <td><?php echo htmlspecialchars( $value1["situacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td/>
                     <td>
                       <a href="/admin/users/<?php echo htmlspecialchars( $value1["id_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
-                      <a href="/admin/updatepassword/<?php echo htmlspecialchars( $value1["id_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Trocar Senha</a>
+                      <a href="/admin/users/situacao/<?php echo htmlspecialchars( $value1["id_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Consultar Dados</a>
                     </td>
                   </tr>
                   <?php } ?>
