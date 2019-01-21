@@ -87,7 +87,7 @@ desired effect
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
                   <li><!-- start notification -->
-                    <a href="/admin/orgaos/create">
+                    <a href="#">
                       <i class="fa fa-building" aria-hidden="true"></i> Cadastrar Novo Orgão
                     </a>
                   </li>

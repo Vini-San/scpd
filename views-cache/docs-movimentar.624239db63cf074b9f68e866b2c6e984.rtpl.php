@@ -9,6 +9,7 @@
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li><a href="/admin/docs">Consultar Todos</a></li>
         <li><a href="/admin/docs/situacao/<?php echo htmlspecialchars( $docs["id_documento"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">Situação do Documento</a></li>
+        <li><a href="javascript:window.history.go(-1)">Voltar Anterior</a></li>
         <li class="active">Movimentar Documento</li>
         </ol>
     </section>

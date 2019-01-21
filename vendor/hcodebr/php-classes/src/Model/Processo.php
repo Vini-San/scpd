@@ -6,11 +6,15 @@ use \Hcode\Model;
 
 class Processo extends Model{
 
+	const SESSION = "User";
+
 
 	public static function listAllProcesso(){
 
 		$sql = new Sql();
-		return $sql->select("SELECT * FROM processo p INNER JOIN orgao o on o.id_orgao=p.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento GROUP BY p.id_processo");
+		return $sql->select("SELECT * FROM processo p INNER JOIN orgao o on o.id_orgao=p.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento INNER JOIN movimento m on m.id_processo_documento=pd.id_processo_documento where m.id_orgao =:orgaolog GROUP BY p.id_processo", array (
+			":orgaolog"=>(int)$_SESSION[User::SESSION]['id_orgao']
+		));
 
 	}
 

@@ -10,7 +10,9 @@ class Documentos extends Model{
 	public static function listAllDocs(){
 
 		$sql = new Sql();
-		return $sql->select("SELECT * FROM documento d INNER JOIN orgao o on o.id_orgao=d.id_orgao INNER JOIN tipo_documento td on td.id_tipo_documento=d.id_tipo_documento INNER JOIN processo_documento pd on pd.id_processo_documento=d.id_processo_documento GROUP BY d.id_documento;");
+		return $sql->select("SELECT * FROM documento d INNER JOIN orgao o on o.id_orgao=d.id_orgao INNER JOIN tipo_documento td on td.id_tipo_documento=d.id_tipo_documento INNER JOIN processo_documento pd on pd.id_processo_documento=d.id_processo_documento INNER JOIN movimento m on m.id_processo_documento=pd.id_processo_documento where m.id_orgao =:orgaolog GROUP BY d.id_documento", array (
+			":orgaolog"=>(int)$_SESSION[User::SESSION]['id_orgao']
+		));
 
 	}
 
