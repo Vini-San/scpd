@@ -8,8 +8,8 @@
         <ol class="breadcrumb">
             <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="/admin/docs">Consultar Todos os Documentos</a></li>
+            <li><a href="javascript:window.history.go(-1)">Voltar Anterior</a></li>
             <li class="active">Consultar Todos os Documentos por Órgão</li>
-            <li><a href="javascript:window.history.go(-1)">Voltar</a></li>
         </ol>
         </section>
     

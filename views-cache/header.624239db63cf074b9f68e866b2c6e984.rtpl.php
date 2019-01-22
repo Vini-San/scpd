@@ -125,6 +125,24 @@ desired effect
                       </div>-->
                     </a>
                   </li>
+                  <li><!-- Task item -->
+                    <a href="#">
+                      <!-- Task title and progress text -->
+                      <h3>
+                        <?php $counter1=-1;  if( isset($users) && ( is_array($users) || $users instanceof Traversable ) && sizeof($users) ) foreach( $users as $key1 => $value1 ){ $counter1++; ?>
+                        Usuário <?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        <?php } ?>
+                        <small class="pull-right"><i class="fa fa-user" aria-hidden="true"></i></small>
+                      </h3>
+                      <!-- The progress bar -->
+                      <!--<div class="progress xs">
+                        Change the css width attribute to simulate progress
+                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                          <span class="sr-only">20% Complete</span>
+                        </div>
+                      </div>-->
+                    </a>
+                  </li>
                   <!-- end task item -->
                 </ul>
               </li>
