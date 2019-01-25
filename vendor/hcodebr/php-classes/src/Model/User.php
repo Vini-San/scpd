@@ -224,6 +224,17 @@ class User extends Model{
 
 	}
 
+	public static function ShowUserSession()
+	{
+
+		$sql = new Sql();
+
+		return $sql->select("SELECT u.id_usuario, u.nome_usuario, u.cpf, o.nome_orgao, nu.nivel, su.situacao FROM usuario u inner join orgao o on o.id_orgao=u.id_orgao inner join nivel_usuario nu on nu.id_nivel_usuario=u.id_nivel_usuario inner join situacao_usuario su on su.id_situacao_usuario=u.id_situacao_usuario WHERE u.id_usuario =:id_usuario ORDER BY u.id_usuario", array (
+			":id_usuario"=>(int)$_SESSION[User::SESSION]['id_usuario']
+		));
+
+	}
+
 	public static function listAllOrgao(){
 
 		$sql = new Sql();
@@ -294,8 +305,5 @@ class User extends Model{
 
 	}
 
-
 }
-
-
- ?>
+?>

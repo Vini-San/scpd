@@ -1,4 +1,4 @@
-<body class="hold-transition skin-blue sidebar-mini">
+<?php if(!class_exists('Rain\Tpl')){exit;}?><body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -76,9 +76,9 @@
                     <a href="#">
                       <!-- Task title and progress text -->
                       <h3>
-                        {loop="$user"}
-                        Editar {$value.nome_usuario}
-                        {/loop}
+                        <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
+                        Editar <?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        <?php } ?>
                         <small class="pull-right"><i class="fa fa-user" aria-hidden="true"></i></small>
                       </h3>
                       <!-- The progress bar -->
@@ -103,21 +103,21 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              {loop="$user"}
-              <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="user-image" alt="User Image">
+              <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
+              <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{$value.nome_usuario}</span>
+              <span class="hidden-xs"><?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
                 
-                <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="img-circle" alt="User Image">
+                <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="img-circle" alt="User Image">
 
                 <p>
-                  {$value.nome_usuario}
-                  <small>{$value.nivel}</small>
-                  {/loop}
+                  <?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                  <small><?php echo htmlspecialchars( $value1["nivel"], ENT_COMPAT, 'UTF-8', FALSE ); ?></small>
+                  <?php } ?>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -158,18 +158,18 @@
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      {loop="$user"}
+      <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="img-circle" alt="User Image">
+          <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{$value.nome_usuario}</p>
+          <p><?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 
-          {/loop}
+          <?php } ?>
         </div>
       </div>
 

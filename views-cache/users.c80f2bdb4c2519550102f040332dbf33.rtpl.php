@@ -1,4 +1,4 @@
-<body class="hold-transition skin-blue sidebar-mini">
+<?php if(!class_exists('Rain\Tpl')){exit;}?><body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -21,12 +21,48 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <li class="dropdown messages-menu">
+            <!-- Menu toggle button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-envelope-o"></i>
+              <span class="label label-success">4</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 4 messages</li>
+              <li>
+                <!-- inner menu: contains the messages -->
+                <ul class="menu">
+                  <li><!-- start message -->
+                    <a href="#">
+                      <div class="pull-left">
+                        <!-- User Image -->
+                        <img src="/res/admin/dist/img/avatar5.png" class="img-circle" alt="User Image">
+                      </div>
+                      <!-- Message title and timestamp -->
+                      <h4>
+                        Support Team
+                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                      </h4>
+                      <!-- The message -->
+                      <p>Why not buy a new awesome theme?</p>
+                    </a>
+                  </li>
+                  <!-- end message -->
+                </ul>
+                <!-- /.menu -->
+              </li>
+              <li class="footer"><a href="#">See All Messages</a></li>
+            </ul>
+          </li>
+          <!-- /.messages-menu -->
+
           <!-- Notifications Menu -->
           <li class="dropdown notifications-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-sitemap" aria-hidden="true"></i>
-              <span class="label label-warning">+</span>
+              <span class="label label-warning">*</span>
             </a>
             <ul class="dropdown-menu">
               <li class="header">Cadastros Administrativos</li>
@@ -34,7 +70,7 @@
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
                   <li><!-- start notification -->
-                    <a href="#">
+                    <a href="/admin/orgaos/create">
                       <i class="fa fa-building" aria-hidden="true"></i> Cadastrar Novo Orgão
                     </a>
                   </li>
@@ -49,7 +85,7 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-user-plus" aria-hidden="true"></i>
-              <span class="label label-danger">+</span>
+              <span class="label label-danger">2</span>
             </a>
             <ul class="dropdown-menu">
               <li class="header">Usuários</li>
@@ -61,24 +97,6 @@
                       <!-- Task title and progress text -->
                       <h3>
                         Cadastrar Novo Usuário
-                        <small class="pull-right"><i class="fa fa-user" aria-hidden="true"></i></small>
-                      </h3>
-                      <!-- The progress bar -->
-                      <!--<div class="progress xs">
-                        Change the css width attribute to simulate progress
-                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">20% Complete</span>
-                        </div>
-                      </div>-->
-                    </a>
-                  </li>
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <!-- Task title and progress text -->
-                      <h3>
-                        {loop="$user"}
-                        Editar {$value.nome_usuario}
-                        {/loop}
                         <small class="pull-right"><i class="fa fa-user" aria-hidden="true"></i></small>
                       </h3>
                       <!-- The progress bar -->
@@ -103,21 +121,20 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              {loop="$user"}
-              <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="user-image" alt="User Image">
+              <img src="/res/admin/dist/img/avatar5.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{$value.nome_usuario}</span>
+              <span class="hidden-xs">Vinicius dos Santos</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                
-                <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="img-circle" alt="User Image">
+                <img src="/res/admin/dist/img/avatar5.png" class="img-circle" alt="User Image">
 
                 <p>
-                  {$value.nome_usuario}
-                  <small>{$value.nivel}</small>
-                  {/loop}
+                  <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
+                  <?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                  <?php } ?>
+                  <small>Administrador</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -158,18 +175,16 @@
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      {loop="$user"}
+
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="img-circle" alt="User Image">
+          <img src="/res/admin/dist/img/avatar5.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{$value.nome_usuario}</p>
+          <p>Vinicius dos Santos</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-
-          {/loop}
         </div>
       </div>
 
@@ -218,29 +233,80 @@
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
-</aside>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        SISTEMA DE CONTROLE DE PROCESSOS E DOCUMENTOS
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"> atual</li>
-      </ol>
-    </section>
+  </aside>
 
-    <!-- Main content -->
-    <section class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <img width="500" src="/res/admin/dist/img/FAETEC(2).png">
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h4>
+    <b>Lista de Usuários</b>
+  </h4>
+  <ol class="breadcrumb">
+    <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="javascript:window.history.go(-1)">Voltar Anterior</a></li>
+    <li class="active">Consultar Todos Usuários</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="row">
+  	<div class="col-md-12">
+  		<div class="box box-primary">
+            
+            <div class="box-header">
+              <div class="dropdown scroll">
+                <label for="numero_processo" style="width: 120px">Buscar por órgão </label>
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Selecione <span class="caret"></span></button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>
+                  <li><a href="/admin/users/<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/resultadopororgao"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+                  <?php } ?>
+                </ul>
+              </div>
             </div>
-        </div>
-      <!-- Your Page Content Here -->
-    </section>
-    <!-- /.content -->
+
+            <div class="box-body no-padding">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th style="width: 150px">Nome</th>
+                    <th>Login</th>
+                    <th>Órgão</th>
+                    <th>Nível</th>
+                    <th>Situação</th>
+                    <th style="width: 200px"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  <?php $counter1=-1;  if( isset($users) && ( is_array($users) || $users instanceof Traversable ) && sizeof($users) ) foreach( $users as $key1 => $value1 ){ $counter1++; ?>
+                  <tr>
+                    <td></td>
+                    <td><?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["cpf"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["nivel"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td/>
+                    <td><?php echo htmlspecialchars( $value1["situacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td/>
+                    <td>
+                      <a href="/admin/users/<?php echo htmlspecialchars( $value1["id_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                      <a href="/admin/users/situacao/<?php echo htmlspecialchars( $value1["id_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Consultar Dados</a>
+                    </td>
+                  </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+  	</div>
   </div>
+
+</section>
+<!-- /.content -->
+</div>
 <!-- /.content-wrapper -->

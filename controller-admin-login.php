@@ -16,11 +16,13 @@ $app->get('/admin', function() {
     
 	User::verifyLogin();
 
-	$user = User::listAllUsuario();
+	$user = User::ShowUserSession();
 
 	$page = new PageAdmin();
 
-	$page->setTpl("index");
+	$page->setTpl("index", array(
+		"user"=>$user
+	));
 });
 
 $app->get('/admin/login',function(){

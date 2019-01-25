@@ -6,14 +6,16 @@ $app->get("/admin/users", function(){
 
 	User::verifyLogin();
 
-	$user = User::listAllUsuario();
+	$users = User::listAllUsuario();
 	$orgao = User::listOrgaoByUsuarioActive();
+	$user = User::ShowUserSession();
 
 	$page = new PageAdmin();
 
 	$page->setTpl("users", array(
-		"users"=>$user,
+		"users"=>$users,
 		"orgao"=>$orgao,
+		"user"=>$user
 	));
 });
 
