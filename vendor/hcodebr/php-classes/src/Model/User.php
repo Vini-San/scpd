@@ -245,14 +245,18 @@ class User extends Model{
 	public static function listAllProcessoOrgaoActive(){
 
 		$sql = new Sql();
-		return $sql->select("SELECT distinct o.* FROM orgao o INNER JOIN processo p on p.id_orgao=o.id_orgao");
+		return $sql->select("SELECT distinct o.* FROM orgao o INNER JOIN processo p on p.id_orgao=o.id_orgao INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento INNER JOIN movimento m on m.id_processo_documento=pd.id_processo_documento where m.id_orgao =:orgaolog", array (
+			":orgaolog"=>(int)$_SESSION[User::SESSION]['id_orgao']
+		));
 
 	}
 
 	public static function listAllDocumentoOrgaoActive(){
 
 		$sql = new Sql();
-		return $sql->select("SELECT distinct o.* FROM orgao o INNER JOIN documento d on d.id_orgao=o.id_orgao");
+		return $sql->select("SELECT distinct o.* FROM orgao o INNER JOIN documento d on d.id_orgao=o.id_orgao INNER JOIN processo_documento pd on pd.id_processo_documento=d.id_processo_documento INNER JOIN movimento m on m.id_processo_documento=pd.id_processo_documento where m.id_orgao=:orgaolog", array(
+			":orgaolog"=>(int)$_SESSION[User::SESSION]['id_orgao']
+		));
 
 	}
 

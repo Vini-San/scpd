@@ -11,9 +11,12 @@ $app->get("/admin/processos", function(){
 
 	$processos = Processo::listAllProcesso();
 
+	$user = User::ShowUserSession();
+
 	$page = new PageAdmin();
 
 	$page->setTpl("processos", array(
+		"user"=>$user,
 		"processos"=>$processos
 	));
 });
@@ -25,10 +28,13 @@ $app->get("/admin/processos/pororgao", function(){
 
 	$orgao = User::listAllProcessoOrgaoActive();
 
+	$user = User::ShowUserSession();
+
 	$page = new PageAdmin();
 
 	$page->setTpl("processos-pororgao", array(
-		"orgao"=>$orgao
+		"orgao"=>$orgao,
+		"user"=>$user
 
 	));
 });
@@ -42,6 +48,8 @@ $app->get("/admin/processos/:id_orgao/resultadopororgao", function($id_orgao){
 
 	$processo->getOrgaobyId((int)$id_orgao);
 
+	$user = User::ShowUserSession();
+
 	$orgao = User::listAllProcessoOrgaoActive();
 
 	$page = new PageAdmin();
@@ -50,7 +58,8 @@ $app->get("/admin/processos/:id_orgao/resultadopororgao", function($id_orgao){
 		"processo"=>$processo->getValues(),
 		"resultadoprocesso"=>$processo->getProcessoByOrgao(),
 		"semprocesso"=>$processo->getProcessoByOrgao(false),
-		"orgao"=>$orgao
+		"orgao"=>$orgao,
+		"user"=>$user
 	));
 });
 
@@ -63,12 +72,15 @@ $app->get("/admin/processos/situacao/:id_processo", function($id_processo){
 
 	$processo->getProcessoById((int)$id_processo);
 
+	$user = User::ShowUserSession();
+
 	$page = new PageAdmin();
 
 	$page->setTpl("processos-situacao", array(
 		"processo"=>$processo->getValues(),
 		"movimento"=>$processo->getProcessoMovimentoById(),
-		"sem movimento"=>$processo->getProcessoMovimentoById(false)
+		"sem movimento"=>$processo->getProcessoMovimentoById(false),
+		"user"=>$user
 	));
 });
 
@@ -80,6 +92,8 @@ $app->get("/admin/processos/movimentar/:id_processo", function($id_processo){
 	$processo = new Processo();
 
 	$processo->getProcessoById((int)$id_processo);
+
+	$user = User::ShowUserSession();
 
 	$orgao = User::listAllOrgao();
 	$tipo = User::listAllTipo();
@@ -93,7 +107,8 @@ $app->get("/admin/processos/movimentar/:id_processo", function($id_processo){
 		"sem movimento"=>$processo->getProcessoMovimentoById(false),
 		"tipomovimento"=>$tipomovimento,
 		"orgao"=>$orgao,
-		"tipo"=>$tipo
+		"tipo"=>$tipo,
+		"user"=>$user
 	));
 });
 
@@ -105,6 +120,8 @@ $app->get("/admin/processos/:id_movimento/editarmovimento/:id_processo", functio
 	$processo = new Processo();
 
 	$processo->getProcessoById((int)$id_processo);
+
+	$user = User::ShowUserSession();
 
 	$movimento = new Processo();
 
@@ -121,7 +138,8 @@ $app->get("/admin/processos/:id_movimento/editarmovimento/:id_processo", functio
 		"movimento"=>$movimento->getValues(),
 		"tipomovimento"=>$tipomovimento,
 		"orgao"=>$orgao,
-		"tipo"=>$tipo
+		"tipo"=>$tipo,
+		"user"=>$user
 	));
 });
 
@@ -132,10 +150,13 @@ $app->get("/admin/processos/create", function(){
 
 	$page = new PageAdmin();
 
+	$user = User::ShowUserSession();
+
 	$orgao = User::listAllOrgao();
 	$tipo = User::listAllTipo();
 
 	$page->setTpl("processos-create", array(
+		"user"=>$user,
 		"orgao"=>$orgao,
 		"tipo"=>$tipo
 	));
@@ -146,9 +167,11 @@ $app->get("/admin/processos/:id_processo", function($id_processo){
 
 	User::verifyLogin();
 
-	$user = new Processo();
+	$processo = new Processo();
 
-	$user->getProcessoById((int)$id_processo);
+	$processo->getProcessoById((int)$id_processo);
+
+	$user = User::ShowUserSession();
 
 	$orgao = User::listAllOrgao();
 	$tipo = User::listAllTipo();
@@ -156,9 +179,10 @@ $app->get("/admin/processos/:id_processo", function($id_processo){
 	$page = new PageAdmin();
 
 	$page->setTpl("processos-update", array(
-		"user"=>$user->getValues(),
+		"processo"=>$processo->getValues(),
 		"orgao"=>$orgao,
-		"tipo"=>$tipo
+		"tipo"=>$tipo,
+		"user"=>$user
 	));
 });
 

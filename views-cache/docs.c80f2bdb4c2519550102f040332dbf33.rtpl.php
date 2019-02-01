@@ -1,4 +1,4 @@
-<body class="hold-transition skin-blue sidebar-mini">
+<?php if(!class_exists('Rain\Tpl')){exit;}?><body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -76,9 +76,9 @@
                     <a href="#">
                       <!-- Task title and progress text -->
                       <h3>
-                        {loop="$user"}
-                        Editar {$value.nome_usuario}
-                        {/loop}
+                        <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
+                        Editar <?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        <?php } ?>
                         <small class="pull-right"><i class="fa fa-user" aria-hidden="true"></i></small>
                       </h3>
                       <!-- The progress bar -->
@@ -103,21 +103,21 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              {loop="$user"}
-              <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="user-image" alt="User Image">
+              <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
+              <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{$value.nome_usuario}</span>
+              <span class="hidden-xs"><?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
                 
-                <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="img-circle" alt="User Image">
+                <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="img-circle" alt="User Image">
 
                 <p>
-                  {$value.nome_usuario}
-                  <small>{$value.nivel}</small>
-                  {/loop}
+                  <?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                  <small><?php echo htmlspecialchars( $value1["nivel"], ENT_COMPAT, 'UTF-8', FALSE ); ?></small>
+                  <?php } ?>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -158,18 +158,18 @@
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      {loop="$user"}
+      <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="img-circle" alt="User Image">
+          <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{$value.nome_usuario}</p>
+          <p><?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 
-          {/loop}
+          <?php } ?>
         </div>
       </div>
 
@@ -224,71 +224,58 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h4>
-    <b>Lista de Processos</b>
+    <b>Lista de Documentos</b>
   </h4>
   <ol class="breadcrumb">
-        <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/admin/processos">Consultar Todos</a></li>
-        <li><a href="javascript:window.history.go(-1)">Voltar Anterior</a></li>
-        <li class="active">Editar</li>
-    </ol>
+    <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="javascript:window.history.go(-1)">Voltar Anterior</a></li>
+    <li class="active">Consultar Todos</li>
+  </ol>
 </section>
 
 <!-- Main content -->
 <section class="content">
 
   <div class="row">
-    <div class="col-md-12">
-      <div class="box box-primary">
-        <div class="box-header with-border">
-          <h3 class="box-title">Editar Processo</h3>
-        </div>
-        <!-- /.box-header -->
-        <!-- form start -->
-        <form role="form" action="/admin/docs/{$docs.id_documento}" method="post">
-          <div class="box-body">
-            <div class="form-group">
-              <label for="numero_documento">Numero</label>
-              <input type="text" class="form-control" id="numero_documento" name="numero_processo" placeholder="Digite o numero" value="{$docs.numero_documento}">
+  	<div class="col-md-12">
+  		<div class="box box-primary">
+            
+            <div class="box-header">
+              <a href="/admin/docs/create" class="btn btn-success">Cadastrar Documento</a>
             </div>
-            <div class="form-group">
-              <label for="id_orgao">Orgão</label>
-              <select id="id_orgao" name="id_orgao">
-                <option value="{$docs.id_orgao}" disabled selected>{$docs.nome_orgao}</option>
-                {loop="$orgao"}
-                <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
-                {/loop}
-              </select>
+
+            <div class="box-body no-padding">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th style="width: 10px">Numero</th>
+                    <th>Assunto</th>
+                    <th>Órgão</th>
+                    <th>Data Início</th>
+                    <th style="width: 250px"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  <?php $counter1=-1;  if( isset($docs) && ( is_array($docs) || $docs instanceof Traversable ) && sizeof($docs) ) foreach( $docs as $key1 => $value1 ){ $counter1++; ?>
+                  <tr>
+                    <td><?php echo htmlspecialchars( $value1["numero_documento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["assunto_documento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo formatDate($value1["data_inicio"]); ?></td/>
+                    <td>
+                      <a href="/admin/docs/<?php echo htmlspecialchars( $value1["id_documento"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                      <a href="/admin/docs/situacao/<?php echo htmlspecialchars( $value1["id_documento"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-default btn-xs"><i class="fa fa-list-alt" aria-hidden="true"></i><b> Consultar</b></a>
+                      <!--<a href="/admin/docs/movimentar/<?php echo htmlspecialchars( $value1["id_documento"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-success btn-xs"><i class="fa fa-plus-circle" aria-hidden="true"></i> Movimentar</a>-->
+                    </td>
+                  </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
             </div>
-            <div class="form-group">
-              <label for="id_tipo_documento">Tipo</label>
-              <select id="id_tipo_documento" name="id_tipo_documento">
-                <option value="{$docs.id_tipo_documento}" disabled selected>{$docs.tipo_documento}</option>
-                {loop="$tipo"}
-                <option value="{$value.id_tipo_documento}">{$value.tipo_documento}</option>
-                {/loop}
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="data_inicio">Data Inicio</label>
-              <input type="text" class="form-control" id="data_inicio" name="data_inicio" placeholder="Digite a data"  value="{function="formatDate($docs.data_inicio)"}">
-            </div>
-            <div class="form-group">
-              <label for="nome_documento">Nome</label>
-              <input type="text" class="form-control" id="nome_documento" name="nome_documento" placeholder="Digite o nome" value="{$docs.nome_documento}">
-            </div>
-            <div class="form-group">
-              <label for="assunto_documento">Assunto</label>
-              <input type="text" class="form-control" id="assunto_documento" name="assunto_documento" placeholder="Digite o assunto" value="{$docs.assunto_documento}">
-            </div>
+            <!-- /.box-body -->
           </div>
-          <!-- /.box-body -->
-          <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-          </div>
-        </form>
-      </div>
-    </div>
+  	</div>
   </div>
 
 </section>

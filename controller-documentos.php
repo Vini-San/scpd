@@ -11,9 +11,12 @@ $app->get("/admin/docs", function(){
 
 	$docs = Documentos::listAllDocs();
 
+	$user = User::ShowUserSession();
+
 	$page = new PageAdmin();
 
 	$page->setTpl("docs", array(
+		"user"=>$user,
 		"docs"=>$docs
 	));
 });
@@ -23,10 +26,12 @@ $app->get("/admin/docs/pororgao", function(){
 	User::verifyLogin();
 
 	$orgao = User::listAllDocumentoOrgaoActive();
+	$user = User::ShowUserSession();
 
 	$page = new PageAdmin();
 
 	$page->setTpl("docs-pororgao", array(
+		"user"=>$user,
 		"orgao"=>$orgao
 
 	));
@@ -40,12 +45,15 @@ $app->get("/admin/docs/situacao/:id_documento", function($id_documento){
 
 	$docs->getDocumentoById((int)$id_documento);
 
+	$user = User::ShowUserSession();
+
 	$page = new PageAdmin();
 
 	$page->setTpl("docs-situacao", array(
 		"docs"=>$docs->getValues(),
 		"movimento"=>$docs->getDocumentoMovimentoById(),
-		"sem movimento"=>$docs->getDocumentoMovimentoById(false)
+		"sem movimento"=>$docs->getDocumentoMovimentoById(false),
+		"user"=>$user
 	));
 });
 
@@ -56,6 +64,8 @@ $app->get("/admin/docs/movimentar/:id_documento", function($id_documento){
 	$docs = new Documentos();
 
 	$docs->getDocumentoById((int)$id_documento);
+
+	$user = User::ShowUserSession();
 
 	$orgao = User::listAllOrgao();
 	$tipo = User::listAllTipoDocumento();
@@ -69,7 +79,8 @@ $app->get("/admin/docs/movimentar/:id_documento", function($id_documento){
 		"sem movimento"=>$docs->getDocumentoMovimentoById(false),
 		"tipomovimento"=>$tipomovimento,
 		"orgao"=>$orgao,
-		"tipo"=>$tipo
+		"tipo"=>$tipo,
+		"user"=>$user
 	));
 });
 
@@ -82,6 +93,8 @@ $app->get("/admin/docs/:id_movimento/editarmovimento/:id_documento", function($i
 	$docs->getDocumentoById((int)$id_documento);
 
 	$movimento = new Documentos();
+
+	$user = User::ShowUserSession();
 
 	$movimento->getMovimentoById((int)$id_movimento);
 
@@ -96,7 +109,8 @@ $app->get("/admin/docs/:id_movimento/editarmovimento/:id_documento", function($i
 		"movimento"=>$movimento->getValues(),
 		"tipomovimento"=>$tipomovimento,
 		"orgao"=>$orgao,
-		"tipo"=>$tipo
+		"tipo"=>$tipo,
+		"user"=>$user
 	));
 });
 
@@ -107,12 +121,14 @@ $app->get("/admin/docs/create", function(){
 
 	$page = new PageAdmin();
 
+	$user = User::ShowUserSession();
 	$orgao = User::listAllOrgao();
 	$tipo = User::listAllTipoDocumento();
 
 	$page->setTpl("docs-create", array(
 		"orgao"=>$orgao,
-		"tipo"=>$tipo
+		"tipo"=>$tipo,
+		"user"=>$user
 	));
 });
 
@@ -125,6 +141,7 @@ $app->get("/admin/docs/:id_documento", function($id_documento){
 
 	$docs->getDocumentoById((int)$id_documento);
 
+	$user = User::ShowUserSession();
 	$orgao = User::listAllOrgao();
 	$tipo = User::listAllTipoDocumento();
 
@@ -133,7 +150,8 @@ $app->get("/admin/docs/:id_documento", function($id_documento){
 	$page->setTpl("docs-update", array(
 		"docs"=>$docs->getValues(),
 		"orgao"=>$orgao,
-		"tipo"=>$tipo
+		"tipo"=>$tipo,
+		"user"=>$user
 	));
 });
 
@@ -145,6 +163,7 @@ $app->get("/admin/docs/:id_orgao/resultadopororgao", function($id_orgao){
 
 	$docs->getOrgaobyId((int)$id_orgao);
 
+	$user = User::ShowUserSession();
 	$orgao = User::listAllDocumentoOrgaoActive();
 
 	$page = new PageAdmin();
@@ -153,7 +172,8 @@ $app->get("/admin/docs/:id_orgao/resultadopororgao", function($id_orgao){
 		"docs"=>$docs->getValues(),
 		"resultadodocumento"=>$docs->getDocumentoByOrgao(),
 		"semprocesso"=>$docs->getDocumentoByOrgao(false),
-		"orgao"=>$orgao
+		"orgao"=>$orgao,
+		"user"=>$user
 	));
 });
 

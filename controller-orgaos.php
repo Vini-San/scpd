@@ -8,11 +8,13 @@ $app->get("/admin/orgaos", function(){
 	User::verifyLogin();
 
 	$orgao = User::listAllOrgao();
+	$user = User::ShowUserSession();
 
 	$page = new PageAdmin();
 
 	$page->setTpl("orgaos", array(
-		"orgaos"=>$orgao
+		"orgaos"=>$orgao,
+		"user"=>$user
 	));
 });
 
@@ -21,11 +23,13 @@ $app->get("/admin/orgaos/create", function(){
 	User::verifyLogin();
 
 	$hierarquia = User::listAllHierarquiaOrgao();
+	$user = User::ShowUserSession();
 
 	$page = new PageAdmin();
 
 	$page->setTpl("orgaos-create", array(
-		"hierarquia"=>$hierarquia
+		"hierarquia"=>$hierarquia,
+		"user"=>$user
 	));
 });
 
@@ -33,17 +37,19 @@ $app->get("/admin/orgaos/:id_orgao/resultadopororgao", function($id_orgao){
 
 	User::verifyLogin();
 
-	$user = new User();
+	$users = new User();
 
-	$user->listOrgaobyId((int)$id_orgao);
+	$users->listOrgaobyId((int)$id_orgao);
+	$user = User::ShowUserSession();
 
 	$orgao = User::listAllOrgao();
 
 	$page = new PageAdmin();
 
 	$page->setTpl("orgaos-resultadopororgao", array(
-		"users"=>$user->getValues(),
-		"orgaos"=>$orgao
+		"users"=>$users->getValues(),
+		"orgaos"=>$orgao,
+		"user"=>$user
 	));
 });
 
@@ -51,9 +57,11 @@ $app->get("/admin/orgaos/:id_orgao", function($id_orgao){
 
 	User::verifyLogin();
 
-	$user = new User();
+	$users = new User();
 	
-	$user->listOrgaobyId((int)$id_orgao);
+	$users->listOrgaobyId((int)$id_orgao);
+
+	$user = User::ShowUserSession();
 
 	$orgao = User::listAllOrgao();
 
@@ -62,8 +70,9 @@ $app->get("/admin/orgaos/:id_orgao", function($id_orgao){
 	$page = new PageAdmin();
 
 	$page->setTpl("orgaos-update", array(
-		"users"=>$user->getValues(),
-		"hierarquia"=>$hierarquia
+		"users"=>$users->getValues(),
+		"hierarquia"=>$hierarquia,
+		"user"=>$user
 	));
 });
 

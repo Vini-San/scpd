@@ -1,4 +1,4 @@
-<body class="hold-transition skin-blue sidebar-mini">
+<?php if(!class_exists('Rain\Tpl')){exit;}?><body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -76,9 +76,9 @@
                     <a href="#">
                       <!-- Task title and progress text -->
                       <h3>
-                        {loop="$user"}
-                        Editar {$value.nome_usuario}
-                        {/loop}
+                        <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
+                        Editar <?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        <?php } ?>
                         <small class="pull-right"><i class="fa fa-user" aria-hidden="true"></i></small>
                       </h3>
                       <!-- The progress bar -->
@@ -103,21 +103,21 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              {loop="$user"}
-              <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="user-image" alt="User Image">
+              <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
+              <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{$value.nome_usuario}</span>
+              <span class="hidden-xs"><?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
                 
-                <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="img-circle" alt="User Image">
+                <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="img-circle" alt="User Image">
 
                 <p>
-                  {$value.nome_usuario}
-                  <small>{$value.nivel}</small>
-                  {/loop}
+                  <?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                  <small><?php echo htmlspecialchars( $value1["nivel"], ENT_COMPAT, 'UTF-8', FALSE ); ?></small>
+                  <?php } ?>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -158,18 +158,18 @@
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      {loop="$user"}
+      <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="img-circle" alt="User Image">
+          <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{$value.nome_usuario}</p>
+          <p><?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 
-          {/loop}
+          <?php } ?>
         </div>
       </div>
 
@@ -221,77 +221,70 @@
 </aside>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-<!-- Content Header (Page header) -->
-<section class="content-header">
-  <h4>
-    <b>Lista de Processos</b>
-  </h4>
-  <ol class="breadcrumb">
-        <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/admin/processos">Consultar Todos</a></li>
-        <li><a href="javascript:window.history.go(-1)">Voltar Anterior</a></li>
-        <li class="active">Editar</li>
-    </ol>
-</section>
-
-<!-- Main content -->
-<section class="content">
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="box box-primary">
-        <div class="box-header with-border">
-          <h3 class="box-title">Editar Processo</h3>
+        <!-- Content Header (Page header) -->
+            <section class="content-header">
+            <h4>
+                <b>Consultar por Orgão</b>
+            </h4>
+            <ol class="breadcrumb">
+                <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="/admin/processos">Consultar Todos</a></li>
+                <li><a href="javascript:window.history.go(-1)">Voltar Anterior</a></li>
+                <li class="active">Processos por Órgão de <?php echo htmlspecialchars( $processo["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?> </li>
+            </ol>
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-success">
+                            <!-- form start -->
+                            <form role="form" action="/admin/processos/resultadopororgao" method="post">
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-10 col-md-5">
+                                            Nova Consulta
+                                            <div class="dropdown scroll">
+                                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    Orgão
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                    <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>  
+                                                    <li><a href="/admin/processos/<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/resultadopororgao"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+                                                    <?php } ?>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-10 col-md-6">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Numero</th>
+                                                        <th>Assunto</th>
+                                                        <th>Data Início</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php $counter1=-1;  if( isset($resultadoprocesso) && ( is_array($resultadoprocesso) || $resultadoprocesso instanceof Traversable ) && sizeof($resultadoprocesso) ) foreach( $resultadoprocesso as $key1 => $value1 ){ $counter1++; ?>
+                                                    <tr>
+                                                        <td><?php echo htmlspecialchars( $value1["numero_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                                                        <td><?php echo htmlspecialchars( $value1["assunto_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                                                        <td><?php echo formatDate($value1["data_inicio"]); ?></td>
+                                                        <td><a href="/admin/processos/situacao/<?php echo htmlspecialchars( $value1["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-default btn-xs"><i class="fa fa-list-alt" aria-hidden="true"></i><b> Consultar</b></a></td>
+                                                    </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <!-- /.content -->
         </div>
-        <!-- /.box-header -->
-        <!-- form start -->
-        <form role="form" action="/admin/docs/{$docs.id_documento}" method="post">
-          <div class="box-body">
-            <div class="form-group">
-              <label for="numero_documento">Numero</label>
-              <input type="text" class="form-control" id="numero_documento" name="numero_processo" placeholder="Digite o numero" value="{$docs.numero_documento}">
-            </div>
-            <div class="form-group">
-              <label for="id_orgao">Orgão</label>
-              <select id="id_orgao" name="id_orgao">
-                <option value="{$docs.id_orgao}" disabled selected>{$docs.nome_orgao}</option>
-                {loop="$orgao"}
-                <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
-                {/loop}
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="id_tipo_documento">Tipo</label>
-              <select id="id_tipo_documento" name="id_tipo_documento">
-                <option value="{$docs.id_tipo_documento}" disabled selected>{$docs.tipo_documento}</option>
-                {loop="$tipo"}
-                <option value="{$value.id_tipo_documento}">{$value.tipo_documento}</option>
-                {/loop}
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="data_inicio">Data Inicio</label>
-              <input type="text" class="form-control" id="data_inicio" name="data_inicio" placeholder="Digite a data"  value="{function="formatDate($docs.data_inicio)"}">
-            </div>
-            <div class="form-group">
-              <label for="nome_documento">Nome</label>
-              <input type="text" class="form-control" id="nome_documento" name="nome_documento" placeholder="Digite o nome" value="{$docs.nome_documento}">
-            </div>
-            <div class="form-group">
-              <label for="assunto_documento">Assunto</label>
-              <input type="text" class="form-control" id="assunto_documento" name="assunto_documento" placeholder="Digite o assunto" value="{$docs.assunto_documento}">
-            </div>
-          </div>
-          <!-- /.box-body -->
-          <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-</section>
-<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+        <!-- /.content-wrapper -->

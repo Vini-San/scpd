@@ -1,4 +1,4 @@
-<body class="hold-transition skin-blue sidebar-mini">
+<?php if(!class_exists('Rain\Tpl')){exit;}?><body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -76,9 +76,9 @@
                     <a href="#">
                       <!-- Task title and progress text -->
                       <h3>
-                        {loop="$user"}
-                        Editar {$value.nome_usuario}
-                        {/loop}
+                        <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
+                        Editar <?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        <?php } ?>
                         <small class="pull-right"><i class="fa fa-user" aria-hidden="true"></i></small>
                       </h3>
                       <!-- The progress bar -->
@@ -103,21 +103,21 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              {loop="$user"}
-              <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="user-image" alt="User Image">
+              <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
+              <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{$value.nome_usuario}</span>
+              <span class="hidden-xs"><?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
                 
-                <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="img-circle" alt="User Image">
+                <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="img-circle" alt="User Image">
 
                 <p>
-                  {$value.nome_usuario}
-                  <small>{$value.nivel}</small>
-                  {/loop}
+                  <?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                  <small><?php echo htmlspecialchars( $value1["nivel"], ENT_COMPAT, 'UTF-8', FALSE ); ?></small>
+                  <?php } ?>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -158,18 +158,18 @@
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      {loop="$user"}
+      <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="img-circle" alt="User Image">
+          <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{$value.nome_usuario}</p>
+          <p><?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 
-          {/loop}
+          <?php } ?>
         </div>
       </div>
 
@@ -238,48 +238,48 @@
 <section class="content">
 
   <div class="row">
-    <div class="col-md-12">
-      <div class="box box-primary">
+  	<div class="col-md-12">
+  		<div class="box box-primary">
         <div class="box-header with-border">
           <h3 class="box-title">Editar Processo</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/docs/{$docs.id_documento}" method="post">
+        <form role="form" action="/admin/processos/<?php echo htmlspecialchars( $processo["id_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post">
           <div class="box-body">
             <div class="form-group">
-              <label for="numero_documento">Numero</label>
-              <input type="text" class="form-control" id="numero_documento" name="numero_processo" placeholder="Digite o numero" value="{$docs.numero_documento}">
+              <label for="numero_processo">Numero</label>
+              <input type="text" class="form-control" id="numero_processo" name="numero_processo" placeholder="Digite o numero" value="<?php echo htmlspecialchars( $processo["numero_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
             <div class="form-group">
               <label for="id_orgao">Orgão</label>
               <select id="id_orgao" name="id_orgao">
-                <option value="{$docs.id_orgao}" disabled selected>{$docs.nome_orgao}</option>
-                {loop="$orgao"}
-                <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
-                {/loop}
+                <option value="<?php echo htmlspecialchars( $processo["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled selected><?php echo htmlspecialchars( $processo["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>
+                <option value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                <?php } ?>
               </select>
             </div>
             <div class="form-group">
-              <label for="id_tipo_documento">Tipo</label>
-              <select id="id_tipo_documento" name="id_tipo_documento">
-                <option value="{$docs.id_tipo_documento}" disabled selected>{$docs.tipo_documento}</option>
-                {loop="$tipo"}
-                <option value="{$value.id_tipo_documento}">{$value.tipo_documento}</option>
-                {/loop}
+              <label for="id_tipo_processo">Tipo</label>
+              <select id="id_tipo_processo" name="id_tipo_processo">
+                <option value="<?php echo htmlspecialchars( $processo["id_tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled selected><?php echo htmlspecialchars( $processo["tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                <?php $counter1=-1;  if( isset($tipo) && ( is_array($tipo) || $tipo instanceof Traversable ) && sizeof($tipo) ) foreach( $tipo as $key1 => $value1 ){ $counter1++; ?>
+                <option value="<?php echo htmlspecialchars( $value1["id_tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["tipo_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                <?php } ?>
               </select>
             </div>
             <div class="form-group">
               <label for="data_inicio">Data Inicio</label>
-              <input type="text" class="form-control" id="data_inicio" name="data_inicio" placeholder="Digite a data"  value="{function="formatDate($docs.data_inicio)"}">
+              <input type="text" class="form-control" id="data_inicio" name="data_inicio" placeholder="Digite a data"  value="<?php echo formatDate($processo["data_inicio"]); ?>">
             </div>
             <div class="form-group">
-              <label for="nome_documento">Nome</label>
-              <input type="text" class="form-control" id="nome_documento" name="nome_documento" placeholder="Digite o nome" value="{$docs.nome_documento}">
+              <label for="nome_processo">Nome</label>
+              <input type="text" class="form-control" id="nome_processo" name="nome_processo" placeholder="Digite o nome" value="<?php echo htmlspecialchars( $processo["nome_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
             <div class="form-group">
-              <label for="assunto_documento">Assunto</label>
-              <input type="text" class="form-control" id="assunto_documento" name="assunto_documento" placeholder="Digite o assunto" value="{$docs.assunto_documento}">
+              <label for="assunto_processo">Assunto</label>
+              <input type="text" class="form-control" id="assunto_processo" name="assunto_processo" placeholder="Digite o assunto" value="<?php echo htmlspecialchars( $processo["assunto_processo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
           </div>
           <!-- /.box-body -->
@@ -288,7 +288,7 @@
           </div>
         </form>
       </div>
-    </div>
+  	</div>
   </div>
 
 </section>

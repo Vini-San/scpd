@@ -1,4 +1,4 @@
-<body class="hold-transition skin-blue sidebar-mini">
+<?php if(!class_exists('Rain\Tpl')){exit;}?><body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -76,9 +76,9 @@
                     <a href="#">
                       <!-- Task title and progress text -->
                       <h3>
-                        {loop="$user"}
-                        Editar {$value.nome_usuario}
-                        {/loop}
+                        <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
+                        Editar <?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        <?php } ?>
                         <small class="pull-right"><i class="fa fa-user" aria-hidden="true"></i></small>
                       </h3>
                       <!-- The progress bar -->
@@ -103,21 +103,21 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              {loop="$user"}
-              <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="user-image" alt="User Image">
+              <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
+              <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{$value.nome_usuario}</span>
+              <span class="hidden-xs"><?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
                 
-                <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="img-circle" alt="User Image">
+                <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="img-circle" alt="User Image">
 
                 <p>
-                  {$value.nome_usuario}
-                  <small>{$value.nivel}</small>
-                  {/loop}
+                  <?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                  <small><?php echo htmlspecialchars( $value1["nivel"], ENT_COMPAT, 'UTF-8', FALSE ); ?></small>
+                  <?php } ?>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -158,18 +158,18 @@
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      {loop="$user"}
+      <?php $counter1=-1;  if( isset($user) && ( is_array($user) || $user instanceof Traversable ) && sizeof($user) ) foreach( $user as $key1 => $value1 ){ $counter1++; ?>
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/res/admin/dist/img/{$value.nome_usuario}.png" class="img-circle" alt="User Image">
+          <img src="/res/admin/dist/img/<?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{$value.nome_usuario}</p>
+          <p><?php echo htmlspecialchars( $value1["nome_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 
-          {/loop}
+          <?php } ?>
         </div>
       </div>
 
@@ -221,18 +221,17 @@
 </aside>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+<!-- Content Header (Page header) -->
     <section class="content-header">
-        <h4>
-        <b>SITUAÇÃO DO PROCESSO</b>
-        </h4>
-        <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li><a href="/admin/processos">Consultar Todos</a></li>
-        <li><a href="/admin/processos/situacao/{$processo.id_processo}">Situação do Processo</a></li>
+    <h4>
+        <b>Cadastro de Documento / Novo Documento</b>
+    </h4>
+    <ol class="breadcrumb">
+        <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/admin/docs">Consultar Todos</a></li>
         <li><a href="javascript:window.history.go(-1)">Voltar Anterior</a></li>
-        <li class="active">Movimentar Processo</li>
-        </ol>
+        <li class="active">Cadastrar</li>
+    </ol>
     </section>
 
     <!-- Main content -->
@@ -240,156 +239,116 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-success">
-                    <form role="form" action="/admin/processos/movimentar/{$processo.id_processo}/add" method="post">
+                    <!-- form start -->
+                    <form role="form" action="/admin/docs/create" method="post">
                         <div class="box-body">
                             <div class="col-12 col-sm-10 col-md-6">
                                 <div class="form-group row">
-                                    <div class="col-10 col-sm-5 col-md-4">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm">NÚMERO DO PROCESSO:</label>
-                                    </div>
-                                    <div class="col-10 col-sm-6 col-md-6">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$processo.numero_processo}</label>
+                                    <div class="col-10 col-sm-5 col-md-8">
+                                        <label for="numero_documento" class="col-form-label col-form-label-sm">NÚMERO DO DOCUMENTO:</label>
+                                        <input type="text" class="form-control form-control-sm" id="numero_documento" name="numero_documento" placeholder="Informe o numero do documento" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-10 col-sm-5 col-md-4">
+                                    <div class="col-10 col-sm-5 col-md-8">
                                         <label for="id_orgao" class="col-form-label col-form-label-sm">ORGÃO DE ORIGEM:</label>
-                                    </div>
-                                    <div class="col-10 col-sm-5 col-md-6">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$processo.nome_orgao}</label>    
+                                        <select class="btn btn-md btn-default" id="id_orgao" name="id_orgao">
+                                            <option value="#">SELECIONE</option>
+                                            <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>
+                                            <option  value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                            <?php } ?>
+                                        </select> 
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-10 col-sm-5 col-md-4">
-                                        <label for="id_tipo_processo" class="col-form-label col-form-label-sm">TIPO DOCUMENTO:</label>
-                                    </div>
-                                    <div class="col-10 col-sm-6 col-md-8">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$processo.tipo_processo}</label>
+                                        <label for="id_tipo_documento" class="col-form-label col-form-label-sm">TIPO DE DOCUMENTO:</label>
+                                        <select class="btn btn-md btn-default" id="id_tipo_documento" name="id_tipo_documento">
+                                            <option value="#">SELECIONE</option>
+                                            <?php $counter1=-1;  if( isset($tipo) && ( is_array($tipo) || $tipo instanceof Traversable ) && sizeof($tipo) ) foreach( $tipo as $key1 => $value1 ){ $counter1++; ?>
+                                            <option value="<?php echo htmlspecialchars( $value1["id_tipo_documento"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["tipo_documento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                 </div> 
                             </div>
                             <div class="col-0 col-sm-10 col-md-6">
                                 <div class="form-group row">
-                                    <div class="col-10 col-sm-5 col-md-3">
+                                    <div class="col-10 col-sm-5 col-md-8">
                                         <label for="data_inicio" class="col-form-label col-form-label-sm">DATA INICIO:</label>
-                                    </div>
-                                    <div class="col-8 col-sm-6 col-md-6">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm">{function="formatDate($processo.data_inicio)"}</label>
+                                        <input type="date" class="form-control form-control-sm" id="data_inicio" name="data_inicio">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-10 col-sm-8 col-md-3">
-                                        <label for="nome_processo" class="col-form-label col-form-label-sm">NOME:</label>
-                                    </div>
-                                    <div class="col-12 col-sm-12 col-md-8">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm">{$processo.nome_processo}</label>
+                                    <div class="col-10 col-sm-8 col-md-8">
+                                        <label for="nome_documento" class="col-form-label col-form-label-sm">NOME:</label>
+                                        <input type="text" class="form-control form-control-sm" id="nome_documento" name="nome_documento" placeholder="Informe o nome" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-10 col-sm-8 col-md-3">
-                                        <label for="assunto_processo" class="col-form-label col-form-label-sm">ASSUNTO:</label>
-                                    </div>
-                                    <div class="col-12 col-sm-12 col-md-8">
-                                        <label for="assunto_processo" class="col-form-label col-form-label-sm">{$processo.assunto_processo}</label>
+                                    <div class="col-10 col-sm-8 col-md-8">
+                                        <label for="assunto_documento" class="col-form-label col-form-label-sm">ASSUNTO:</label>
+                                        <input type="text" class="form-control form-control-sm" id="assunto_documento" name="assunto_documento" placeholder="Informe o assunto" required>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="box box-body">
-                            <div class="col-12 col-sm-10 col-md-12">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>TIPO DE MOVIMENTO</th>
-                                            <th>Órgão</th>
-                                            <th>Data</th>
-                                            <th style="width: 300px">Observações</th>
-                                            <th>Opção</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {loop="$movimento"}
-                                        <tr>
-                                            <td>{$value.tipo_movimento}</td>
-                                            <td>{$value.nome_orgao}</td>
-                                            <td>{function="formatDate($value.proc_data_entrada)"}</td>
-                                            <td>{$value.observacoes_proc_entrada}</td>
-                                            <td>
-                                                <a href="/admin/processos/{$value.id_movimento}/editarmovimento/{$processo.id_processo}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
-                                            </td>
-                                        </tr>
-                                        {/loop}
-                                    </tbody>
-                                </table> 
                             </div>
                         </div>
                         
                         <div class="box-body">
                             <div class="box-body bg-primary">
                                 <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-3">
-                                        <div class="col-sm-12 col-md-12">
-                                            <input type="hidden" class="form-control form-control-sm" id="id_processo" name="id_processo" value="{$processo.id_processo}"/>
-                                            <label class="col-form-label col-form-label-sm ">TIPO DE MOVIMENTO:</label>
-                                        </div>
-                                        <div class="col-sm-12 col-md-12 text-black">
-                                            <select class="btn btn-md" id="id_tipo_movimento" name="id_tipo_movimento" required>
-                                                <option value="" disabled selected>SELECIONE</option>
-                                                {loop="$tipomovimento"}
-                                                <option value="{$value.id_tipo_movimento}">{$value.tipo_movimento}</option>
-                                                {/loop}
-                                            </select>
+                                    <div class="col-md-12">
+                                        <h4>ENTRADA</h4>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-md-3">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <label class="col-form-label col-form-label-sm">Data:</label>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <input type="date" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-2">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <label class="col-form-label col-form-label-sm">Origem:</label>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-12 text-black">
+                                                        <select class="btn btn-md" id="id_orgao_movimento" name="id_orgao_movimento">
+                                                            <option class="pl-3 pr-3" value="#">SELECIONE</option>
+                                                            <?php $counter1=-1;  if( isset($orgao) && ( is_array($orgao) || $orgao instanceof Traversable ) && sizeof($orgao) ) foreach( $orgao as $key1 => $value1 ){ $counter1++; ?>
+                                                            <option value="<?php echo htmlspecialchars( $value1["id_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_orgao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-3">
+                                    <div class="col-12 col-sm-12 col-md-12">
                                         <div class="form-group row">
-                                            <div class="col-sm-12 col-md-10">
-                                                <label class="col-form-label col-form-label-sm">Data:</label>
+                                            <div class="col-sm-10 col-md-10">
+                                                <label class="col-form-label col-form-label-sm">Observações:</label>
                                             </div>
                                             <div class="col-sm-12 col-md-10">
-                                                <input type="date" class="form-control form-control-sm" id="proc_data_entrada" name="proc_data_entrada" placeholder="aaaa-mm-dd">
+                                                <input type="text" class="form-control form-control-sm" id="observacoes" name="observacoes" required/>
                                             </div>
-                                        </div> 
-                                    </div>
-                                    <div class="col-12 col-sm-12 col-md-6">
-                                        <div class="form-group row">
-                                            <div class="col-sm-12 col-md-12">
-                                                <label class="col-form-label col-form-label-sm">Origem:</label>
-                                            </div>
-                                            <div class="col-sm-12 col-md-12 text-black">
-                                                <select class="btn btn-md" id="id_orgao_movimento" name="id_orgao_movimento">
-                                                    <option value="#">SELECIONE</option>
-                                                    {loop="$orgao"}
-                                                    <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
-                                                    {/loop}
-                                                </select>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-10">
-                                    <div class="form-group row">
-                                        <div class="col-sm-10 col-md-12">
-                                            <label class="col-form-label col-form-label-sm">Observações:</label>
-                                        </div>
-                                        <div class="col-sm-12 col-md-12">
-                                            <input type="text" class="form-control form-control-sm" id="observacoes" name="observacoes" required/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
-                            <input type="reset" class="btn btn-primary btn-sm"/>
+                            <div class="box">
+                                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+                                <button type="button" class="btn btn-primary btn-sm">Cancelar</button>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <!-- Your Page Content Here -->
     </section>
-        <!-- /.content -->
+<!-- /.content -->
 </div>
-      <!-- /.content-wrapper -->
-      
+<!-- /.content-wrapper -->

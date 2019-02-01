@@ -10,7 +10,7 @@ $app = new Slim();
 $app->config('debug', true);
 
 require_once("controller-admin-login.php");
-require_once("controller-produtos.php");
+require_once("controller-processos.php");
 require_once("controller-documentos.php");
 require_once("controller-users.php");
 require_once("controller-orgaos.php");

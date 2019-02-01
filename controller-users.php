@@ -26,6 +26,8 @@ $app->get("/admin/users/create", function(){
 
 	$page = new PageAdmin();
 
+	$user = User::ShowUserSession();
+
 	$orgao = User::listAllOrgaoIntern();
 	$nivel = User::listAllNivelUsuario();
 	$situacao = User::listAllSituacaoUsuario();
@@ -33,7 +35,8 @@ $app->get("/admin/users/create", function(){
 	$page->setTpl("users-create", array(
 		"orgao"=>$orgao,
 		"nivel"=>$nivel,
-		"situacao"=>$situacao
+		"situacao"=>$situacao,
+		"user"=>$user
 	));
 });
 
@@ -42,10 +45,11 @@ $app->get("/admin/users/:id_usuario", function($id_usuario){
 
 	User::verifyLogin();
 
-	$user = new User();
+	$users = new User();
 
-	$user->listUsuarioById((int)$id_usuario);
+	$users->listUsuarioById((int)$id_usuario);
 
+	$user = User::ShowUserSession();
 	$orgao = User::listAllOrgao();
 	$nivel = User::listAllNivelUsuario();
 	$situacao = User::listAllSituacaoUsuario();
@@ -53,10 +57,11 @@ $app->get("/admin/users/:id_usuario", function($id_usuario){
 	$page = new PageAdmin();
 
 	$page->setTpl("users-update", array(
-		"user"=>$user->getValues(),
+		"users"=>$users->getValues(),
 		"orgao"=>$orgao,
 		"nivel"=>$nivel,
-		"situacao"=>$situacao
+		"situacao"=>$situacao,
+		"user"=>$user
 	));
 });
 
@@ -64,19 +69,21 @@ $app->get("/admin/users/:id_orgao/resultadopororgao", function($id_orgao){
 
 	User::verifyLogin();
 
-	$user = new User();
+	$users = new User();
 
-	$user->getOrgaobyId((int)$id_orgao);
+	$users->getOrgaobyId((int)$id_orgao);
 
+	$user = User::ShowUserSession();
 	$orgao = User::listOrgaoByUsuarioActive();
 
 	$page = new PageAdmin();
 
 	$page->setTpl("users-resultadopororgao", array(
-		"users"=>$user->getValues(),
+		"users"=>$users->getValues(),
 		"resultadousuario"=>$user->listUsuarioByOrgao(),
 		"semusuario"=>$user->listUsuarioByOrgao(false),
-		"orgao"=>$orgao
+		"orgao"=>$orgao,
+		"user"=>$user
 	));
 });
 
@@ -84,10 +91,11 @@ $app->get("/admin/updatepassword/:id_usuario", function($id_usuario){
 
 	User::verifyLogin();
 
-	$user = new User();
+	$users = new User();
 
-	$user->listUsuarioById((int)$id_usuario);
+	$users->listUsuarioById((int)$id_usuario);
 
+	$user = User::ShowUserSession();
 	$orgao = User::listAllOrgao();
 	$nivel = User::listAllNivelUsuario();
 	$situacao = User::listAllSituacaoUsuario();
@@ -95,10 +103,11 @@ $app->get("/admin/updatepassword/:id_usuario", function($id_usuario){
 	$page = new PageAdmin();
 
 	$page->setTpl("users-updatepassword", array(
-		"user"=>$user->getValues(),
+		"users"=>$users->getValues(),
 		"orgao"=>$orgao,
 		"nivel"=>$nivel,
-		"situacao"=>$situacao
+		"situacao"=>$situacao,
+		"user"=>$user
 	));
 });
 
@@ -107,14 +116,16 @@ $app->get("/admin/users/situacao/:id_usuario", function($id_usuario){
 
 	User::verifyLogin();
 
-	$user = new User();
+	$users = new User();
 
-	$user->listUsuarioById((int)$id_usuario);
+	$users->listUsuarioById((int)$id_usuario);
 
+	$user = User::ShowUserSession();
 	$page = new PageAdmin();
 
 	$page->setTpl("users-situacao", array(
-		"user"=>$user->getValues()
+		"users"=>$users->getValues(),
+		"user"=>$user
 	));
 });
 
