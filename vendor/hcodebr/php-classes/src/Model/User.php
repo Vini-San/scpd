@@ -8,6 +8,38 @@ class User extends Model{
 
 	const SESSION = "User";
 
+	
+	public static function getFromSession()
+	{
+
+		$user = new User();
+
+		if (isset($_SESSION[User::SESSION]) && (int)$_SESSION[User::SESSION]['id_usuario'] > 0) {
+
+			$user->setData($_SESSION[User::SESSION]);
+
+		}
+
+		return $user;
+
+	}
+
+	public static function getNivelFromSession()
+	{
+
+		$nivel = new User();
+
+		if (isset($_SESSION[User::SESSION]) && (int)$_SESSION[User::SESSION]['id_nivel_usuario'] > 0) {
+
+			$nivel->get((int)$_SESSION[User::SESSION]['id_nivel_usuario']);
+
+		}
+
+		return $nivel;
+
+	}
+
+
 	public static function login($login,$password){
 		$sql = new Sql();
 
