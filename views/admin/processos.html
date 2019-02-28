@@ -22,6 +22,18 @@
             <div class="box-header">
               <a href="/admin/processos/create" class="btn btn-success">Cadastrar Processo</a>
             </div>
+            <div class="box-body">
+              <div class="form-group row">
+                <form action="/admin/processos">
+                  <div class="col-10 col-sm-5 col-md-4">
+                    <input type="text" name="search" class="form-control pull-right" placeholder="Procurar Processos" value="{$search}">
+                  </div>
+                  <div class="col-10 col-sm-6 col-md-6">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
 
             <div class="box-body no-padding">
               <table class="table table-striped">

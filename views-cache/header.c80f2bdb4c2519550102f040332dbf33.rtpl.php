@@ -30,6 +30,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+
+<script type="text/javascript">
+        window.history.go(1);
+</script>
+
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -87,7 +92,7 @@ desired effect
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
                   <li><!-- start notification -->
-                    <a href="#">
+                    <a href="/admin/orgaos/create">
                       <i class="fa fa-building" aria-hidden="true"></i> Cadastrar Novo Orgão
                     </a>
                   </li>
@@ -114,22 +119,6 @@ desired effect
                       <!-- Task title and progress text -->
                       <h3>
                         Cadastrar Novo Usuário
-                        <small class="pull-right"><i class="fa fa-user" aria-hidden="true"></i></small>
-                      </h3>
-                      <!-- The progress bar -->
-                      <!--<div class="progress xs">
-                        Change the css width attribute to simulate progress
-                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">20% Complete</span>
-                        </div>
-                      </div>-->
-                    </a>
-                  </li>
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <!-- Task title and progress text -->
-                      <h3>
-                        <?php echo getUserName(); ?>
                         <small class="pull-right"><i class="fa fa-user" aria-hidden="true"></i></small>
                       </h3>
                       <!-- The progress bar -->
@@ -187,7 +176,7 @@ desired effect
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat"><b>Perfil</b></a>
+                  <a href='/admin/users/situacao/<?php echo getUserId(); ?>' class="btn btn-default btn-flat"><b>Perfil</b></a>
                 </div>
                 <div class="pull-right">
                   <a href="/admin/login" class="btn btn-default btn-flat">Sair</a>

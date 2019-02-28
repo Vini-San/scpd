@@ -18,12 +18,12 @@ function getUserName()
 
 }
 
-function getUserLevel()
+function getUserId()
 {
 
-	$usuario = User::getNivelFromSession();
+	$usuario = User::getFromSession();
 
-	return $usuario->getnivel();
+	return $usuario->getid_usuario();
 
 }
 

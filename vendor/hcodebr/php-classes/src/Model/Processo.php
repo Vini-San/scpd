@@ -8,6 +8,53 @@ class Processo extends Model{
 
 	const SESSION = "User";
 
+	public static function getPage($page = 1, $itemsPerPage = 10)
+	{
+
+		$start = ($page - 1) * $itemsPerPage;
+
+		$sql = new Sql();
+
+		$results = $sql->select("
+			SELECT SQL_CALC_FOUND_ROWS * FROM processo p INNER JOIN orgao o on o.id_orgao=p.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento INNER JOIN movimento m on m.id_processo_documento=pd.id_processo_documento where m.id_orgao =:orgaolog GROUP BY p.id_processo LIMIT $start, $itemsPerPage;",[
+
+				":orgaolog"=>(int)$_SESSION[User::SESSION]['id_orgao']
+
+			]);
+
+		$resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+		return [
+			'data'=>$results,
+			'total'=>(int)$resultTotal[0]["nrtotal"],
+			'pages'=>ceil($resultTotal[0]["nrtotal"] / $itemsPerPage)
+		];
+
+	}
+
+	public static function getPageSearch($search, $page = 1, $itemsPerPage = 10)
+	{
+
+		$start = ($page - 1) * $itemsPerPage;
+
+		$sql = new Sql();
+
+		$results = $sql->select("
+			SELECT SQL_CALC_FOUND_ROWS * FROM processo p INNER JOIN orgao o on o.id_orgao=p.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento INNER JOIN movimento m on m.id_processo_documento=pd.id_processo_documento WHERE p.numero_processo LIKE :search and m.id_orgao =:orgaolog GROUP BY p.id_processo LIMIT $start, $itemsPerPage;", [
+			':search'=>'%'.$search.'%',
+			":orgaolog"=>(int)$_SESSION[User::SESSION]['id_orgao']
+		]);
+
+		$resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+		return [
+			'data'=>$results,
+			'total'=>(int)$resultTotal[0]["nrtotal"],
+			'pages'=>ceil($resultTotal[0]["nrtotal"] / $itemsPerPage)
+		];
+
+	}
+
 
 	public static function listAllProcesso(){
 
@@ -107,11 +154,14 @@ class Processo extends Model{
 
 		if ($related === true){
 		return $sql->select("SELECT p.id_processo, p.numero_processo, p.id_tipo_processo, p.id_orgao, p.data_inicio, p.nome_processo, p.assunto_processo FROM processo p 
-			INNER JOIN orgao o on o.id_orgao=p.id_orgao 
-			WHERE p.id_orgao IN(
+			INNER JOIN orgao o on o.id_orgao=p.id_orgao
+			INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento 
+			INNER JOIN movimento m on m.id_processo_documento=pd.id_processo_documento
+			WHERE m.id_orgao IN(
 			SELECT o.id_orgao 
 			FROM orgao o 
-			WHERE o.id_orgao=:id_orgao)", [
+			WHERE o.id_orgao in (:id_orgao_user)) and p.id_orgao = :id_orgao group by p.id_processo", [
+				":id_orgao_user"=>(int)$_SESSION[User::SESSION]['id_orgao'],
 				":id_orgao"=>$this->getid_orgao()
 			]);
 		} else {

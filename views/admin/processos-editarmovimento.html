@@ -35,7 +35,7 @@
                                         <label for="id_orgao" class="col-form-label col-form-label-sm">ORGÃO DE ORIGEM:</label>
                                     </div>
                                     <div class="col-10 col-sm-5 col-md-6">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$processo.nome_orgao}</label>    
+                                        <label for="nome_orgao" class="col-form-label col-form-label-sm">{$processo.nome_orgao}</label>    
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -43,7 +43,7 @@
                                         <label for="id_tipo_processo" class="col-form-label col-form-label-sm">TIPO DOCUMENTO:</label>
                                     </div>
                                     <div class="col-10 col-sm-6 col-md-8">
-                                        <label for="numero_processo" class="col-form-label col-form-label-sm">{$processo.tipo_processo}</label>
+                                        <label for="tipo_processo" class="col-form-label col-form-label-sm">{$processo.tipo_processo}</label>
                                     </div>
                                 </div> 
                             </div>
@@ -61,7 +61,7 @@
                                         <label for="nome_processo" class="col-form-label col-form-label-sm">NOME:</label>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-8">
-                                        <label for="data_inicio" class="col-form-label col-form-label-sm">{$processo.nome_processo}</label>
+                                        <label for="nome_processo" class="col-form-label col-form-label-sm">{$processo.nome_processo}</label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -99,7 +99,7 @@
                                             </div>
                                             <div class="col-sm-12 col-md-12 text-black">
                                                 <select class="btn btn-sm" id="id_orgao" name="id_orgao">
-                                                    <option value="#" disabled selected>{$movimento.nome_orgao}</option>
+                                                    <option value="{$movimento.id_orgao}" selected>{$movimento.nome_orgao}</option>
                                                     {loop="$orgao"}
                                                     <option value="{$value.id_orgao}">{$value.nome_orgao}</option>
                                                     {/loop}

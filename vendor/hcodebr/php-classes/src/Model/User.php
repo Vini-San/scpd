@@ -277,7 +277,7 @@ class User extends Model{
 	public static function listAllProcessoOrgaoActive(){
 
 		$sql = new Sql();
-		return $sql->select("SELECT distinct o.* FROM orgao o INNER JOIN processo p on p.id_orgao=o.id_orgao INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento INNER JOIN movimento m on m.id_processo_documento=pd.id_processo_documento where m.id_orgao =:orgaolog", array (
+		return $sql->select("SELECT o.* FROM orgao o INNER JOIN processo p on p.id_orgao=o.id_orgao INNER JOIN tipo_processo tp on tp.id_tipo_processo=p.id_tipo_processo INNER JOIN processo_documento pd on pd.id_processo_documento=p.id_processo_documento INNER JOIN movimento m on m.id_processo_documento=pd.id_processo_documento where m.id_orgao =:orgaolog", array (
 			":orgaolog"=>(int)$_SESSION[User::SESSION]['id_orgao']
 		));
 

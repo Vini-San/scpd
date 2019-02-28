@@ -9,15 +9,42 @@ $app->get("/admin/processos", function(){
 
 	User::verifyLogin();
 
-	$processos = Processo::listAllProcesso();
+	$search = (isset($_GET['search'])) ? $_GET['search'] : "";
+	$page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 
-	$user = User::ShowUserSession();
+	if ($search != '') {
+
+		$pagination = Processo::getPageSearch($search, $page);
+
+	} else {
+
+		$pagination = Processo::getPage($page);
+
+	}
+
+	$pages = [];
+
+	for ($x = 0; $x < $pagination['pages']; $x++)
+	{
+
+		array_push($pages, [
+			'href'=>'/admin/processos?'.http_build_query([
+				'page'=>$x+1,
+				'search'=>$search
+			]),
+			'text'=>$x+1
+		]);
+
+	}
+
+	$processos = Processo::listAllProcesso();
 
 	$page = new PageAdmin();
 
 	$page->setTpl("processos", array(
-		"user"=>$user,
-		"processos"=>$processos
+		"processos"=>$pagination['data'],
+		"search"=>$search,
+		"pages"=>$pages
 	));
 });
 
